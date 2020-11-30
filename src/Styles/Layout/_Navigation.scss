@@ -1,0 +1,63 @@
+.navigation {
+    background-color: #1D1D1E;
+    min-height: 100vh;
+    width: 216px;
+
+    >img {
+        padding: 62px;
+    }
+
+    &__wrapper {}
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgba($color: #C4C4C4, $alpha: 0.2);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 34px;
+        padding-right: 11px;
+        cursor: pointer;
+
+        .title {
+            font-weight: bold;
+            font-size: 9px;
+            line-height: 9px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #E4E4E4;
+        }
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 21px;
+        padding-left: 38px;
+        padding-right: 18px;
+        cursor: pointer;
+
+        .title {
+            font-weight: bold;
+            font-size: 9px;
+            line-height: 10px;
+            letter-spacing: 0.05em;
+            margin-left: 10px;
+            color: #CCCCCC;
+            text-transform: uppercase;
+        }
+
+        &--active {
+            .title {
+                color: #3776FF;
+            }
+
+            svg {
+                @include svgColor(#3776FF);
+            }
+
+        }
+    }
+}

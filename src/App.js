@@ -4,14 +4,16 @@ import { Navigation } from '@Layouts'
 import Routes from '@Routes'
 
 const App = () => {
-  return (
-    <Router>
-      <Navigation />
-      {Routes.map((route, index) => (
-        <Route exact path={route.route} component={route.component} key={index} />
-      ))}
-    </Router>
-  );
+	return (
+		<Router>
+			<div className='home'>
+				<Navigation />
+				{Routes.map((route, index) => (
+					<Route exact path={route.route} component={route.component} key={index} />
+				))}
+			</div>
+		</Router>
+	)
 }
 
 export default App
