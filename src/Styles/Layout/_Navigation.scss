@@ -1,7 +1,8 @@
 .navigation {
     background-color: #1D1D1E;
     min-height: 100vh;
-    width: 216px;
+    max-width: 216px;
+    min-width: 216px;
 
     >img {
         padding: 62px;
