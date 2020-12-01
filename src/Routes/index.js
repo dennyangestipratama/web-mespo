@@ -12,6 +12,16 @@ const Routes = [
 		route: '/',
 		name: 'System Environment',
 	},
+	{
+		component: SystemEnvironment,
+		route: '/create',
+		name: 'System Environment',
+	},
+	{
+		component: SystemEnvironment,
+		route: '/create/environment',
+		name: 'System Environment',
+	},
 ]
 
 export default Routes

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import ArrowLeft from '@Assets/Image/arrow-left.png'
 import { ReactComponent as IconWindow } from '@Assets/Icon/window.svg'
 import { ReactComponent as IconArrowLeft } from '@Assets/Icon/arrow-left.svg'
@@ -18,7 +20,9 @@ const Main = ({ isClose, setClose }) => {
 			</div>
 			<div className='main__filter'>
 				<div className='title'>Environment</div>
-				<IconAdd />
+				<Link to='/create'>
+					<IconAdd />
+				</Link>
 				<img src={ArrowLeft} alt='arrow' />
 				<div className='info'>or create environment first here.</div>
 			</div>
