@@ -14,5 +14,33 @@
         padding-bottom: 13px;
         padding-left: 22px;
         padding-right: 15px;
+
+    }
+}
+
+.buttonModal {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 95px;
+
+    button {
+        width: 100%;
+        background: #3776FF;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+        padding-top: 16px;
+        padding-bottom: 13px;
+        padding-left: 22px;
+        padding-right: 15px;
+    }
+
+    .no {
+        background-color: transparent;
+        margin-right: 23px;
     }
 }

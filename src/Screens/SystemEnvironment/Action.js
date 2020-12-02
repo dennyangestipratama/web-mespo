@@ -9,7 +9,7 @@ import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
 import { ReactComponent as IconSearch } from '@Assets/Icon/search.svg'
 import { ReactComponent as IconAdd } from '@Assets/Icon/add.svg'
 
-const Action = ({ isClose, setClose }) => {
+const Action = ({ isClose, setClose, setModalSystem, setModalEnvironment }) => {
 	return isClose ? null : (
 		<div className='action'>
 			<Switch>
@@ -36,7 +36,15 @@ const Action = ({ isClose, setClose }) => {
 						</Fragment>
 					)}
 				/>
-				<Route path='/create' render={() => <ActionCreate />} />
+				<Route
+					path='/create'
+					render={() => (
+						<ActionCreate
+							setModalEnvironment={(params) => setModalEnvironment(params)}
+							setModalSystem={(param) => setModalSystem(param)}
+						/>
+					)}
+				/>
 			</Switch>
 		</div>
 	)

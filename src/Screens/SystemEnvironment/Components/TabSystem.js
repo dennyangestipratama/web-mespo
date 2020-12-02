@@ -1,10 +1,9 @@
 import Button from '@Components/Button'
-import Modal from '@Components/Modal'
 
 import { ReactComponent as IconInfo } from '@Assets/Icon/info.svg'
 import { ReactComponent as IconAttachment } from '@Assets/Icon/attachment.svg'
 
-const TabSystem = ({ setModal, modal, onClickNo, onClickYes }) => {
+const TabSystem = ({ setModalSystem }) => {
 	return (
 		<div className='tabSystem'>
 			<div className='empty'>
@@ -27,19 +26,8 @@ const TabSystem = ({ setModal, modal, onClickNo, onClickYes }) => {
 					<div className='title'>Attach to Environment</div>
 					<div className='info'>No Environment available</div>
 				</div>
-				<button onClick={() => setModal(true)}>test</button>
-				{/* <Button type='submit' text='Create' style={{ marginRight: '31px' }} onClick={() => setModal} /> */}
 			</form>
-			{!modal ? null : (
-				<div>test</div>
-				// <Modal
-				// 	type={1}
-				// 	text={`Environment SS_Prod is  successfully created !`}
-				// 	info={`But it seems it doesn’t attach to any system. Do you want to create a system now?`}
-				// 	onClickNo={() => onClickNo()}
-				// 	onClickYes={() => onClickYes()}
-				// />
-			)}
+			<Button text='Create' style={{ marginRight: '31px' }} onClick={() => setModalSystem(true)} />
 		</div>
 	)
 }

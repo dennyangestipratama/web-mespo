@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
 
 import TabEnvironment from '@Screens/SystemEnvironment/Components/TabEnvironment'
@@ -6,17 +5,7 @@ import TabSystem from '@Screens/SystemEnvironment/Components/TabSystem'
 
 import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
 
-const ActionCreate = () => {
-	const [modal, setModal] = useState(false)
-
-	const onClickNo = () => {
-		setModal(false)
-	}
-
-	const onClickYes = () => {
-		setModal(false)
-	}
-
+const ActionCreate = ({ setModalEnvironment, setModalSystem }) => {
 	return (
 		<div className='createAction'>
 			<div className='breadcrumbs'>
@@ -36,25 +25,11 @@ const ActionCreate = () => {
 				<Route
 					exact
 					path='/create'
-					render={() => (
-						<TabSystem
-							showModal={modal}
-							setModal={(param) => setModal(param)}
-							onClickNo={onClickNo}
-							onclickYes={onClickYes}
-						/>
-					)}
+					render={() => <TabSystem setModalSystem={(param) => setModalSystem(param)} />}
 				/>
 				<Route
 					path='/create/environment'
-					render={() => (
-						<TabEnvironment
-							showModal={modal}
-							setModal={(param) => setModal(param)}
-							onClickNo={onClickNo}
-							onclickYes={onClickYes}
-						/>
-					)}
+					render={() => <TabEnvironment setModalEnvironment={(param) => setModalEnvironment(param)} />}
 				/>
 			</Switch>
 		</div>

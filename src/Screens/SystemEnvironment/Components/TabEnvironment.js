@@ -1,14 +1,9 @@
-import { useState } from 'react'
-
 import Button from '@Components/Button'
-import Modal from '@Components/Modal'
 
 import { ReactComponent as IconInfo } from '@Assets/Icon/info.svg'
 import { ReactComponent as IconAttachment } from '@Assets/Icon/attachment.svg'
 
-const TabEnvironment = () => {
-	const [modal, setModal] = useState(false)
-
+const TabEnvironment = ({ setModalEnvironment }) => {
 	return (
 		<div className='tabSystem'>
 			<div className='empty'>
@@ -31,9 +26,8 @@ const TabEnvironment = () => {
 					<div className='title'>Attach to System</div>
 					<div className='info'>No System available</div>
 				</div>
-				<Button type='submit' text='Create' style={{ marginRight: '31px' }} />
 			</form>
-			{!modal ? null : <Modal />}
+			<Button text='Create' style={{ marginRight: '31px' }} onClick={() => setModalEnvironment(true)} />
 		</div>
 	)
 }
