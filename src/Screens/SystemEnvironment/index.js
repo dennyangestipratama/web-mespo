@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, Component } from 'react'
 
 import Modal from '@Components/Modal'
 import Action from '@Screens/SystemEnvironment/Action'
@@ -6,60 +6,71 @@ import Main from '@Screens/SystemEnvironment/Main'
 import { Navigation } from '@Layouts'
 import { MOBILE_VIEW } from '@Utilities'
 
-const SystemEnvironment = () => {
-	const [close, setClose] = useState(false)
-	const [navigation, setNavigation] = useState(false)
-	const [modalSystem, setModalSystem] = useState(false)
-	const [modalEnvironment, setModalEnvironment] = useState(false)
-
-	const onClickNo = () => {
-		setModalSystem(false)
-		setModalEnvironment(false)
+export default class SystemEnvironment extends Component {
+	state = {
+		isClose: false,
+		isNavigation: false,
+		isModalSystem: false,
+		isModalEnvironment: false,
+		systems: [
+			{
+				ID: 1,
+				name: 'Shapestone',
+				isCheck: false,
+			},
+		],
+		environments: null,
 	}
 
-	const onClickYes = () => {
-		setModalSystem(false)
-		setModalEnvironment(false)
+	setToggle = (state) => {
+		this.setState((prevState) => ({ [state]: !prevState[state] }))
 	}
 
-	return (
-		<Fragment>
-			<Action
-				isClose={close}
-				isNavigation={navigation}
-				setClose={(param) => setClose(param)}
-				setModalSystem={(param) => setModalSystem(param)}
-				setModalEnvironment={(param) => setModalEnvironment(param)}
-			/>
-			{MOBILE_VIEW && !close ? null : (
-				<Main
-					isClose={close}
-					isNavigation={navigation}
-					setNavigation={(param) => setNavigation(param)}
-					setClose={(param) => setClose(param)}
+	setFalse = (state) => {
+		this.setState({ [state]: false })
+	}
+
+	render() {
+		const { isClose, isModalEnvironment, isModalSystem, isNavigation, systems, environments } = this.state
+		return (
+			<Fragment>
+				<Action
+					systems={systems}
+					environments={environments}
+					isClose={isClose}
+					isNavigation={isNavigation}
+					setToggle={this.setToggle}
 				/>
-			)}
-			{MOBILE_VIEW && navigation ? <Navigation setNavigation={(param) => setNavigation(param)} /> : null}
-			{!modalSystem ? null : (
-				<Modal
-					type={1}
-					text={`SS_Prod`}
-					info={`But it seems it doesn’t attach to any environment. Do you want to create a environment now?`}
-					onClickNo={onClickNo}
-					onClickYes={onClickYes}
-				/>
-			)}
-			{!modalEnvironment ? null : (
-				<Modal
-					type={2}
-					text={`SS_Prod`}
-					info={`But it seems it doesn’t attach to any system. Do you want to create a system now?`}
-					onClickNo={onClickNo}
-					onClickYes={onClickYes}
-				/>
-			)}
-		</Fragment>
-	)
+				{MOBILE_VIEW && !isClose ? null : (
+					<Main
+						systems={systems}
+						environments={environments}
+						isNavigation={isNavigation}
+						setToggle={this.setToggle}
+					/>
+				)}
+				{MOBILE_VIEW && isNavigation ? <Navigation setToggle={this.setToggle} /> : null}
+				{!isModalSystem ? null : (
+					<Modal
+						{...this.props}
+						type={1}
+						text={`SS_Prod`}
+						info={`But it seems it doesn’t attach to any environment. Do you want to create a environment now?`}
+						isNo={this.setFalse}
+						isYes={this.setFalse}
+					/>
+				)}
+				{!isModalEnvironment ? null : (
+					<Modal
+						{...this.props}
+						type={2}
+						text={`SS_Prod`}
+						info={`But it seems it doesn’t attach to any system. Do you want to create a system now?`}
+						isNo={this.setFalse}
+						isYes={this.setFalse}
+					/>
+				)}
+			</Fragment>
+		)
+	}
 }
-
-export default SystemEnvironment

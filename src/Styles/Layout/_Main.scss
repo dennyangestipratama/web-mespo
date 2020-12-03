@@ -60,6 +60,10 @@
                 letter-spacing: 0.02em;
                 margin-left: 9px;
                 color: rgba($color: #FFFFFF, $alpha: 0.4);
+
+                &.active {
+                    color: #50E4A7;
+                }
             }
         }
     }
