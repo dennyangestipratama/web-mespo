@@ -37,13 +37,12 @@ export default class Navigation extends Component {
 					</div>
 					{!showProperties ? null : (
 						<NavLink
-							to='/'
+							to='/system'
 							className='navigation__content'
 							activeClassName='navigation__content--active'
-							exact={true}
 							isActive={(match, location) => {
 								if (location.pathname.includes('create')) return true
-								if (location.pathname.includes('/')) return true
+								if (location.pathname.includes('system')) return true
 							}}>
 							<IconPhone />
 							<div className='title'>System Environment</div>
@@ -61,7 +60,7 @@ export default class Navigation extends Component {
 								to='/features'
 								className='navigation__content'
 								activeClassName='navigation__content--active'
-								exact={true}>
+							>
 								<IconFeature />
 								<div className='title'>Features</div>
 							</NavLink>
@@ -69,7 +68,7 @@ export default class Navigation extends Component {
 								to='/toggles'
 								className='navigation__content'
 								activeClassName='navigation__content--active'
-								exact={true}>
+							>
 								<IconToggles />
 								<div className='title'>Toggles</div>
 							</NavLink>
@@ -87,7 +86,7 @@ export default class Navigation extends Component {
 								to='/account'
 								className='navigation__content'
 								activeClassName='navigation__content--active'
-								exact={true}>
+							>
 								<IconAccount />
 								<div className='title'>Me</div>
 							</NavLink>
@@ -95,7 +94,7 @@ export default class Navigation extends Component {
 								to='/people'
 								className='navigation__content'
 								activeClassName='navigation__content--active'
-								exact={true}>
+							>
 								<IconPeople />
 								<div className='title'>People</div>
 							</NavLink>
@@ -103,7 +102,7 @@ export default class Navigation extends Component {
 								to='/roles'
 								className='navigation__content'
 								activeClassName='navigation__content--active'
-								exact={true}>
+							>
 								<IconHat />
 								<div className='title'>Roles</div>
 							</NavLink>

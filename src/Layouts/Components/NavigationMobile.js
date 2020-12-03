@@ -11,13 +11,13 @@ export default class NavigationMobile extends Component {
 		return (
 			<div className='navigation--mobile'>
 				<NavLink
-					to='/'
+					to='/system'
 					className='icon'
 					activeClassName='icon--active'
 					exact={true}
 					isActive={(match, location) => {
 						if (location.pathname.includes('create')) return true
-						if (location.pathname.includes('/')) return true
+						if (location.pathname.includes('system')) return true
 					}}>
 					<IconPhone />
 				</NavLink>

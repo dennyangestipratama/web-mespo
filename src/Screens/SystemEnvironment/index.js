@@ -12,11 +12,21 @@ export default class SystemEnvironment extends Component {
 		isNavigation: false,
 		isModalSystem: false,
 		isModalEnvironment: false,
+		selectedSystem: this.props.match.params.ID ? parseInt(this.props.match.params.ID) : null,
 		systems: [
 			{
 				ID: 1,
 				name: 'Shapestone',
 				isCheck: false,
+				description: 'An Awesome asset platform !',
+				properties: []
+			},
+			{
+				ID: 2,
+				name: 'Troumaka',
+				isCheck: false,
+				description: 'An Awesome asset platform !',
+				properties: []
 			},
 		],
 		environments: null,
@@ -30,21 +40,30 @@ export default class SystemEnvironment extends Component {
 		this.setState({ [state]: false })
 	}
 
+	selectSystem = (ID) => {
+		this.setState({ selectedSystem: ID })
+	}
+
+
 	render() {
-		const { isClose, isModalEnvironment, isModalSystem, isNavigation, systems, environments } = this.state
+		const { isClose, isModalEnvironment, isModalSystem, isNavigation, systems, environments, selectedSystem } = this.state
 		return (
 			<Fragment>
 				<Action
+					{...this.props}
 					systems={systems}
 					environments={environments}
 					isClose={isClose}
 					isNavigation={isNavigation}
+					selectedSystem={selectedSystem}
 					setToggle={this.setToggle}
+					selectSystem={this.selectSystem}
 				/>
 				{MOBILE_VIEW && !isClose ? null : (
 					<Main
+						{...this.props}
 						systems={systems}
-						environments={environments}
+						selectedSystem={selectedSystem}
 						isNavigation={isNavigation}
 						setToggle={this.setToggle}
 					/>

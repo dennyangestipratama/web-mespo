@@ -2,23 +2,23 @@ import { Fragment, Component } from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 
 import ActionCreate from '@Screens/SystemEnvironment/Components/ActionCreate'
+import ActionEmpty from '@Screens/SystemEnvironment/Components/ActionEmpty'
+import ActionSystem from '@Screens/SystemEnvironment/Components/ActionSystem'
 
-import GhostImage from '@Assets/Image/ghost.png'
-import AddSystemImage from '@Assets/Image/add-system.png'
 import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
 import { ReactComponent as IconSearch } from '@Assets/Icon/search.svg'
 import { ReactComponent as IconAdd } from '@Assets/Icon/add.svg'
-import { ReactComponent as IconMore } from '@Assets/Icon/more-vertical.svg'
 
 export default class Action extends Component {
 	render() {
-		const { isClose, isNavigation, systems, setToggle } = this.props
+		const { isClose, isNavigation, systems, setToggle, selectedSystem } = this.props
+		const system = systems.filter(filter => filter.ID === selectedSystem)
+
 		return isClose || isNavigation ? null : (
 			<div className='action'>
 				<Switch>
 					<Route
-						exact
-						path='/'
+						path='/system'
 						render={() => (
 							<Fragment>
 								<IconClose onClick={() => setToggle('isClose')} />
@@ -32,24 +32,8 @@ export default class Action extends Component {
 										<IconAdd />
 									</Link>
 								</div>
-								{systems.length === 0 ? (
-									<div className='action__body'>
-										<img className='add-system' src={AddSystemImage} alt='add-system' />
-										<div className='title'>Add your system to shoo away the boo-boo!</div>
-										<img src={GhostImage} alt='ghost' />
-									</div>
-								) : (
-									<div className='action__content'>
-										{systems.map((system) => {
-											return (
-												<div className='system'>
-													<div className='title'>{system.name}</div>
-													<IconMore />
-												</div>
-											)
-										})}
-									</div>
-								)}
+								{systems.length === 0 ? <ActionEmpty /> : <ActionSystem {...this.props} systems={systems} />
+								}
 							</Fragment>
 						)}
 					/>

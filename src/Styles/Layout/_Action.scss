@@ -94,22 +94,28 @@
 
     &__content {
         padding-left: 21px;
-        padding-right: 6px;
+        padding-right: 26px;
         margin-top: 20px;
 
         .system {
             background: #1D1F20;
-            border: 1px solid #50E4A7;
             box-sizing: border-box;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 22px;
-            padding-right: 30px;
+            padding: 10px 22px;
+            margin-bottom: 9px;
+            cursor: pointer;
+
+            &.active {
+                border: 1px solid #50E4A7;
+            }
+
+            svg {
+                cursor: pointer;
+            }
 
             .title {
                 font-weight: bold;
