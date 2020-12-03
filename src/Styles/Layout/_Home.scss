@@ -1,3 +1,7 @@
 .home {
     display: flex;
+
+    @include respondTo(tablet) {
+        flex-direction: column-reverse;
+    }
 }

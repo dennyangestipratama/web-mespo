@@ -5,12 +5,12 @@ import TabSystem from '@Screens/SystemEnvironment/Components/TabSystem'
 
 import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
 
-const ActionCreate = ({ setModalEnvironment, setModalSystem }) => {
+const ActionCreate = ({ setModalEnvironment, setModalSystem, setClose, isClose }) => {
 	return (
 		<div className='createAction'>
 			<div className='breadcrumbs'>
 				<div className='title'>System List &gt; Create</div>
-				<IconClose />
+				<IconClose onClick={() => setClose(!isClose)} />
 			</div>
 			<div className='title'>Create</div>
 			<div className='createAction__tab'>

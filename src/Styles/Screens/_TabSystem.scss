@@ -1,6 +1,10 @@
 .tabSystem {
     padding-bottom: 70px;
 
+    @include respondTo(tablet) {
+        padding-bottom: 160px;
+    }
+
     .empty {
         background-color: rgba($color: #50e4a7, $alpha: 0.5);
         border: 1px solid #50E4A7;

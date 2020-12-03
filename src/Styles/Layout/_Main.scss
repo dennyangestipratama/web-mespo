@@ -3,6 +3,11 @@
     filter: drop-shadow(-10px 4px 20px rgba(0, 0, 0, 0.25));
     background-color: #1A1D1F;
 
+    @include respondTo(tablet) {
+        height: 100%;
+        min-height: 100vh;
+    }
+
 
     &__header {
         display: flex;
@@ -12,6 +17,11 @@
         padding-bottom: 51px;
         border-bottom: 1px solid #464343;
         background-color: #2F2F30;
+
+        @include respondTo(tablet) {
+            background-color: #1A1D1F;
+            border-bottom: none;
+        }
 
         >svg {
             margin-right: 41px;
@@ -60,6 +70,10 @@
         background-color: #2F2F30;
         border-bottom: 1px solid #464343;
         padding: 18px 28px;
+
+        @include respondTo(tablet) {
+            border-bottom: none;
+        }
 
         svg {
             margin-right: 13px;

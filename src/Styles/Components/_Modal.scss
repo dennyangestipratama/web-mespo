@@ -13,6 +13,10 @@
     width: 386px;
     height: 365px;
 
+    @include respondTo(tablet) {
+        width: 274px;
+    }
+
     .title {
         font-weight: bold;
         font-size: 15px;
@@ -23,6 +27,10 @@
         padding: 0 94px;
         margin-bottom: 30px;
         margin-top: 11px;
+
+        @include respondTo(tablet) {
+            padding: 0 18px;
+        }
     }
 
     .info {
@@ -34,5 +42,9 @@
         color: rgba($color: #FFFFFF, $alpha: 0.6);
         padding: 0 79px;
         margin-bottom: 40px;
+
+        @include respondTo(tablet) {
+            padding: 0 7px;
+        }
     }
 }
