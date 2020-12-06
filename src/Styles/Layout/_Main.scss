@@ -245,9 +245,26 @@
                 font-size: 9px;
                 line-height: 9px;
                 letter-spacing: 0.05em;
-                color: #A6C1FB;
+                color: #FFFFFF;
                 padding: 4px 9px;
+                transform: translateX(-100%);
                 cursor: pointer;
+
+                svg {
+                    rect {
+                        fill: #FFFFFF
+                    }
+                }
+
+                &:hover {
+                    color: #A6C1FB;
+
+                    svg {
+                        rect {
+                            fill: #A6C1FB
+                        }
+                    }
+                }
 
                 span {
                     margin-left: 6px;
@@ -284,13 +301,14 @@
         &__action {
             display: flex;
             align-items: center;
+            justify-content: center;
             background-color: rgba($color: #000000, $alpha: 0.4);
             padding: 7px 0;
 
             .action--button {
                 display: flex;
                 align-items: center;
-                padding-left: 32px;
+                justify-content: center;
 
                 >div {
                     display: flex;
@@ -307,20 +325,6 @@
                         margin-right: 6px;
                     }
                 }
-            }
-
-            .action--save {
-                margin-left: auto;
-                cursor: pointer;
-                margin-right: 22px;
-                border-radius: 33px;
-                background-color: rgba($color: #000000, $alpha: 0.3);
-                font-weight: bold;
-                font-size: 10px;
-                line-height: 11px;
-                letter-spacing: 0.02em;
-                padding: 6px 15px;
-                color: rgba($color: #FFFFFF, $alpha: 0.4);
             }
         }
 

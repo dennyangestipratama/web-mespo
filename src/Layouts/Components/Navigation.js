@@ -15,101 +15,81 @@ import { ReactComponent as IconHat } from '@Assets/Icon/hat.svg'
 import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
 
 export default class Navigation extends Component {
-	state = {
-		showProperties: true,
-		showFeatures: true,
-		showAccount: true,
-	}
+   state = {
+      showProperties: true,
+      showFeatures: true,
+      showAccount: true,
+   }
 
-	render() {
-		const { showAccount, showFeatures, showProperties } = this.state
-		const { setToggle } = this.props
-		return (
-			<div className='navigation'>
-				<div className='navigation--logo'>
-					<img src={Mespo_Logo} alt='mespo-logo' />
-					{MOBILE_VIEW ? <IconClose onClick={() => setToggle('isNavigation')} /> : null}
-				</div>
-				<div className='navigation__wrapper'>
-					<div className='navigation__header' onClick={() => this.setState({ showProperties: !showProperties })}>
-						<div className='title'>Dynamic Properties</div>
-						{showProperties ? <IconDropdownUp /> : <IconDropdown />}
-					</div>
-					{!showProperties ? null : (
-						<NavLink
-							to='/system'
-							className='navigation__content'
-							activeClassName='navigation__content--active'
-							isActive={(match, location) => {
-								if (location.pathname.includes('create')) return true
-								if (location.pathname.includes('system')) return true
-							}}>
-							<IconPhone />
-							<div className='title'>System Environment</div>
-						</NavLink>
-					)}
-				</div>
-				<div className='navigation__wrapper'>
-					<div className='navigation__header' onClick={() => this.setState({ showFeatures: !showFeatures })}>
-						<div className='title'>Features & Toggles</div>
-						{showFeatures ? <IconDropdownUp /> : <IconDropdown />}
-					</div>
-					{!showFeatures ? null : (
-						<Fragment>
-							<NavLink
-								to='/features'
-								className='navigation__content'
-								activeClassName='navigation__content--active'
-							>
-								<IconFeature />
-								<div className='title'>Features</div>
-							</NavLink>
-							<NavLink
-								to='/toggles'
-								className='navigation__content'
-								activeClassName='navigation__content--active'
-							>
-								<IconToggles />
-								<div className='title'>Toggles</div>
-							</NavLink>
-						</Fragment>
-					)}
-				</div>
-				<div className='navigation__wrapper'>
-					<div className='navigation__header' onClick={() => this.setState({ showAccount: !showAccount })}>
-						<div className='title'>Accounts</div>
-						{showAccount ? <IconDropdownUp /> : <IconDropdown />}
-					</div>
-					{!showAccount ? null : (
-						<Fragment>
-							<NavLink
-								to='/account'
-								className='navigation__content'
-								activeClassName='navigation__content--active'
-							>
-								<IconAccount />
-								<div className='title'>Me</div>
-							</NavLink>
-							<NavLink
-								to='/people'
-								className='navigation__content'
-								activeClassName='navigation__content--active'
-							>
-								<IconPeople />
-								<div className='title'>People</div>
-							</NavLink>
-							<NavLink
-								to='/roles'
-								className='navigation__content'
-								activeClassName='navigation__content--active'
-							>
-								<IconHat />
-								<div className='title'>Roles</div>
-							</NavLink>
-						</Fragment>
-					)}
-				</div>
-			</div>
-		)
-	}
+   render() {
+      const { showAccount, showFeatures, showProperties } = this.state
+      const { setToggle } = this.props
+      return (
+         <div className='navigation'>
+            <div className='navigation--logo'>
+               <img src={Mespo_Logo} alt='mespo-logo' />
+               {MOBILE_VIEW ? <IconClose onClick={() => setToggle('isNavigation')} /> : null}
+            </div>
+            <div className='navigation__wrapper'>
+               <div className='navigation__header' onClick={() => this.setState({ showProperties: !showProperties })}>
+                  <div className='title'>Dynamic Properties</div>
+                  {showProperties ? <IconDropdownUp /> : <IconDropdown />}
+               </div>
+               {!showProperties ? null : (
+                  <NavLink
+                     to='/system'
+                     className='navigation__content'
+                     activeClassName='navigation__content--active'
+                     isActive={(match, location) => {
+                        if (location.pathname.includes('create')) return true
+                        if (location.pathname.includes('system')) return true
+                     }}>
+                     <IconPhone />
+                     <div className='title'>System Environment</div>
+                  </NavLink>
+               )}
+            </div>
+            <div className='navigation__wrapper'>
+               <div className='navigation__header' onClick={() => this.setState({ showFeatures: !showFeatures })}>
+                  <div className='title'>Features & Toggles</div>
+                  {showFeatures ? <IconDropdownUp /> : <IconDropdown />}
+               </div>
+               {!showFeatures ? null : (
+                  <Fragment>
+                     <NavLink to='/features' className='navigation__content' activeClassName='navigation__content--active'>
+                        <IconFeature />
+                        <div className='title'>Features</div>
+                     </NavLink>
+                     <NavLink to='/toggles' className='navigation__content' activeClassName='navigation__content--active'>
+                        <IconToggles />
+                        <div className='title'>Toggles</div>
+                     </NavLink>
+                  </Fragment>
+               )}
+            </div>
+            <div className='navigation__wrapper'>
+               <div className='navigation__header' onClick={() => this.setState({ showAccount: !showAccount })}>
+                  <div className='title'>Accounts</div>
+                  {showAccount ? <IconDropdownUp /> : <IconDropdown />}
+               </div>
+               {!showAccount ? null : (
+                  <Fragment>
+                     <NavLink to='/account' className='navigation__content' activeClassName='navigation__content--active'>
+                        <IconAccount />
+                        <div className='title'>Me</div>
+                     </NavLink>
+                     <NavLink to='/people' className='navigation__content' activeClassName='navigation__content--active'>
+                        <IconPeople />
+                        <div className='title'>People</div>
+                     </NavLink>
+                     <NavLink to='/roles' className='navigation__content' activeClassName='navigation__content--active'>
+                        <IconHat />
+                        <div className='title'>Roles</div>
+                     </NavLink>
+                  </Fragment>
+               )}
+            </div>
+         </div>
+      )
+   }
 }
