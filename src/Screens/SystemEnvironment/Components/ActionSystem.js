@@ -6,7 +6,7 @@ import { ReactComponent as IconMore } from '@Assets/Icon/more-vertical.svg'
 
 export default class ActionSystem extends Component {
    render() {
-      const { systems, selectedSystem, selectSystem, showOption, showOptionSystem } = this.props
+      const { systems, selectedSystem, selectSystem, setType, showOption, showOptionSystem, setToggle } = this.props
       return (
          <div className='action__content'>
             {systems.map((system, index) => {
@@ -15,7 +15,7 @@ export default class ActionSystem extends Component {
                      <div className={`system ${selectedSystem === system.ID ? 'active' : ''}`} key={index}>
                         <div className='title'>{system.name}</div>
                         <IconMore onClick={() => showOption(system.ID)} />
-                        {showOptionSystem === system.ID ? <ModalOptionSystem title={'System Action'} showOption={showOption} /> : null}
+                        {showOptionSystem === system.ID ? <ModalOptionSystem title={'System Action'} setToggle={setToggle} setType={setType} showOption={showOption} /> : null}
                      </div>
                   </Link>
                )

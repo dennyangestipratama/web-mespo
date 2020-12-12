@@ -237,3 +237,99 @@
         z-index: 5;
     }
 }
+
+.modalDelete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    box-shadow: -10px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+    width: 386px;
+    height: 365px;
+
+    >svg {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        svg {
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 3px;
+        }
+
+        input {
+            margin: 0 53px;
+            margin-top: 14px;
+            margin-bottom: 37px;
+            background: #181A1B;
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 13px;
+            letter-spacing: 0.02em;
+            padding: 10px 20px;
+        }
+
+        button {
+            font-weight: bold;
+            margin: 0 90px;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            letter-spacing: 0.01em;
+            padding: 15px 22px;
+            color: rgba($color: #FFFFFF, $alpha: 0.4);
+            background: #434343;
+            mix-blend-mode: normal;
+            border-radius: 8px;
+
+            span {
+                text-transform: capitalize;
+            }
+        }
+
+        .text {
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 17px;
+            text-align: center;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+            margin-bottom: 7px;
+
+            &--input {
+                font-weight: bold;
+                font-size: 12px;
+                line-height: 13px;
+                text-align: center;
+                letter-spacing: 0.02em;
+                color: #FFFFFF;
+                margin-top: 36px;
+            }
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 17px;
+            text-align: center;
+            letter-spacing: 0.02em;
+            color: #3776FF;
+        }
+    }
+
+}

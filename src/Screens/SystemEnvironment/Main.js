@@ -51,7 +51,7 @@ export default class Main extends Component {
 
 	render() {
 		const { showProperties, showMenu, properties } = this.state
-		const { isNavigation, systems, setToggle, selectedSystem, isModalUpload, showProperty, showOptionProperty } = this.props
+		const { isNavigation, systems, setToggle, setType, selectedSystem, isModalUpload, showProperty, showOptionProperty } = this.props
 		const system = systems.filter((filter) => filter.ID === selectedSystem)
 
 		return isNavigation ? null : (
@@ -159,7 +159,7 @@ export default class Main extends Component {
 														<div className='table__body --title'>{property.value}</div>
 														<div className='table__body --action' style={{ position: 'relative' }}>
 															<IconMore style={{ height: '25px' }} onClick={() => showProperty(property.ID)} />
-															{showOptionProperty === property.ID ? <ModalAction title={'Property Action'} showProperty={showProperty} id={property.ID} /> : null}
+															{showOptionProperty === property.ID ? <ModalAction title={'Property Action'} setToggle={setToggle} setType={setType} showProperty={showProperty} id={property.ID} /> : null}
 														</div>
 													</Fragment>
 												)

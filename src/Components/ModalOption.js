@@ -7,7 +7,7 @@ import { ReactComponent as IconArrowDown } from '@Assets/Icon/arrow-down.svg'
 
 export class ModalOptionSystem extends Component {
    render() {
-      const { showOption, title } = this.props
+      const { showOption, title, setType, setToggle } = this.props
       return (
          <div className='modalOption'>
             <div className="modalOption__title">{title}</div>
@@ -20,7 +20,11 @@ export class ModalOptionSystem extends Component {
                   <IconEdit />
                   <span>Edit</span>
                </div>
-               <div className="wrapper delete" onClick={() => showOption(0)}>
+               <div className="wrapper delete" onClick={() => {
+                  showOption(0)
+                  setToggle('isModalDelete')
+                  setType('system')
+               }}>
                   <IconDelete />
                   <span>Delete</span>
                </div>
@@ -32,7 +36,7 @@ export class ModalOptionSystem extends Component {
 
 export class ModalAction extends Component {
    render() {
-      const { showProperty, title } = this.props
+      const { showProperty, setType, title, setToggle } = this.props
       return (
          <div className='modalOption modalProperty'>
             <div className="modalOption__title">{title}</div>
@@ -45,7 +49,11 @@ export class ModalAction extends Component {
                      <IconArrowDown />
                   </div>
                </div>
-               <div className="wrapper delete" onClick={() => showProperty(0)}>
+               <div className="wrapper delete" onClick={() => {
+                  showProperty(0)
+                  setToggle('isModalDelete')
+                  setType('environment')
+               }}>
                   <IconDelete />
                   <span>Delete</span>
                </div>

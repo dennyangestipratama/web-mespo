@@ -11,7 +11,7 @@ import { ReactComponent as IconAdd } from '@Assets/Icon/add.svg'
 
 export default class Action extends Component {
    render() {
-      const { isClose, isNavigation, systems, setToggle, selectedSystem, showOption, showOptionSystem } = this.props
+      const { isClose, isNavigation, systems, setToggle, setType, selectedSystem, showOption, showOptionSystem } = this.props
       const system = systems.filter((filter) => filter.ID === selectedSystem)
 
       return isClose || isNavigation ? null : (
@@ -32,7 +32,7 @@ export default class Action extends Component {
                               <IconAdd />
                            </Link>
                         </div>
-                        {systems.length === 0 ? <ActionEmpty /> : <ActionSystem {...this.props} showOptionSystem={showOptionSystem} showOption={showOption} setToggle={setToggle} systems={systems} />}
+                        {systems.length === 0 ? <ActionEmpty /> : <ActionSystem {...this.props} showOptionSystem={showOptionSystem} showOption={showOption} setToggle={setToggle} systems={systems} setType={setType} />}
                      </Fragment>
                   )}
                />
