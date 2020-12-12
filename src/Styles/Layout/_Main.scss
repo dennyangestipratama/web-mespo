@@ -182,6 +182,10 @@
 
     &__body {
 
+        &__content {
+            position: relative;
+        }
+
         .search {
             max-width: 252px;
             margin: auto;

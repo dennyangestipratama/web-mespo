@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import MainEmpty from '@Screens/SystemEnvironment/Components/MainEmpty'
 import ModalUpload from '@Components/ModalUpload'
 import { MOBILE_VIEW } from '@Utilities'
+import { ModalAction } from '@Components/ModalOption'
 
 import ArrowLeft from '@Assets/Image/arrow-left.png'
 import { ReactComponent as IconWindow } from '@Assets/Icon/window.svg'
@@ -50,7 +51,7 @@ export default class Main extends Component {
 
 	render() {
 		const { showProperties, showMenu, properties } = this.state
-		const { isNavigation, systems, setToggle, selectedSystem, isModalUpload } = this.props
+		const { isNavigation, systems, setToggle, selectedSystem, isModalUpload, showProperty, showOptionProperty } = this.props
 		const system = systems.filter((filter) => filter.ID === selectedSystem)
 
 		return isNavigation ? null : (
@@ -151,12 +152,15 @@ export default class Main extends Component {
 											<div className='table__header'></div>
 											{properties.map(property => {
 												return (
-													<Fragment>
+													<Fragment key={property.ID}>
 														<div className='table__body --menu'><IconMenu /></div>
 														<div className='table__body --title'>{property.name}</div>
 														<div className='table__body --title'>{property.type} <span><IconArrowDown /></span></div>
 														<div className='table__body --title'>{property.value}</div>
-														<div className='table__body --action'><IconMore /></div>
+														<div className='table__body --action' style={{ position: 'relative' }}>
+															<IconMore style={{ height: '25px' }} onClick={() => showProperty(property.ID)} />
+															{showOptionProperty === property.ID ? <ModalAction title={'Property Action'} showProperty={showProperty} id={property.ID} /> : null}
+														</div>
 													</Fragment>
 												)
 											})}

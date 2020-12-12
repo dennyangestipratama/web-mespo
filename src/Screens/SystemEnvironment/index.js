@@ -16,6 +16,7 @@ export default class SystemEnvironment extends Component {
       isModalEnvironment: false,
       isModalUpload: false,
       showOptionSystem: false,
+      showOptionProperty: false,
       selectedSystem: this.props.match.params.ID ? parseInt(this.props.match.params.ID) : null,
       systems: [
          {
@@ -48,17 +49,16 @@ export default class SystemEnvironment extends Component {
       this.setState({ selectedSystem: ID })
    }
 
-   closeOption = () => {
-      this.setState({ showOptionSystem: false })
-   }
-
    showOption = (ID) => {
       this.setState({ showOptionSystem: ID })
    }
 
+   showProperty = (ID) => {
+      this.setState({ showOptionProperty: ID })
+   }
+
    render() {
-      const { isClose, isModalEnvironment, isModalUpload, isModalSystem, isNavigation, systems, environments, selectedSystem, showOptionSystem } = this.state
-      console.log(this.state.showOptionSystem)
+      const { isClose, isModalEnvironment, isModalUpload, isModalSystem, isNavigation, systems, environments, selectedSystem, showOptionSystem, showOptionProperty } = this.state
       return (
          <Fragment>
             <Action
@@ -73,7 +73,16 @@ export default class SystemEnvironment extends Component {
                showOption={this.showOption}
                selectSystem={this.selectSystem}
             />
-            {MOBILE_VIEW && !isClose ? null : <Main {...this.props} systems={systems} selectedSystem={selectedSystem} isNavigation={isNavigation} setToggle={this.setToggle} />}
+            {MOBILE_VIEW && !isClose ? null :
+               <Main
+                  {...this.props}
+                  systems={systems}
+                  selectedSystem={selectedSystem}
+                  isNavigation={isNavigation}
+                  showOptionProperty={showOptionProperty}
+                  setToggle={this.setToggle}
+                  showProperty={this.showProperty}
+               />}
             {MOBILE_VIEW && isNavigation ? <Navigation setToggle={this.setToggle} /> : null}
             {!isModalSystem ? null : (
                <Modal
