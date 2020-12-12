@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import { ModalOptionSystem } from '@Components/ModalOption'
 import { ReactComponent as IconMore } from '@Assets/Icon/more-vertical.svg'
 
 export default class ActionSystem extends Component {
    render() {
-      const { systems, selectedSystem, selectSystem } = this.props
+      const { systems, selectedSystem, selectSystem, showOption, showOptionSystem } = this.props
       return (
          <div className='action__content'>
             {systems.map((system, index) => {
@@ -13,7 +14,8 @@ export default class ActionSystem extends Component {
                   <Link to={`/system/${system.ID}`} onClick={() => selectSystem(system.ID)}>
                      <div className={`system ${selectedSystem === system.ID ? 'active' : ''}`} key={index}>
                         <div className='title'>{system.name}</div>
-                        <IconMore />
+                        <IconMore onClick={() => showOption(system.ID)} />
+                        {showOptionSystem === system.ID ? <ModalOptionSystem title={'System Action'} showOption={showOption} /> : null}
                      </div>
                   </Link>
                )

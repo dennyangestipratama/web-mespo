@@ -118,7 +118,7 @@ export default class Main extends Component {
 											<span>Properties</span>
 										</Fragment>
 									)}
-									{showProperties ? <IconDropdownUp /> : <IconDropdown />}
+									{showProperties ? <IconDropdownUp onClick={() => this.setState({ showProperties: !showProperties })} /> : <IconDropdown onClick={() => this.setState({ showProperties: !showProperties })} />}
 								</div>
 							</div>
 							{!showMenu ? null : (
@@ -139,7 +139,7 @@ export default class Main extends Component {
 									</div>
 								</div>
 							)}
-							{!properties ? (
+							{!showProperties ? null : !properties ? (
 								<MainEmpty />
 							) : (
 									<div className='main__body__content'>

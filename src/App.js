@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { Navigation, NavigationMobile } from '@Layouts'
 import { MOBILE_VIEW } from '@Utilities'

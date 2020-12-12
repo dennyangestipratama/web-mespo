@@ -145,3 +145,71 @@
         cursor: pointer;
     }
 }
+
+.modalOption {
+    position: absolute;
+    z-index: 5;
+    top: 2.3rem;
+    right: -3rem;
+    width: 140px;
+    height: 128px;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
+
+    &__title {
+        border-radius: 8px 8px 0 0;
+        padding: 10px 24px;
+        background: rgba($color: #313639, $alpha: 0.9);
+        font-weight: bold;
+        font-size: 9px;
+        line-height: 9px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-align: center;
+        color: #E4E4E4;
+    }
+
+    .body {
+        border-radius: 0 0 8px 8px;
+        backdrop-filter: blur(10px);
+        background: rgba($color: #101010, $alpha: 0.9);
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            cursor: pointer;
+
+            span {
+                font-weight: bold;
+                font-size: 10px;
+                line-height: 10px;
+                color: #FFFFFF;
+                margin-left: 4px;
+            }
+
+            &:hover {
+                background: #3776FF;
+            }
+
+            &.delete {
+                span {
+                    color: #FF5E5B;
+                }
+
+                &:hover {
+                    background: #FF5E5B;
+
+                    span {
+                        color: #FFFFFF;
+                    }
+
+                    svg {
+                        path {
+                            fill: #FFFFFF;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

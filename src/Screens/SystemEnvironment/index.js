@@ -2,6 +2,7 @@ import { Fragment, Component } from 'react'
 
 import Modal from '@Components/Modal'
 import ModalUpload from '@Components/ModalUpload'
+
 import Action from '@Screens/SystemEnvironment/Action'
 import Main from '@Screens/SystemEnvironment/Main'
 import { Navigation } from '@Layouts'
@@ -14,6 +15,7 @@ export default class SystemEnvironment extends Component {
       isModalSystem: false,
       isModalEnvironment: false,
       isModalUpload: false,
+      showOptionSystem: false,
       selectedSystem: this.props.match.params.ID ? parseInt(this.props.match.params.ID) : null,
       systems: [
          {
@@ -46,8 +48,17 @@ export default class SystemEnvironment extends Component {
       this.setState({ selectedSystem: ID })
    }
 
+   closeOption = () => {
+      this.setState({ showOptionSystem: false })
+   }
+
+   showOption = (ID) => {
+      this.setState({ showOptionSystem: ID })
+   }
+
    render() {
-      const { isClose, isModalEnvironment, isModalUpload, isModalSystem, isNavigation, systems, environments, selectedSystem } = this.state
+      const { isClose, isModalEnvironment, isModalUpload, isModalSystem, isNavigation, systems, environments, selectedSystem, showOptionSystem } = this.state
+      console.log(this.state.showOptionSystem)
       return (
          <Fragment>
             <Action
@@ -57,7 +68,9 @@ export default class SystemEnvironment extends Component {
                isClose={isClose}
                isNavigation={isNavigation}
                selectedSystem={selectedSystem}
+               showOptionSystem={showOptionSystem}
                setToggle={this.setToggle}
+               showOption={this.showOption}
                selectSystem={this.selectSystem}
             />
             {MOBILE_VIEW && !isClose ? null : <Main {...this.props} systems={systems} selectedSystem={selectedSystem} isNavigation={isNavigation} setToggle={this.setToggle} />}
