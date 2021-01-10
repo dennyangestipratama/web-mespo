@@ -18,11 +18,19 @@
    flex-direction: column;
 
    padding: 72px 60px 61px;
+
+   @include respondTo(tablet) {
+      padding: 72px 30px;
+   }
 }
 
 .login__logo {
    object-fit: contain;
    margin-bottom: 43px;
+
+   @include respondTo(tablet) {
+      margin-bottom: 35px;
+   }
 }
 
 .login__label {
@@ -43,6 +51,10 @@
 
    display: flex;
    align-items: center;
+
+   @include respondTo(tablet) {
+      width: 224px;
+   }
 
    input {
       width: 100%;
