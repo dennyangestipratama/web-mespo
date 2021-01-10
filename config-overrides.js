@@ -8,7 +8,8 @@ module.exports = function override(config, env) {
 
    config.resolve.alias = {
       ...defaultAlias,
-      '@Assets': path.resolve(__dirname, './src/Assets'),
+      '@Image': path.resolve(__dirname, './assets/Image'),
+      '@Icon': path.resolve(__dirname, './assets/Icon'),
       '@Components': path.resolve(__dirname, './src/Components'),
       '@Context': path.resolve(__dirname, './src/Context'),
       '@Layouts': path.resolve(__dirname, './src/Layouts'),

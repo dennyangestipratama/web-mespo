@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ModalOptionSystem } from '@Components/ModalOption'
-import { ReactComponent as IconMore } from '@Assets/Icon/more-vertical.svg'
+import { ReactComponent as IconMore } from '@Icon/more-vertical.svg'
 
 export default class ActionSystem extends Component {
    render() {

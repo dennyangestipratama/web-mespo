@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import AddProperties from '@Assets/Image/add-properties.png'
+import AddProperties from '@Image/add-properties.png'
 
 export default class MainEmpty extends Component {
    render() {

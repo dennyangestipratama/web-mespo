@@ -4,7 +4,7 @@ import { Switch, Route, NavLink } from 'react-router-dom'
 import TabEnvironment from '@Screens/SystemEnvironment/Components/TabEnvironment'
 import TabSystem from '@Screens/SystemEnvironment/Components/TabSystem'
 
-import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
+import { ReactComponent as IconClose } from '@Icon/close.svg'
 
 export default class ActionCreate extends Component {
    render() {

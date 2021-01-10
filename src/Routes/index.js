@@ -1,13 +1,6 @@
-import Login from '@Screens/Login'
 import SystemEnvironment from '@Screens/SystemEnvironment'
 
 const Routes = [
-   {
-      component: Login,
-      route: '/login',
-      name: 'Login',
-      exact: true,
-   },
    {
       component: SystemEnvironment,
       route: '/system',

@@ -5,9 +5,9 @@ import ActionCreate from '@Screens/SystemEnvironment/Components/ActionCreate'
 import ActionEmpty from '@Screens/SystemEnvironment/Components/ActionEmpty'
 import ActionSystem from '@Screens/SystemEnvironment/Components/ActionSystem'
 
-import { ReactComponent as IconClose } from '@Assets/Icon/close.svg'
-import { ReactComponent as IconSearch } from '@Assets/Icon/search.svg'
-import { ReactComponent as IconAdd } from '@Assets/Icon/add.svg'
+import { ReactComponent as IconClose } from '@Icon/close.svg'
+import { ReactComponent as IconSearch } from '@Icon/search.svg'
+import { ReactComponent as IconAdd } from '@Icon/add.svg'
 
 export default class Action extends Component {
    render() {

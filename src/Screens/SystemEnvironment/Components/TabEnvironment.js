@@ -2,12 +2,12 @@ import { Component, Fragment } from 'react'
 
 import Button from '@Components/Button'
 
-import { ReactComponent as IconInfo } from '@Assets/Icon/info.svg'
-import { ReactComponent as IconAttachment } from '@Assets/Icon/attachment.svg'
-import { ReactComponent as IconSearch } from '@Assets/Icon/search.svg'
-import { ReactComponent as IconAdd } from '@Assets/Icon/add.svg'
-import { ReactComponent as IconCheck } from '@Assets/Icon/check.svg'
-import { ReactComponent as IconMore } from '@Assets/Icon/more-vertical.svg'
+import { ReactComponent as IconInfo } from '@Icon/info.svg'
+import { ReactComponent as IconAttachment } from '@Icon/attachment.svg'
+import { ReactComponent as IconSearch } from '@Icon/search.svg'
+import { ReactComponent as IconAdd } from '@Icon/add.svg'
+import { ReactComponent as IconCheck } from '@Icon/check.svg'
+import { ReactComponent as IconMore } from '@Icon/more-vertical.svg'
 
 export default class TabEnvironment extends Component {
    state = {
@@ -41,36 +41,36 @@ export default class TabEnvironment extends Component {
                   {environment ? (
                      <div className='info'>No System available</div>
                   ) : (
-                     <Fragment>
-                        <div className='attachment__search'>
-                           <div className='wrapper'>
-                              <input type='text' placeholder='Search System' />
-                              <IconSearch />
-                           </div>
-                           <IconAdd />
-                        </div>
-                        <div className='attachment__item'>
-                           <div className='wrapper' onClick={() => this.setState({ isCheckShapestone: !isCheckShapestone })}>
-                              {isCheckShapestone ? <IconCheck /> : null}
-                           </div>
-                           <div className={`item ${isCheckShapestone ? 'active' : ''}`}>
-                              <div className='title'>
-                                 Shapestone <span>new</span>
+                        <Fragment>
+                           <div className='attachment__search'>
+                              <div className='wrapper'>
+                                 <input type='text' placeholder='Search System' />
+                                 <IconSearch />
                               </div>
-                              <IconMore />
+                              <IconAdd />
                            </div>
-                        </div>
-                        <div className='attachment__item'>
-                           <div className='wrapper' onClick={() => this.setState({ isCheck: !isCheck })}>
-                              {isCheck ? <IconCheck /> : null}
+                           <div className='attachment__item'>
+                              <div className='wrapper' onClick={() => this.setState({ isCheckShapestone: !isCheckShapestone })}>
+                                 {isCheckShapestone ? <IconCheck /> : null}
+                              </div>
+                              <div className={`item ${isCheckShapestone ? 'active' : ''}`}>
+                                 <div className='title'>
+                                    Shapestone <span>new</span>
+                                 </div>
+                                 <IconMore />
+                              </div>
                            </div>
-                           <div className={`item ${isCheck ? 'active' : ''}`}>
-                              <div className='title'>Troumaka</div>
-                              <IconMore />
+                           <div className='attachment__item'>
+                              <div className='wrapper' onClick={() => this.setState({ isCheck: !isCheck })}>
+                                 {isCheck ? <IconCheck /> : null}
+                              </div>
+                              <div className={`item ${isCheck ? 'active' : ''}`}>
+                                 <div className='title'>Troumaka</div>
+                                 <IconMore />
+                              </div>
                            </div>
-                        </div>
-                     </Fragment>
-                  )}
+                        </Fragment>
+                     )}
                </div>
             </form>
             <Button text='Create' style={{ marginRight: '31px' }} onClick={() => setToggle('isModalEnvironment')} />

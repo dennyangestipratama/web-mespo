@@ -1,7 +1,7 @@
 import { Component } from 'react'
 
-import GhostImage from '@Assets/Image/ghost.png'
-import AddSystemImage from '@Assets/Image/add-system.png'
+import GhostImage from '@Image/ghost.png'
+import AddSystemImage from '@Image/add-system.png'
 
 export default class ActionEmpty extends Component {
    render() {
