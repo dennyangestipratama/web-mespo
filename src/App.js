@@ -12,7 +12,7 @@ export default class App extends Component {
       return (
          <Router>
             <Switch>
-               <Route exact path='/login' component={Login} />
+               <Route exact path='/' component={Login} />
                <div className='home'>
                   {MOBILE_VIEW ? <NavigationMobile /> : <Navigation />}
                   {Routes.map((route, index) => (

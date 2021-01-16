@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-
+import AuthContext from '@Context/AuthContext'
 import '@Styles/Main.scss'
 
 ReactDOM.render(
    <React.StrictMode>
-      <App />
+      <AuthContext>
+         <App />
+      </AuthContext>
    </React.StrictMode>,
    document.getElementById('root')
 )

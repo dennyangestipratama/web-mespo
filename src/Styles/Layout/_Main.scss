@@ -8,6 +8,14 @@
         min-height: 100vh;
     }
 
+    &__title {
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 28px;
+        letter-spacing: 0.02em;
+        color: #FFFFFF;
+    }
+
 
     &__header {
         display: flex;

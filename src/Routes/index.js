@@ -1,4 +1,6 @@
 import SystemEnvironment from '@Screens/SystemEnvironment'
+import Toggles from '@Screens/Toggles'
+import Features from '@Screens/Features'
 
 const Routes = [
    {
@@ -23,6 +25,18 @@ const Routes = [
       component: SystemEnvironment,
       route: '/create/environment',
       name: 'System Environment',
+      exact: true,
+   },
+   {
+      component: Toggles,
+      route: '/toggles',
+      name: 'Toggles',
+      exact: true,
+   },
+   {
+      component: Features,
+      route: '/features',
+      name: 'Features',
       exact: true,
    },
 ]
