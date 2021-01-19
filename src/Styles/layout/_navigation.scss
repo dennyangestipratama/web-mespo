@@ -1,0 +1,36 @@
+.navigation {
+   background: #1D1D1E;
+   display: flex;
+   flex-direction: column;
+}
+
+.navigation__logo {
+   padding: 62px;
+   object-fit: contain;
+}
+
+.navigation__tab {}
+
+.navigation__link-title {
+   background: rgba($color: #C4C4C4, $alpha: 0.2);
+   padding: 7px 15px 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   span {
+      margin-left: 34px;
+   }
+}
+
+.navigation__link-tab {
+   display: flex;
+   align-items: center;
+   margin-bottom: 21px;
+   margin-left: 34px;
+   margin-top: 11px;
+
+   svg {
+      margin-right: 10px;
+   }
+}

@@ -16,5 +16,5 @@ Button.propTypes = {
    showImage: PropTypes.bool,
    icon: PropTypes.node,
    onClick: PropTypes.func,
-   color: PropTypes.string
+   color: PropTypes.string,
 }

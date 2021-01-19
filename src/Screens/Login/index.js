@@ -14,7 +14,7 @@ export default function Login() {
    const [seePassword, setSeePassword] = useState(false)
    const [username, setUsername] = useState({
       isFocus: false,
-      value: ''
+      value: '',
    })
    const [password, setPassword] = useState({
       isFocus: false,
@@ -35,41 +35,43 @@ export default function Login() {
    }
 
    return (
-      <section className="login">
-         <form onSubmit={submit} className="login__card">
-            <img src={Mespo} alt="mespo" className="login__logo" />
+      <section className='login'>
+         <form onSubmit={submit} className='login__card'>
+            <img src={Mespo} alt='mespo' className='login__logo' />
             <Input
-               label="Username"
-               placeholder="Type your username"
-               type="text"
+               label='Username'
+               placeholder='Type your username'
+               type='text'
                value={username.value}
                isFocus={username.isFocus}
                onClick={() => {
-                  setUsername(prevState => ({ ...prevState, isFocus: true }))
-                  setPassword(prevState => ({ ...prevState, isFocus: false }))
+                  setUsername((prevState) => ({ ...prevState, isFocus: true }))
+                  setPassword((prevState) => ({ ...prevState, isFocus: false }))
                }}
-               onChange={event => {
-                  setUsername(prevState => ({ ...prevState, value: event.target.value }))
+               onChange={(event) => {
+                  setUsername((prevState) => ({ ...prevState, value: event.target.value }))
                }}
             />
             <Input
-               label="Password"
-               placeholder="Type your password..."
-               type={seePassword ? "text" : "password"}
+               label='Password'
+               placeholder='Type your password...'
+               type={seePassword ? 'text' : 'password'}
                showImage={true}
                icon={seePassword ? <EyeOpen onClick={() => setSeePassword(!seePassword)} /> : <EyeClose onClick={() => setSeePassword(!seePassword)} />}
                value={password.value}
                isFocus={password.isFocus}
                onClick={() => {
-                  setPassword(prevState => ({ ...prevState, isFocus: true }))
-                  setUsername(prevState => ({ ...prevState, isFocus: false }))
+                  setPassword((prevState) => ({ ...prevState, isFocus: true }))
+                  setUsername((prevState) => ({ ...prevState, isFocus: false }))
                }}
-               onChange={event => {
-                  setPassword(prevState => ({ ...prevState, value: event.target.value }))
+               onChange={(event) => {
+                  setPassword((prevState) => ({ ...prevState, value: event.target.value }))
                }}
             />
-            <a href='/' className="login__forget text__link">Forgot Password</a>
-            <Button type='submit' label="Login" showImage={true} icon={<IconLogin className='login__button-icon' />} />
+            <a href='/' className='login__forget text__link'>
+               Forgot Password
+            </a>
+            <Button type='submit' label='Login' showImage={true} icon={<IconLogin className='login__button-icon' />} />
          </form>
       </section>
    )

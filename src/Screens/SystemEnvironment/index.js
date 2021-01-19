@@ -1,9 +1,13 @@
-import React from 'react'
+import { Fragment } from 'react'
+
+import Action from './Action'
+import Main from './Main'
 
 export default function SystemEnvironment() {
    return (
-      <div>
-         System Environment
-      </div>
+      <Fragment>
+         <Action />
+         <Main />
+      </Fragment>
    )
 }

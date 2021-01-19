@@ -32,3 +32,29 @@
    letter-spacing: 0.01em;
    color: #FFFFFF;
 }
+
+.text__nav-title {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   letter-spacing: 0.05em;
+   text-transform: uppercase;
+   color: #E4E4E4;
+}
+
+.text__nav {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 10px;
+   letter-spacing: 0.05em;
+   text-transform: uppercase;
+   color: #CCCCCC;
+}
+
+.text__nav--active {
+   color: #3776FF;
+
+   path {
+      fill: #3776FF;
+   }
+}
