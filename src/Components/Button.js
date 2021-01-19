@@ -1,11 +1,20 @@
-const Button = ({ text, onClick, type, style }) => {
+import React from 'react'
+import PropTypes from 'prop-types'
+
+export default function Button({ showImage = false, icon = null, label, color = '#3776FF', onClick, type = 'button' }) {
    return (
-      <div className='button' style={style}>
-         <button type={type} onClick={onClick}>
-            {text}
-         </button>
-      </div>
+      <button type={type} onClick={onClick} className='button' style={{ background: color }}>
+         {showImage ? icon : null}
+         <span className='text__button'>{label}</span>
+      </button>
    )
 }
 
-export default Button
+Button.propTypes = {
+   label: PropTypes.string,
+   type: PropTypes.string,
+   showImage: PropTypes.bool,
+   icon: PropTypes.node,
+   onClick: PropTypes.func,
+   color: PropTypes.string
+}

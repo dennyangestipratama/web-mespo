@@ -1,0 +1,39 @@
+.login {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   background: radial-gradient(67.72% 81.85% at 51.22% 79.44%, #50E4A7 21.23%, #4E85FF 58.99%, #910249 100%);
+   mix-blend-mode: saturation;
+
+   @include respondTo(tablet) {
+      padding: 76px 18px;
+   }
+}
+
+.login__card {
+   margin: auto;
+   width: 425px;
+   height: 397px;
+   background: #1A1D1F;
+   border-radius: 8px;
+   padding: 72px 60px 61px;
+
+   @include respondTo(tablet) {
+      width: 100%;
+      height: auto;
+      padding: 72px 30px;
+   }
+}
+
+.login__logo {
+   margin: 0 auto 43px;
+}
+
+.login__forget {
+   display: block;
+   margin-bottom: 12px;
+}
+
+.login__button-icon {
+   margin-right: 18px;
+}

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import AuthContext from '@Context/AuthContext'
-import '@Styles/Main.scss'
+import '@Styles/main.scss'
 
 ReactDOM.render(
    <React.StrictMode>

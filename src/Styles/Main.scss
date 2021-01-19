@@ -1,22 +1,12 @@
-@import 'Abstracts/Mixins', 'Abstracts/Variables';
-@import 'Abstracts/Variables';
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
 
-@import 'Base/Reset', 'Base/Typography';
-@import 'Base/Typography';
+@import 'base/reset';
+@import 'base/typography';
 
-@import 'Components/Button';
-@import 'Components/Modal';
-@import 'Components/Table';
-@import 'Components/Empty';
+@import 'components/input';
+@import 'components/button';
 
-@import 'Layout/Home';
-@import 'Layout/Navigation';
-@import 'Layout/Action';
-@import 'Layout/Main';
+@import 'screen/login';
 
-@import 'Screens/CreateSystem';
-@import 'Screens/Toggles';
-@import 'Screens/TabSystem';
-@import 'Screens/Login';
-
-@import 'Themes/Theme';
+@import 'themes/theme';
