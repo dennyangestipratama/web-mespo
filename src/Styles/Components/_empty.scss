@@ -1,0 +1,49 @@
+.empty-action {
+   padding: 114px 21px;
+   position: relative;
+}
+
+.empty-action__search {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   svg {
+      margin-left: 12px;
+   }
+}
+
+.empty-action__close {
+   position: absolute;
+   top: 24px;
+   right: 19px;
+}
+
+.empty-action__info {
+   display: flex;
+   justify-content: center;
+   position: relative;
+   margin-top: 116px;
+
+   svg {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+   }
+}
+
+.empty-action__content {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-top: 80px;
+
+   span {
+      padding: 0 100px;
+   }
+
+   img {
+      margin-top: 44px;
+   }
+}

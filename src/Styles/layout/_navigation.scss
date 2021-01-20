@@ -6,16 +6,14 @@
 
 .navigation__logo {
    padding: 62px;
-   object-fit: contain;
+   width: 100%;
+   object-fit: cover;
 }
-
-.navigation__tab {}
 
 .navigation__link-title {
    background: rgba($color: #C4C4C4, $alpha: 0.2);
-   padding: 7px 15px 10px;
+   padding: 7px 15px 10px 5px;
    display: flex;
-   align-items: center;
    justify-content: space-between;
 
    span {

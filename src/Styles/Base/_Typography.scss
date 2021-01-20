@@ -58,3 +58,29 @@
       fill: #3776FF;
    }
 }
+
+.text__action {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.text__action-title {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__search {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.01em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
