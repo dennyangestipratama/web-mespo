@@ -11,6 +11,7 @@ export default function Action() {
             content='Don’t let frank wreck your release! Add a feature now.'
             label='Add a feature here'
             placeholder='Search Feature'
+            to='/features/create/features'
          />
       </section>
    )

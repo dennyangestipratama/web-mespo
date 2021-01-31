@@ -7,7 +7,14 @@
 .navigation__logo {
    padding: 62px;
    width: 100%;
-   object-fit: cover;
+   object-fit: contain;
+}
+
+.navigation__logo--mini {
+   padding: 0;
+   width: 24px;
+   height: 22px;
+   margin: 62px auto 58px;
 }
 
 .navigation__link-title {
@@ -21,6 +28,19 @@
    }
 }
 
+.navigation__link-title--mini {
+   span {
+      margin-left: 19px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+
+   svg {
+      width: 100%;
+   }
+}
+
 .navigation__link-tab {
    display: flex;
    align-items: center;
@@ -31,4 +51,8 @@
    svg {
       margin-right: 10px;
    }
+}
+
+.navigation__link-tab--mini {
+   margin-left: 20px;
 }

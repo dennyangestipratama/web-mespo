@@ -1,27 +1,12 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 
-export default function Input({ label, type = 'text', placeholder, showImage = false, icon = null, value, onChange, onClick, isFocus }) {
+export default function Input({ label, onClick, value, onChange, type, placeholder }) {
    return (
-      <div className='input'>
+      <div className='input' onClick={onClick}>
          <label className='input__label text__label' htmlFor='input'>
             {label}
          </label>
-         <div className={`input__wrapper ${isFocus ? 'input--focus' : ''}`} onClick={onClick}>
-            <input className='input__element text__input' value={value} onChange={onChange} id='input' type={type} placeholder={placeholder} />
-            {showImage ? icon : null}
-         </div>
+         <input className='input__element input__default text__input' value={value} onChange={onChange} id='input' type={type} placeholder={placeholder} />
       </div>
    )
-}
-
-Input.propTypes = {
-   label: PropTypes.string,
-   type: PropTypes.string,
-   placeholder: PropTypes.string,
-   showImage: PropTypes.bool,
-   icon: PropTypes.node,
-   isFocus: PropTypes.bool,
-   value: PropTypes.string,
-   onChange: PropTypes.func,
-   onClick: PropTypes.func,
 }

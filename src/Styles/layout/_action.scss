@@ -1,3 +1,82 @@
 .action {
    background: #2B2F31;
+   position: relative;
+}
+
+.action__create-close {
+   position: absolute;
+   top: 24px;
+   right: 19px;
+}
+
+.action__create-title {
+   padding: 0 27px 26px;
+}
+
+.action__create-breadcrumbs {
+   padding: 40px 27px 16px;
+}
+
+.action__create-tabs {
+   display: flex;
+}
+
+.action__create-tab {
+   padding-bottom: 10px;
+   width: 100%;
+}
+
+.action__create-tab--active {
+   border-bottom: 4px solid #3776FF;
+}
+
+.action__tab {
+   padding: 22px 24px;
+}
+
+.action__tab-upload {
+   background: #222324;
+   margin-top: 47px;
+   position: relative;
+   margin-bottom: 22px;
+}
+
+.action__tab-form {
+   margin-top: 20px;
+}
+
+.action__attach-icon {
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background: #50E4A7;
+   border-radius: 100%;
+   width: 41px;
+   height: 41px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+
+   svg {
+      width: 100%;
+   }
+}
+
+.action__upload {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 43px 75px;
+}
+
+.action__upload-empty {
+   padding: 74px 0 83px;
+}
+
+.action__tab-btn {
+   padding-right: 31px;
+   padding-bottom: 70px;
 }

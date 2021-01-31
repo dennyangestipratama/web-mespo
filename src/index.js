@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import AuthContext from '@Context/AuthContext'
+import UtilsContext from '@Context/UtilsContext'
+import SystemContext from '@Context/SystemContext'
 import '@Styles/main.scss'
 
 ReactDOM.render(
    <React.StrictMode>
       <AuthContext>
-         <App />
+         <UtilsContext>
+            <SystemContext>
+               <App />
+            </SystemContext>
+         </UtilsContext>
       </AuthContext>
    </React.StrictMode>,
    document.getElementById('root')

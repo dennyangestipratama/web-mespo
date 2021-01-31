@@ -4,3 +4,15 @@
    display: grid;
    grid-template-columns: 216px 350px auto;
 }
+
+.home--full {
+   grid-template-columns: 216px auto;
+}
+
+.home--mini {
+   grid-template-columns: 75px 350px auto;
+}
+
+.home--fullsize {
+   grid-template-columns: 75px auto;
+}

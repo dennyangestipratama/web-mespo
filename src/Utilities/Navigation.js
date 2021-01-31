@@ -14,7 +14,7 @@ export const NAVIGATION_TAB = [
             ID: 1,
             title: 'System Environment',
             icon: <SystemEnvironment />,
-            href: '/system-environment'
+            href: '/system-environment',
          },
       ],
    },
@@ -26,13 +26,13 @@ export const NAVIGATION_TAB = [
             ID: 1,
             title: 'Features',
             icon: <Features />,
-            href: '/features'
+            href: '/features',
          },
          {
             ID: 2,
             title: 'Toggles',
             icon: <Toggles />,
-            href: '/toggles'
+            href: '/toggles',
          },
       ],
    },
@@ -44,19 +44,19 @@ export const NAVIGATION_TAB = [
             ID: 1,
             title: 'Me',
             icon: <Account />,
-            href: '/account'
+            href: '/account',
          },
          {
             ID: 2,
             title: 'People',
             icon: <People />,
-            href: '/people'
+            href: '/people',
          },
          {
             ID: 3,
             title: 'Roles',
             icon: <Roles />,
-            href: '/roles'
+            href: '/roles',
          },
       ],
    },

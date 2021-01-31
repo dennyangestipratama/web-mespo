@@ -84,3 +84,64 @@
    letter-spacing: 0.01em;
    color: rgba($color: #FFFFFF, $alpha: 0.4);
 }
+
+.text__title {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #BDCACA, $alpha: 0.5);
+}
+
+.text__navigation {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.text__sub-title {
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 17px;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__breadcrumbs {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #BDCACA, $alpha: 0.5);
+}
+
+.text__tabs {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   text-align: center;
+   color: rgba($color: #FFFFFF, $alpha: 0.5);
+}
+
+.text__tabs--active {
+   color: #3776FF;
+}
+
+.text__alert {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 15px;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.placeholder {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}

@@ -9,6 +9,12 @@ const Routes = [
       exact: true,
    },
    {
+      component: SystemEnvironment,
+      route: '/system-environment/create',
+      name: 'System Environment',
+      exact: false,
+   },
+   {
       component: Features,
       route: '/features',
       name: 'Features',

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import Input from '@Components/Input'
+import InputLogin from '@Components/InputLogin'
 import Button from '@Components/Button'
 
 import Mespo from '@Image/logo.png'
@@ -38,7 +38,7 @@ export default function Login() {
       <section className='login'>
          <form onSubmit={submit} className='login__card'>
             <img src={Mespo} alt='mespo' className='login__logo' />
-            <Input
+            <InputLogin
                label='Username'
                placeholder='Type your username'
                type='text'
@@ -52,7 +52,7 @@ export default function Login() {
                   setUsername((prevState) => ({ ...prevState, value: event.target.value }))
                }}
             />
-            <Input
+            <InputLogin
                label='Password'
                placeholder='Type your password...'
                type={seePassword ? 'text' : 'password'}

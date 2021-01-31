@@ -1,13 +1,17 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 
+import { UtilsContext } from '@Context/UtilsContext'
 import { NAVIGATION_TAB } from '@Utilities/Navigation'
 
 import Mespo from '@Image/logo.png'
+import MespoMini from '@Image/logo-mini.png'
+
 import { ReactComponent as ArrowDown } from '@Icon/arrow-down.svg'
 import { ReactComponent as ArrowUp } from '@Icon/arrow-up.svg'
 
 export default function Navigation() {
+   const utilsContext = useContext(UtilsContext)
    const [minimize, setMinimize] = useState({
       tabProperties: false,
       tabFeatures: false,
@@ -42,30 +46,31 @@ export default function Navigation() {
 
    return (
       <section className='navigation'>
-         <img className='navigation__logo' src={Mespo} alt='mespo' />
+         <img className={`navigation__logo ${!utilsContext.isMini ? '' : 'navigation__logo--mini'}`} src={utilsContext.isMini ? MespoMini : Mespo} alt='mespo' />
          <div className='navigation__tab'>
             {NAVIGATION_TAB.map((tabs) => {
                return (
                   <div key={tabs.ID} className='navigation__link'>
-                     <div className='navigation__link-title text__nav-title' onClick={() => toggleNav(tabs.ID)}>
+                     <div className={`navigation__link-title text__nav-title ${!utilsContext.isMini ? '' : 'navigation__link-title--mini'}`} onClick={() => toggleNav(tabs.ID)}>
                         <span>{tabs.title}</span>
                         {whichNav(tabs.ID) ? <ArrowDown /> : <ArrowUp />}
                      </div>
-                     {
-                        !whichNav(tabs.ID) &&
+                     {!whichNav(tabs.ID) &&
                         tabs.tab.map((item) => {
                            return (
-                              <NavLink to={item.href} className='navigation__link-tab text__nav' activeClassName='navigation__link-tab text__nav--active'>
+                              <NavLink
+                                 to={item.href}
+                                 className={`navigation__link-tab text__nav ${!utilsContext.isMini ? '' : 'navigation__link-tab--mini'}`}
+                                 activeClassName={`navigation__link-tab text__nav--active ${!utilsContext.isMini ? '' : 'navigation__link-tab--mini'}`}>
                                  {item.icon}
-                                 <span>{item.title}</span>
+                                 {utilsContext.isMini ? null : <span>{item.title}</span>}
                               </NavLink>
                            )
-                        })
-                     }
+                        })}
                   </div>
                )
             })}
          </div>
-      </section >
+      </section>
    )
 }
