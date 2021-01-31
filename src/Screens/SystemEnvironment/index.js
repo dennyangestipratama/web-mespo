@@ -3,6 +3,7 @@ import { Fragment, Component } from 'react'
 import Modal from '@Components/Modal'
 import ModalUpload from '@Components/ModalUpload'
 import ModalDelete from '@Components/ModalDelete'
+import EnvironmentController from '@Services/EnvironmentController'
 
 import Action from '@Screens/SystemEnvironment/Action'
 import Main from '@Screens/SystemEnvironment/Main'
@@ -63,6 +64,13 @@ export default class SystemEnvironment extends Component {
    showProperty = (ID) => {
       this.setState({ showOptionProperty: ID })
    }
+
+   componentDidMount() {
+      EnvironmentController().then(response => {
+         console.log(response)
+      })
+   }
+
 
    render() {
       const {
