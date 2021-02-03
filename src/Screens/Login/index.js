@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import InputLogin from '@Components/InputLogin'
@@ -8,6 +8,7 @@ import Mespo from '@Image/logo.png'
 import { ReactComponent as EyeOpen } from '@Icon/eye-open.svg'
 import { ReactComponent as EyeClose } from '@Icon/eye-close.svg'
 import { ReactComponent as IconLogin } from '@Icon/login.svg'
+import GetEnvironmentController from '../../Services/Environment/GetEnvironmentController'
 
 export default function Login() {
    const history = useHistory()
@@ -20,6 +21,16 @@ export default function Login() {
       isFocus: false,
       value: '',
    })
+
+   useEffect(() => {
+      GetEnvironmentController().then(response => {
+         alert('success')
+         console.log(response)
+      }).catch(err => {
+         alert('error')
+         console.log(err)
+      })
+   }, [])
 
    const submit = (event) => {
       event.preventDefault()
