@@ -56,9 +56,10 @@ export default function Navigation() {
                         {whichNav(tabs.ID) ? <ArrowDown /> : <ArrowUp />}
                      </div>
                      {!whichNav(tabs.ID) &&
-                        tabs.tab.map((item) => {
+                        tabs.tab.map((item, index) => {
                            return (
                               <NavLink
+                                 key={index}
                                  to={item.href}
                                  className={`navigation__link-tab text__nav ${!utilsContext.isMini ? '' : 'navigation__link-tab--mini'}`}
                                  activeClassName={`navigation__link-tab text__nav--active ${!utilsContext.isMini ? '' : 'navigation__link-tab--mini'}`}>

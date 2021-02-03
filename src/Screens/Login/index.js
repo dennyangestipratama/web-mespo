@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom'
 
 import InputLogin from '@Components/InputLogin'
 import Button from '@Components/Button'
+import EnvironmentController from '@Services/EnvironmentController'
+import SystemController from '@Services/SystemController'
 
 import Mespo from '@Image/logo.png'
 import { ReactComponent as EyeOpen } from '@Icon/eye-open.svg'
 import { ReactComponent as EyeClose } from '@Icon/eye-close.svg'
 import { ReactComponent as IconLogin } from '@Icon/login.svg'
-import GetEnvironmentController from '../../Services/Environment/GetEnvironmentController'
 
 export default function Login() {
    const history = useHistory()
@@ -23,12 +24,11 @@ export default function Login() {
    })
 
    useEffect(() => {
-      GetEnvironmentController().then(response => {
-         alert('success')
+      EnvironmentController.environment().then((response) => {
          console.log(response)
-      }).catch(err => {
-         alert('error')
-         console.log(err)
+      })
+      SystemController.system().then((response) => {
+         console.log(response)
       })
    }, [])
 

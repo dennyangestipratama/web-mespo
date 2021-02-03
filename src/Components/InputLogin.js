@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 export default function InputLogin({ label, type = 'text', placeholder, showImage = false, icon = null, value, onChange, onClick, isFocus }) {
    return (
       <div className='input'>
-         <label className='input__label text__label' htmlFor='input'>
-            {label}
-         </label>
+         <label className='input__label text__label'>{label}</label>
          <div className={`input__wrapper ${isFocus ? 'input--focus' : ''}`} onClick={onClick}>
-            <input className='input__element text__input' value={value} onChange={onChange} id='input' type={type} placeholder={placeholder} />
+            <input className='input__element text__input' value={value} onChange={onChange} type={type} placeholder={placeholder} />
             {showImage ? icon : null}
          </div>
       </div>
