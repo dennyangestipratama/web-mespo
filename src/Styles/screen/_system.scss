@@ -1,0 +1,34 @@
+.system-list {
+   padding: 68px 25px;
+}
+
+.system-list__capsules {
+   background: #1D1F20;
+   border-radius: 8px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 10px 5px 10px 22px;
+   position: relative;
+   cursor: pointer;
+
+   &:not(:last-child) {
+      margin-bottom: 9px;
+   }
+}
+
+.system-list__capsules-icon {
+   width: 2rem;
+}
+
+.system-list__capsules--active {
+   border: 1px solid #50E4A7;
+}
+
+.system-list__title {
+   margin-bottom: 29px;
+}
+
+.system-list__search {
+   margin-bottom: 20px;
+}

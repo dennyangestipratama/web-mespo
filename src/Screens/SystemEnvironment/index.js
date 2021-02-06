@@ -1,9 +1,10 @@
-import { Fragment, useContext, useEffect } from 'react'
+import { Fragment, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { UtilsContext } from '@Context/UtilsContext'
 import { SystemContext } from '@Context/SystemContext'
 import ModalSuccess from '@Components/ModalSuccess'
+import ModalDelete from '@Components/ModalDelete'
 import Button from '@Components/Button'
 
 import Action from './Action'
@@ -16,10 +17,6 @@ export default function SystemEnvironment() {
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
 
-   useEffect(() => {
-      console.log(systemContext.create.isSubmit)
-   }, [systemContext.system.isLoading])
-
    return (
       <Fragment>
          {/* FOR PAGE */}
@@ -27,7 +24,7 @@ export default function SystemEnvironment() {
          <Main />
 
          {/* FOR MODAL */}
-         {!utilsContext.isSuccessSystem ? null : (
+         {!systemContext.isSuccessSystem ? null : (
             <ModalSuccess
                icon={<CreateSystemSVG />}
                title={systemContext.create.data?.event.system.name}
@@ -38,7 +35,7 @@ export default function SystemEnvironment() {
                   <Fragment>
                      <Button
                         onClick={() => {
-                           utilsContext.setIsSuccessSystem(false)
+                           systemContext.setIsSuccessSystem(false)
                            history.push('/system-environment')
                         }}
                         color='#000000'
@@ -46,13 +43,32 @@ export default function SystemEnvironment() {
                      />
                      <Button
                         onClick={() => {
-                           utilsContext.setIsSuccessSystem(false)
+                           systemContext.setIsSuccessSystem(false)
                            history.push('/system-environment/create/environment')
                         }}
                         label='Yes'
                      />
                   </Fragment>
                }
+            />
+         )}
+         {!systemContext.showDelete ? null : (
+            <ModalDelete
+               title={systemContext.showDelete?.name}
+               text='You are about to delete a system :'
+               desc='To continue, type the system name below.'
+               placeholder={systemContext.showDelete?.name}
+               value={systemContext.deleteSystem.name}
+               onChange={({ target: { value } }) => systemContext.setDeleteSystem((prevState) => ({ ...prevState, name: value }))}
+               label={systemContext.deleteSystem.isSubmit ? 'Please wait...' : 'Delete System'}
+               disabled={systemContext.deleteSystem.name !== systemContext.showDelete?.name}
+               onClick={() => {
+                  systemContext.setDeleteSystem((prevState) => ({ ...prevState, isSubmit: true }))
+                  setTimeout(() => {
+                     systemContext.deletingSystem(systemContext.showDelete?.systemId, { version: systemContext.showDelete?.version })
+                     history.push('/system-environment')
+                  }, 500)
+               }}
             />
          )}
       </Fragment>

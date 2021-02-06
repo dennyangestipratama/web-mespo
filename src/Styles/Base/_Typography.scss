@@ -33,6 +33,41 @@
    color: #FFFFFF;
 }
 
+.text__button-action {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   letter-spacing: 0.05em;
+   color: #E4E4E4;
+   text-transform: uppercase;
+}
+
+
+.text__delete-title {
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 17px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__delete-title--active {
+   color: #3776FF;
+   margin-top: 7px;
+   display: block;
+   margin-bottom: 36px;
+}
+
+.text__delete-desc {
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 13px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
 .text__nav-title {
    font-weight: bold;
    font-size: 9px;
@@ -166,4 +201,12 @@
    text-align: center;
    letter-spacing: 0.02em;
    color: rgba($color: #FFFFFF, $alpha: 0.6);
+}
+
+.text__capsules {
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 13px;
+   letter-spacing: 0.01em;
+   color: #FFFFFF;
 }

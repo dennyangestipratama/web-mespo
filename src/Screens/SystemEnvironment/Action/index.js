@@ -5,13 +5,13 @@ import { SystemContext } from '@Context/SystemContext'
 import EmptyAction from '@Components/EmptyAction'
 
 import CreateSystem from './CreateSystem'
+import ListSystem from './ListSystem'
 
 import Ghost from '@Image/ghost.png'
 
 export default function Action() {
    const history = useHistory()
    const systemContext = useContext(SystemContext)
-
    return (
       <section className='action'>
          <Switch>
@@ -25,8 +25,11 @@ export default function Action() {
                      to='/system-environment/create'
                   />
                ) : (
-                  <div>halo</div>
+                  <ListSystem />
                )}
+            </Route>
+            <Route exact path='/system-environment/system/:id'>
+               <ListSystem />
             </Route>
             <Route path='/system-environment/create'>
                <CreateSystem history={history} />

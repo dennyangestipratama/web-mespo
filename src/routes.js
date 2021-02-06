@@ -15,6 +15,12 @@ const Routes = [
       exact: false,
    },
    {
+      component: SystemEnvironment,
+      route: '/system-environment/system/:id',
+      name: 'System Environment',
+      exact: false,
+   },
+   {
       component: Features,
       route: '/features',
       name: 'Features',

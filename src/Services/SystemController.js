@@ -99,16 +99,16 @@ export default class SystemController {
     */
 
    static deleteSystem(id, params) {
-      const query = API.cleanPayload({
+      const query = {
          version: params.version,
-      })
-      return API.fetch(`systems/${id}?${queryString.stringify(query)}`, { method: 'DELETE' })
-   }
+      }
 
-   static deleteSystemProperty(id, params) {
-      const query = API.cleanPayload({
-         version: params.version,
-      })
-      return API.fetch(`systems/properties/${id}?${queryString.stringify(query)}`, { method: 'DELETE' })
+      return fetch(`${BASE_URL}/systems/${id}?${queryString.stringify(query)}`, {
+         method: 'delete',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
 }

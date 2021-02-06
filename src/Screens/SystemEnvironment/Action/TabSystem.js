@@ -6,13 +6,11 @@ import TextArea from '@Components/TextArea'
 import Button from '@Components/Button'
 import SystemController from '@Services/SystemController'
 import { SystemContext } from '@Context/SystemContext'
-import { UtilsContext } from '@Context/UtilsContext'
 
 import { ReactComponent as Attachment } from '@Icon/attachment.svg'
 
 export default function TabSystem({ history }) {
    const systemContext = useContext(SystemContext)
-   const utilsContext = useContext(UtilsContext)
 
    const createSystem = () => {
       SystemController.createSystem(systemContext.create.parameters).then((response) => {
@@ -22,7 +20,8 @@ export default function TabSystem({ history }) {
             data: response,
             parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: '' },
          }))
-         utilsContext.setIsSuccessSystem(true)
+         systemContext.setIsSuccessSystem(true)
+         systemContext.fetchSystem()
       })
    }
 

@@ -14,8 +14,11 @@
 @import 'components/empty';
 @import 'components/alert';
 @import 'components/modal-success';
+@import 'components/modal-delete';
+@import 'components/modal-action';
 
 @import 'screen/login';
 @import 'screen/home';
+@import 'screen/system';
 
 @import 'themes/theme';
