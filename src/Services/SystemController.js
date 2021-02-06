@@ -18,7 +18,12 @@ export default class SystemController {
     */
 
    static system() {
-      return API.fetch(`systems`)
+      return fetch(`${BASE_URL}/systems`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
 
    static detailSystem(id) {
@@ -71,6 +76,8 @@ export default class SystemController {
       })
       return API.fetch(`systems/search?${queryString.stringify(query)}`)
    }
+
+
 
    /**
     * POST controller
