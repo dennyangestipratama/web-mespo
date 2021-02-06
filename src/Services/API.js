@@ -23,8 +23,6 @@ export default class API {
       if (mergeConfig.body && !(mergeConfig.body instanceof FormData)) {
          const form = new FormData()
          Object.entries(mergeConfig.body).map(([label, value]) => {
-            console.log('label', label)
-            console.log('value', Object.entries(value))
             if (Array.isArray(value)) {
                value.map((each, index) => {
                   if (typeof each === 'object') {
