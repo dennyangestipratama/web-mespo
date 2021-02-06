@@ -5,11 +5,15 @@ export const UtilsContextConsumer = UtilsContext.Consumer
 const UtilsContextProvider = ({ children }) => {
    const [showAction, setShowAction] = useState(true)
    const [isMini, setIsMini] = useState(false)
+   const [isSuccessSystem, setIsSuccessSystem] = useState(false)
+
    return (
       <UtilsContext.Provider
          value={{
             showAction,
             isMini,
+            isSuccessSystem,
+            setIsSuccessSystem,
             setIsMini,
             setShowAction,
          }}>

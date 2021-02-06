@@ -145,3 +145,25 @@
    letter-spacing: 0.02em;
    color: rgba($color: #FFFFFF, $alpha: 0.4);
 }
+
+.text__success-title {
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 17px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__success-title--active {
+   color: #3776FF;
+}
+
+.text__success-desc {
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 16px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.6);
+}

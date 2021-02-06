@@ -9,12 +9,13 @@ import { ReactComponent as IconClose } from '@Icon/close.svg'
 
 export default function CreateSystem({ history }) {
    const utilsContext = useContext(UtilsContext)
+
    return (
       <div className='action__create'>
          <IconClose className='action__create-close' onClick={() => utilsContext.setShowAction(false)} />
          <div className='action__create-breadcrumbs text__breadcrumbs'>
             <span style={{ cursor: 'pointer' }} onClick={() => history.push('/system-environment')}>
-               System List &gt;{' '}
+               System List &gt;
             </span>
             <span>Create</span>
          </div>
