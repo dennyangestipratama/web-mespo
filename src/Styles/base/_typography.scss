@@ -1,0 +1,212 @@
+* {
+   font-family: 'Comfortaa', cursive;
+}
+
+.text__input {
+   font-size: 11px;
+   line-height: 15px;
+   letter-spacing: 0.01em;
+   color: #FFFFFF;
+}
+
+.text__label {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #BDCACA, $alpha: 0.5);
+}
+
+.text__link {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: #3776FF;
+}
+
+.text__button {
+   font-weight: bold;
+   font-size: 14px;
+   line-height: 14px;
+   letter-spacing: 0.01em;
+   color: #FFFFFF;
+}
+
+.text__button-action {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   letter-spacing: 0.05em;
+   color: #E4E4E4;
+   text-transform: uppercase;
+}
+
+
+.text__delete-title {
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 17px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__delete-title--active {
+   color: #3776FF;
+   margin-top: 7px;
+   display: block;
+   margin-bottom: 36px;
+}
+
+.text__delete-desc {
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 13px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__nav-title {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   letter-spacing: 0.05em;
+   text-transform: uppercase;
+   color: #E4E4E4;
+}
+
+.text__nav {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 10px;
+   letter-spacing: 0.05em;
+   text-transform: uppercase;
+   color: #CCCCCC;
+}
+
+.text__nav--active {
+   color: #3776FF;
+
+   path {
+      fill: #3776FF;
+   }
+}
+
+.text__action {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.text__action-title {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__search {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.01em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.text__title {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #BDCACA, $alpha: 0.5);
+}
+
+.text__navigation {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.text__sub-title {
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 17px;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__breadcrumbs {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #BDCACA, $alpha: 0.5);
+}
+
+.text__tabs {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   text-align: center;
+   color: rgba($color: #FFFFFF, $alpha: 0.5);
+}
+
+.text__tabs--active {
+   color: #3776FF;
+}
+
+.text__alert {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 15px;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.placeholder {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.4);
+}
+
+.text__success-title {
+   font-weight: bold;
+   font-size: 15px;
+   line-height: 17px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__success-title--active {
+   color: #3776FF;
+}
+
+.text__success-desc {
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 16px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: 0.6);
+}
+
+.text__capsules {
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 13px;
+   letter-spacing: 0.01em;
+   color: #FFFFFF;
+}

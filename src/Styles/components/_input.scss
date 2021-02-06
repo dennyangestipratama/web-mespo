@@ -1,0 +1,52 @@
+.input {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 15px;
+
+   svg {
+      cursor: pointer;
+   }
+}
+
+.input__element {
+   width: 100%;
+}
+
+.input__wrapper {
+   display: flex;
+   align-items: center;
+   margin-top: 9px;
+   padding: 8px 14px;
+   border-radius: 8px;
+   background: #000000;
+}
+
+.input--focus {
+   border: 1px solid #3776FF;
+}
+
+.input__default,
+.textarea__default {
+   background: rgba($color: #000000, $alpha: 0.45);
+   border-radius: 8px;
+   padding: 8px 17px;
+   margin-top: 8px;
+   width: 100%;
+
+   &:focus {
+      background: #000000;
+      border: 1px solid #3776FF;
+   }
+}
+
+.textarea {
+   position: relative;
+   margin-bottom: 15px;
+}
+
+.placeholder {
+   position: absolute;
+   top: 50%;
+   right: 50%;
+   transform: translateX(50%);
+}
