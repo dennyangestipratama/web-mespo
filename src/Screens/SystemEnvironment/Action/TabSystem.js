@@ -22,7 +22,7 @@ export default function TabSystem({ history }) {
          }))
          systemContext.setIsSuccessSystem(true)
          systemContext.fetchSystem()
-      })
+      }).catch(err => console.log(err))
    }
 
    const submit = (event) => {
