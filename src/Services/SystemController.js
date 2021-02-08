@@ -77,8 +77,6 @@ export default class SystemController {
       return API.fetch(`systems/search?${queryString.stringify(query)}`)
    }
 
-
-
    /**
     * POST controller
     * for Systems

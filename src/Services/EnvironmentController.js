@@ -1,35 +1,77 @@
 import queryString from 'query-string'
 import API from './API'
 
+const UUID = () => {
+   function _p8(s) {
+      var p = (Math.random().toString(16) + '000000000').substr(2, 8)
+      return s ? '-' + p.substr(0, 4) + '-' + p.substr(4, 4) : p
+   }
+   return _p8() + _p8(true) + _p8(true) + _p8()
+}
+
+const BASE_URL = '/configurations'
+
 export default class EnvironmentController {
+   /**
+    * GET controller
+    * for Environment
+    */
+
    static environment() {
-      return API.fetch('environments')
+      return fetch(`${BASE_URL}/environments`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
 
-   static detailEnvironment(id) {
-      return API.fetch(`environments/${id}`)
+   static environmentSystem() {
+      return fetch(`${BASE_URL}/environments/systems`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
+
+   /**
+    * POST controller
+    * for Systems
+    */
 
    static createEnvironment(params) {
-      const payload = API.cleanPayload({
-         environmentId: params.environmentId,
+      const payload = {
          name: params.name,
-         canonicalName: params.canonicalName,
          description: params.description,
-         version: params.version,
-         ownerPartyId: params.ownerPartyId,
-         dateModifiedLocal: params.dateModifiedLocal,
-         dateModifiedTimeZoneId: params.dateModifiedTimeZoneId,
-         dateModifiedUtc: params.dateModifiedUtc,
-         dateModifiedTimeZoneVersion: params.dateModifiedTimeZoneVersion,
-      })
-      return API.fetch('environments', { method: 'POST', body: payload })
+      }
+
+      return fetch(`${BASE_URL}/environments`, {
+         method: 'post',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
    }
 
-   static deleteEnvironment(id, params) {
-      const query = API.cleanPayload({
+   /**
+    * DELETE controller
+    * for Systems
+    */
+
+   static deleteSystem(id, params) {
+      const query = {
          version: params.version,
-      })
-      return API.fetch(`environments/${id}?${queryString.stringify(query)}`)
+      }
+
+      return fetch(`${BASE_URL}/environments/${id}?${queryString.stringify(query)}`, {
+         method: 'delete',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
 }

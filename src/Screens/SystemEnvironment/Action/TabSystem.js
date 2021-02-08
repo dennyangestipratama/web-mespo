@@ -6,23 +6,28 @@ import TextArea from '@Components/TextArea'
 import Button from '@Components/Button'
 import SystemController from '@Services/SystemController'
 import { SystemContext } from '@Context/SystemContext'
+import { EnvironmentContext } from '@Context/EnvironmentContext'
+import AttachSystem from './AttachSystem'
 
 import { ReactComponent as Attachment } from '@Icon/attachment.svg'
 
 export default function TabSystem({ history }) {
    const systemContext = useContext(SystemContext)
+   const environmentContext = useContext(EnvironmentContext)
 
    const createSystem = () => {
-      SystemController.createSystem(systemContext.create.parameters).then((response) => {
-         systemContext.setCreate((prevState) => ({
-            ...prevState,
-            isSubmit: false,
-            data: response,
-            parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: '' },
-         }))
-         systemContext.setIsSuccessSystem(true)
-         systemContext.fetchSystem()
-      }).catch(err => console.log(err))
+      SystemController.createSystem(systemContext.create.parameters)
+         .then((response) => {
+            systemContext.setCreate((prevState) => ({
+               ...prevState,
+               isSubmit: false,
+               data: response,
+               parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: '' },
+            }))
+            systemContext.setIsSuccessSystem(true)
+            systemContext.fetchSystem()
+         })
+         .catch((err) => console.log(err))
    }
 
    const submit = (event) => {
@@ -57,11 +62,8 @@ export default function TabSystem({ history }) {
                   {/* <Input
                      label='URL'
                      placeholder='https://'
-                  />
-                  <Input
-                     label='System ID'
-                     placeholder='Environment ID'
                   /> */}
+                  <Input label='System ID' placeholder='Environment ID' value={environmentContext.selectedEnvironment?.environmentId ?? ''} />
                </div>
             </form>
          </div>
@@ -71,7 +73,7 @@ export default function TabSystem({ history }) {
             </div>
             <div className='action__upload'>
                <div className='action__upload-title text__sub-title'>Attach to Environment</div>
-               {systemContext.system.items.length !== 0 ? <div className='action__upload-empty text__action'>No Environment available</div> : <div>halo</div>}
+               {systemContext.system.items.length === 0 ? <div className='action__upload-empty text__action'>No Environment available</div> : <AttachSystem />}
             </div>
          </div>
          <div className='action__tab-btn'>

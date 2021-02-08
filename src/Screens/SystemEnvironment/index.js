@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import { UtilsContext } from '@Context/UtilsContext'
 import { SystemContext } from '@Context/SystemContext'
+import { EnvironmentContext } from '@Context/EnvironmentContext'
 import ModalSuccess from '@Components/ModalSuccess'
 import ModalDelete from '@Components/ModalDelete'
 import Button from '@Components/Button'
@@ -11,11 +12,13 @@ import Action from './Action'
 import Main from './Main'
 
 import { ReactComponent as CreateSystemSVG } from '@Icon/create-system.svg'
+import { ReactComponent as CreateEnvironmentSVG } from '@Icon/create-environment.svg'
 
 export default function SystemEnvironment() {
    const history = useHistory()
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
+   const environmentContext = useContext(EnvironmentContext)
 
    return (
       <Fragment>
@@ -45,6 +48,36 @@ export default function SystemEnvironment() {
                         onClick={() => {
                            systemContext.setIsSuccessSystem(false)
                            history.push('/system-environment/create/environment')
+                           systemContext.fetchSystem()
+                        }}
+                        label='Yes'
+                     />
+                  </Fragment>
+               }
+            />
+         )}
+         {!environmentContext.isSuccessEnvironment ? null : (
+            <ModalSuccess
+               icon={<CreateEnvironmentSVG />}
+               title={environmentContext.create.data?.event.environment.name}
+               text_title='Environment'
+               text='is  successfully created !'
+               desc='But it seems it doesn’t attach to any system. Do you want to create a system now?'
+               button={
+                  <Fragment>
+                     <Button
+                        onClick={() => {
+                           environmentContext.setIsSuccessEnvironment(false)
+                           history.push('/system-environment')
+                        }}
+                        color='#000000'
+                        label='No'
+                     />
+                     <Button
+                        onClick={() => {
+                           environmentContext.setIsSuccessEnvironment(false)
+                           history.push('/system-environment/create')
+                           environmentContext.fetchEnvironment()
                         }}
                         label='Yes'
                      />

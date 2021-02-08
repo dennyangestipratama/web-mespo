@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals'
 import AuthContext from '@Context/AuthContext'
 import UtilsContext from '@Context/UtilsContext'
 import SystemContext from '@Context/SystemContext'
+import EnvironmentContext from '@Context/EnvironmentContext'
 import '@Styles/main.scss'
 
 ReactDOM.render(
@@ -12,7 +13,9 @@ ReactDOM.render(
       <AuthContext>
          <UtilsContext>
             <SystemContext>
-               <App />
+               <EnvironmentContext>
+                  <App />
+               </EnvironmentContext>
             </SystemContext>
          </UtilsContext>
       </AuthContext>
