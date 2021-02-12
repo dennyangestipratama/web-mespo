@@ -29,12 +29,11 @@ export default function DetailSystem() {
             <div className='main__title text__title'>System ID</div>
             <div className='main__navigation-detail text__navigation-detail'>
                {system.systemId}
-               <button>
-                  <IconCopy
-                     onClick={() => {
-                        navigator.clipboard.writeText(system.systemId)
-                     }}
-                  />
+               <button
+                  onClick={() => {
+                     navigator.clipboard.writeText(system.systemId)
+                  }}>
+                  <IconCopy />
                   <span>Copy</span>
                </button>
             </div>
