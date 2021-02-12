@@ -1,31 +1,32 @@
-import { useContext } from 'react'
-import { useHistory } from 'react-router-dom'
-import { UtilsContext } from '@Context/UtilsContext'
+import { useContext, useEffect } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 
-import { ReactComponent as IconWindow } from '@Icon/window.svg'
-import { ReactComponent as IconAdd } from '@Icon/add.svg'
-import { ReactComponent as ArrowLeft } from '@Icon/arrow-left.svg'
-import { ReactComponent as ArrowStraight } from '@Icon/arrow-straight.svg'
+import { SystemContext } from '@Context/SystemContext'
+import { EnvironmentContext } from '@Context/EnvironmentContext'
+import ListEnvironment from './ListEnvironment'
+import DetailSystem from './DetailSystem'
+import EmptyEnvironment from './EmptyEnvironment'
+import EmptySystem from './EmptySystem'
 
 export default function Main() {
    const history = useHistory()
-   const utilsContext = useContext(UtilsContext)
+   const params = useParams()
+   const systemContext = useContext(SystemContext)
+   const environmentContext = useContext(EnvironmentContext)
+   const system = systemContext.detailSystem.data
+
+   useEffect(() => {
+      if (systemContext.detailSystem.data?.systemId !== params.id) {
+         systemContext.fetchDetailSystem(params.id)
+      }
+   }, [systemContext.selectedSystem])
 
    return (
       <section className='main'>
-         <div className='main__header'>
-            <div className='main__title text__title'>System</div>
-            <div className='main__navigation text__navigation' onClick={() => utilsContext.setShowAction(!utilsContext.showAction)}>
-               <ArrowLeft />
-               <span>Select System</span>
-            </div>
-            <IconWindow className='main__window' onClick={() => utilsContext.setIsMini(!utilsContext.isMini)} />
-         </div>
-         <div className='main__sub' onClick={() => history.push('/system-environment/create/environment')}>
+         {!system ? <EmptySystem /> : <DetailSystem />}
+         <div className='main__sub'>
             <div className='main__sub-title text__sub-title'>Environment</div>
-            <IconAdd className='main__icon-add' />
-            <ArrowStraight className='main__icon-arrow' />
-            <div className='text__action'>or create environment first here.</div>
+            {environmentContext.environment.items.length === 0 ? <EmptyEnvironment history={history} /> : <ListEnvironment history={history} />}
          </div>
       </section>
    )

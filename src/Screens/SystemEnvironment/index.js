@@ -104,6 +104,25 @@ export default function SystemEnvironment() {
                }}
             />
          )}
+         {!environmentContext.showDelete ? null : (
+            <ModalDelete
+               title={environmentContext.showDelete?.name}
+               text='You are about to delete a system :'
+               desc='To continue, type the system name below.'
+               placeholder={environmentContext.showDelete?.name}
+               value={environmentContext.deleteEnvironment.name}
+               onChange={({ target: { value } }) => environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, name: value }))}
+               label={environmentContext.deleteEnvironment.isSubmit ? 'Please wait...' : 'Delete System'}
+               disabled={environmentContext.deleteEnvironment.name !== environmentContext.showDelete?.name}
+               onClick={() => {
+                  environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, isSubmit: true }))
+                  setTimeout(() => {
+                     environmentContext.deletingEnvironment(environmentContext.showDelete?.environmentId, { version: environmentContext.showDelete?.version })
+                     history.push('/system-environment')
+                  }, 500)
+               }}
+            />
+         )}
       </Fragment>
    )
 }

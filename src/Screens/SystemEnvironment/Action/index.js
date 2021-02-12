@@ -31,6 +31,9 @@ export default function Action() {
             <Route exact path='/system-environment/system/:id'>
                <ListSystem />
             </Route>
+            <Route exact path='/system-environment/system/:id/env/:envId'>
+               <ListSystem />
+            </Route>
             <Route path='/system-environment/create'>
                <CreateSystem history={history} />
             </Route>

@@ -26,6 +26,15 @@ export default class EnvironmentController {
       }).then((res) => res.json())
    }
 
+   static detailEnvironment(ID) {
+      return fetch(`${BASE_URL}/environments/${ID}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
+   }
+
    static environmentSystem() {
       return fetch(`${BASE_URL}/environments/systems`, {
          headers: {
@@ -61,7 +70,7 @@ export default class EnvironmentController {
     * for Systems
     */
 
-   static deleteSystem(id, params) {
+   static deleteEnvironment(id, params) {
       const query = {
          version: params.version,
       }

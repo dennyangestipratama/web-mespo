@@ -10,12 +10,26 @@ const SystemContextProvider = ({ children }) => {
       items: [],
    })
 
+   const [detailSystem, setDetailSystem] = useState({
+      isLoading: false,
+      data: null,
+   })
+
    const [create, setCreate] = useState({
       isSubmit: false,
       data: null,
       parameters: {
          name: '',
          description: '',
+      },
+   })
+
+   const [search, setSearch] = useState({
+      isSubmit: false,
+      parameters: {
+         q: '',
+         pageNumber: 1,
+         pageSize: 10,
       },
    })
 
@@ -33,6 +47,13 @@ const SystemContextProvider = ({ children }) => {
       setSystem((prevState) => ({ ...prevState, isLoading: true, items: [] }))
       SystemController.system().then((response) => {
          setSystem((prevState) => ({ ...prevState, isLoading: false, items: response }))
+      })
+   }
+
+   const fetchDetailSystem = (ID) => {
+      setDetailSystem((prevState) => ({ ...prevState, isLoading: true, data: null }))
+      SystemController.detailSystem(ID).then((response) => {
+         setDetailSystem((prevState) => ({ ...prevState, isLoading: false, data: response }))
       })
    }
 
@@ -59,6 +80,10 @@ const SystemContextProvider = ({ children }) => {
             showDelete,
             isSuccessSystem,
             deleteSystem,
+            search,
+            detailSystem,
+            setDetailSystem,
+            setSearch,
             setDeleteSystem,
             setIsSuccessSystem,
             setShowDelete,
@@ -68,6 +93,7 @@ const SystemContextProvider = ({ children }) => {
             setSystem,
             deletingSystem,
             fetchSystem,
+            fetchDetailSystem,
          }}>
          {children}
       </SystemContext.Provider>

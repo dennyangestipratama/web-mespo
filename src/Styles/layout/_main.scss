@@ -10,6 +10,12 @@
    border-bottom: 1px solid #464343;
 }
 
+.main__header-detail {
+   display: flex;
+   align-items: center;
+   padding: 0;
+}
+
 .main__window {
    position: absolute;
    top: 39px;
@@ -28,6 +34,37 @@
 
    svg {
       margin-right: 9px;
+   }
+}
+
+.main__navigation-wrapper {
+   padding: 40px 28px;
+
+   &.first {
+      border-right: 1px solid #464343;
+      border-left: 1px solid #464343;
+   }
+}
+
+.main__navigation-detail {
+   margin-top: 10px;
+   display: flex;
+   align-items: center;
+
+   button {
+      display: flex;
+      align-items: center;
+      background: rgba($color: #767C7D, $alpha: 0.2);
+      border-radius: 9px;
+      margin-left: 5px;
+      font-weight: bold;
+      font-size: 8px;
+      line-height: 79%;
+      color: #949393;
+   }
+
+   svg {
+      margin-right: 2px;
    }
 }
 

@@ -26,55 +26,28 @@ export default class SystemController {
       }).then((res) => res.json())
    }
 
-   static detailSystem(id) {
-      return API.fetch(`systems/${id}`)
-   }
-
-   static systemAttachment(id) {
-      return API.fetch(`systems/${id}/environments/attachments`)
-   }
-
-   static systemProperty(params) {
-      const query = API.cleanPayload({
-         page: params.page,
-      })
-      return API.fetch(`systems/properties?${queryString.stringify(query)}`)
-   }
-
-   static detailSystemProperty(id) {
-      return API.fetch(`systems/properties/${id}`)
-   }
-
-   static systemPropertyValue(params) {
-      const query = API.cleanPayload({
-         page: params.page,
-      })
-      return API.fetch(`systems/properties/values?${queryString.stringify(query)}`)
-   }
-
-   static detailSystemPropertyValue(id) {
-      return API.fetch(`systems/properties/values/${id}`)
-   }
-
-   static systemToggle(params) {
-      const query = API.cleanPayload({
-         page: params.page,
-         pageSize: params.pageSize,
-      })
-      return API.fetch(`systems/toggles?${queryString.stringify(query)}`)
-   }
-
-   static detailSystemToggle(id) {
-      return API.fetch(`systems/toggles/${id}`)
+   static detailSystem(ID) {
+      return fetch(`${BASE_URL}/systems/${ID}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
 
    static searchSystem(params) {
-      const query = API.cleanPayload({
+      const query = {
+         q: params.q,
          pageNumber: params.pageNumber,
          pageSize: params.pageSize,
-         q: params.q,
-      })
-      return API.fetch(`systems/search?${queryString.stringify(query)}`)
+      }
+
+      return fetch(`${BASE_URL}/systems/search?${queryString.stringify(query)}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
    }
 
    /**

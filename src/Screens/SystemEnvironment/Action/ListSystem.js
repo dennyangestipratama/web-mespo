@@ -1,10 +1,11 @@
 import { useContext, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import Search from '@Components/Search'
 import ModalAction from '@Components/ModalAction'
 import ButtonAction from '@Components/ButtonAction'
 
+import SystemController from '@Services/SystemController'
 import { UtilsContext } from '@Context/UtilsContext'
 import { SystemContext } from '@Context/SystemContext'
 
@@ -19,23 +20,37 @@ export default function ListSystem() {
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
 
+   const search = (event) => {
+      event.preventDefault()
+      SystemController.searchSystem(systemContext.search.parameters).then((response) => {
+         console.log(response)
+         // systemContext.setSystem()
+      })
+   }
+
    return (
       <div className='system-list'>
          <Close className='empty-action__close' onClick={() => utilsContext.setShowAction(false)} />
          <div className='system-list__title text__sub-title'>Select System :</div>
          <div className='system-list__search empty-action__search'>
-            <Search placeholder={'Search System'} />
+            <Search
+               placeholder={'Search System'}
+               value={systemContext.search.parameters.q}
+               onChange={({ target: { value } }) => systemContext.setSearch((prevState) => ({ ...prevState, parameters: { ...systemContext.search.parameters, q: value } }))}
+               onSubmit={search}
+            />
             <Link to={'/system-environment/create'}>
                <Add />
             </Link>
          </div>
          {systemContext.system.items.map((item) => {
             return (
-               <Link
+               <NavLink
                   key={item.systemId}
                   to={`/system-environment/system/${item.systemId}`}
                   onClick={() => systemContext.setSelectedSystem(item.systemId)}
-                  className={`system-list__capsules text__capsules ${systemContext.selectedSystem === item.systemId ? 'system-list__capsules--active' : ''}`}>
+                  activeClassName='system-list__capsules--active'
+                  className='system-list__capsules text__capsules'>
                   <span>{item.name}</span>
                   <MoreSVG className='system-list__capsules-icon' onClick={() => systemContext.setShowAction(item)} />
                   {systemContext.showAction?.systemId !== item.systemId ? null : (
@@ -58,7 +73,7 @@ export default function ListSystem() {
                         }
                      />
                   )}
-               </Link>
+               </NavLink>
             )
          })}
       </div>
