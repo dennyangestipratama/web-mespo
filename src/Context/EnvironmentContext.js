@@ -26,6 +26,7 @@ const EnvironmentContextProvider = ({ children }) => {
       parameters: {
          name: '',
          description: '',
+         environmentId: '',
       },
    })
 
@@ -62,6 +63,13 @@ const EnvironmentContextProvider = ({ children }) => {
       })
    }
 
+   const fetchEnvironmentSystem = (ID) => {
+      setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: true, items: [] }))
+      EnvironmentController.environmentSystem(ID).then((response) => {
+         setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: false, items: response }))
+      })
+   }
+
    useEffect(() => {
       fetchEnvironment()
    }, [])
@@ -89,6 +97,7 @@ const EnvironmentContextProvider = ({ children }) => {
             setEnvironment,
             fetchEnvironment,
             fetchDetailEnvironment,
+            fetchEnvironmentSystem,
             deletingEnvironment,
          }}>
          {children}

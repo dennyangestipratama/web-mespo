@@ -10,6 +10,11 @@ const SystemContextProvider = ({ children }) => {
       items: [],
    })
 
+   const [systemProperties, setSystemProperties] = useState({
+      isLoading: false,
+      items: [],
+   })
+
    const [detailSystem, setDetailSystem] = useState({
       isLoading: false,
       data: null,
@@ -21,6 +26,7 @@ const SystemContextProvider = ({ children }) => {
       parameters: {
          name: '',
          description: '',
+         systemId: null,
       },
    })
 
@@ -57,6 +63,13 @@ const SystemContextProvider = ({ children }) => {
       })
    }
 
+   const fetchSystemProperties = (ID) => {
+      setSystemProperties((prevState) => ({ ...prevState, isLoading: true, items: [] }))
+      SystemController.systemProperties(ID).then((response) => {
+         setSystemProperties((prevState) => ({ ...prevState, isLoading: true, items: response }))
+      })
+   }
+
    const deletingSystem = (id, params) => {
       SystemController.deleteSystem(id, params).then((response) => {
          setShowDelete(null)
@@ -82,6 +95,8 @@ const SystemContextProvider = ({ children }) => {
             deleteSystem,
             search,
             detailSystem,
+            systemProperties,
+            setSystemProperties,
             setDetailSystem,
             setSearch,
             setDeleteSystem,
@@ -94,6 +109,7 @@ const SystemContextProvider = ({ children }) => {
             deletingSystem,
             fetchSystem,
             fetchDetailSystem,
+            fetchSystemProperties,
          }}>
          {children}
       </SystemContext.Provider>

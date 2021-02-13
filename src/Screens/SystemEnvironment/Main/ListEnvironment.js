@@ -1,10 +1,11 @@
-import { Fragment, useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Fragment, useContext, useEffect } from 'react'
+import { NavLink, useParams } from 'react-router-dom'
 
 import ModalAction from '@Components/ModalAction'
 import ButtonAction from '@Components/ButtonAction'
 import { EnvironmentContext } from '@Context/EnvironmentContext'
 import { SystemContext } from '@Context/SystemContext'
+import EmptyEnvironment from './EmptyEnvironment'
 
 import { ReactComponent as IconAdd } from '@Icon/add.svg'
 import { ReactComponent as IconMore } from '@Icon/more-vertical.svg'
@@ -15,8 +16,15 @@ import { ReactComponent as DeleteSVG } from '@Icon/delete.svg'
 export default function ListEnvironment({ history }) {
    const environmentContext = useContext(EnvironmentContext)
    const systemContext = useContext(SystemContext)
+   const params = useParams()
 
-   return (
+   useEffect(() => {
+      environmentContext.fetchEnvironmentSystem(params.ID)
+   }, [])
+   console.log(environmentContext.environmentSystem.items)
+   return environmentContext.environmentSystem.items.length === 0 ? (
+      <EmptyEnvironment history={history} />
+   ) : (
       <Fragment>
          <NavLink
             exact
@@ -27,7 +35,8 @@ export default function ListEnvironment({ history }) {
             style={{ marginLeft: 16, paddingRight: 13 }}>
             All
          </NavLink>
-         {environmentContext.environment.items.map((item) => {
+         {environmentContext.environmentSystem.items.map((item) => {
+            // {environmentContext.environment.items.map((item) => {
             return (
                <NavLink
                   to={`/system-environment/system/${systemContext.selectedSystem}/env/${item.environmentId}`}

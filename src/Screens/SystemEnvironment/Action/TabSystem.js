@@ -22,7 +22,7 @@ export default function TabSystem({ history }) {
                ...prevState,
                isSubmit: false,
                data: response,
-               parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: '' },
+               parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: null },
             }))
             systemContext.setIsSuccessSystem(true)
             systemContext.fetchSystem()
@@ -35,7 +35,6 @@ export default function TabSystem({ history }) {
       systemContext.setCreate((prevState) => ({ ...prevState, isSubmit: true }))
       createSystem()
    }
-
    return (
       <Fragment>
          <div className='action__tab'>

@@ -23,7 +23,7 @@ export default function DetailSystem() {
          </div>
          <div className='main__navigation-wrapper first'>
             <div className='main__title text__title'>Description</div>
-            <div className='main__navigation-detail text__navigation-detail'>{system.description ?? 'No Description'}</div>
+            <div className='main__navigation-detail text__navigation-detail'>{system.description === '' || !system.description ? 'No Description' : system.description}</div>
          </div>
          <div className='main__navigation-wrapper'>
             <div className='main__title text__title'>System ID</div>

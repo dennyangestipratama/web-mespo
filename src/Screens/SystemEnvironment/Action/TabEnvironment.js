@@ -22,7 +22,7 @@ export default function TabEnvironment() {
                ...prevState,
                isSubmit: false,
                data: response,
-               parameters: { ...environmentContext.create.parameters, name: '', description: '', systemId: '' },
+               parameters: { ...environmentContext.create.parameters, name: '', description: '', environmentId: '' },
             }))
             environmentContext.setIsSuccessEnvironment(true)
             environmentContext.fetchEnvironment()
@@ -63,7 +63,14 @@ export default function TabEnvironment() {
                      label='URL'
                      placeholder='https://'
                   /> */}
-                  <Input label='Environment ID' placeholder='System ID' value={systemContext.selectedSystem?.systemId ?? ''} />
+                  <Input
+                     label='Environment ID'
+                     placeholder='System ID'
+                     value={systemContext.selectedSystem?.systemId ?? ''}
+                     onChange={({ target: { value } }) =>
+                        environmentContext.setCreate((prevState) => ({ ...prevState, parameters: { ...environmentContext.create.parameters, environmentId: value } }))
+                     }
+                  />
                </div>
             </form>
          </div>

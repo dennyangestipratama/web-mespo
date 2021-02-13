@@ -18,9 +18,10 @@ export default function Main() {
    useEffect(() => {
       if (systemContext.detailSystem.data?.systemId !== params.id) {
          systemContext.fetchDetailSystem(params.id)
+         systemContext.fetchSystemProperties(params.id)
       }
    }, [systemContext.selectedSystem])
-
+   console.log(systemContext.systemProperties.items)
    return (
       <section className='main'>
          {!system ? <EmptySystem /> : <DetailSystem />}

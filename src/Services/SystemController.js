@@ -35,6 +35,15 @@ export default class SystemController {
       }).then((res) => res.json())
    }
 
+   static systemProperties(ID) {
+      return fetch(`${BASE_URL}/environments/systems/${ID}/nodes/properties`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
+   }
+
    static searchSystem(params) {
       const query = {
          q: params.q,
@@ -59,6 +68,7 @@ export default class SystemController {
       const payload = {
          name: params.name,
          description: params.description,
+         systemId: params.systemId,
       }
 
       return fetch(`${BASE_URL}/systems`, {

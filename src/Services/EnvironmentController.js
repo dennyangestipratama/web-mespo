@@ -35,6 +35,15 @@ export default class EnvironmentController {
       }).then((res) => res.json())
    }
 
+   static environmentSystem(ID) {
+      return fetch(`${BASE_URL}/environments/systems/${ID}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
+   }
+
    static environmentSystem() {
       return fetch(`${BASE_URL}/environments/systems`, {
          headers: {
@@ -53,6 +62,7 @@ export default class EnvironmentController {
       const payload = {
          name: params.name,
          description: params.description,
+         environmentId: params.environmentId,
       }
 
       return fetch(`${BASE_URL}/environments`, {
