@@ -30,6 +30,17 @@ const SystemContextProvider = ({ children }) => {
       },
    })
 
+   const [update, setUpdate] = useState({
+      isSubmit: false,
+      data: null,
+      parameters: {
+         name: '',
+         description: '',
+         systemId: '',
+         ownerPartyId: '',
+      },
+   })
+
    const [search, setSearch] = useState({
       isSubmit: false,
       parameters: {
@@ -60,6 +71,17 @@ const SystemContextProvider = ({ children }) => {
       setDetailSystem((prevState) => ({ ...prevState, isLoading: true, data: null }))
       SystemController.detailSystem(ID).then((response) => {
          setDetailSystem((prevState) => ({ ...prevState, isLoading: false, data: response }))
+         setUpdate((prevState) => ({
+            ...prevState,
+            parameters: {
+               ...update.parameters,
+               name: response.name,
+               description: response.description,
+               version: response.version,
+               systemId: response.systemId,
+               ownerPartyId: response.ownerPartyId,
+            },
+         }))
       })
    }
 
@@ -88,6 +110,7 @@ const SystemContextProvider = ({ children }) => {
          value={{
             system,
             create,
+            update,
             selectedSystem,
             showAction,
             showDelete,
@@ -105,6 +128,7 @@ const SystemContextProvider = ({ children }) => {
             setShowAction,
             setSelectedSystem,
             setCreate,
+            setUpdate,
             setSystem,
             deletingSystem,
             fetchSystem,

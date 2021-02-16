@@ -5,6 +5,8 @@ import { SystemContext } from '@Context/SystemContext'
 import EmptyAction from '@Components/EmptyAction'
 
 import CreateSystem from './CreateSystem'
+import EditSystem from './EditSystem'
+import EditEnvironment from './EditEnvironment'
 import ListSystem from './ListSystem'
 
 import Ghost from '@Image/ghost.png'
@@ -25,17 +27,23 @@ export default function Action() {
                      to='/system-environment/create'
                   />
                ) : (
-                  <ListSystem />
+                  <ListSystem history={history} />
                )}
             </Route>
             <Route exact path='/system-environment/system/:id'>
-               <ListSystem />
+               <ListSystem history={history} />
             </Route>
             <Route exact path='/system-environment/system/:id/env/:envId'>
-               <ListSystem />
+               <ListSystem history={history} />
             </Route>
             <Route path='/system-environment/create'>
                <CreateSystem history={history} />
+            </Route>
+            <Route path='/system-environment/update/:id/env/:envId'>
+               <EditEnvironment history={history} />
+            </Route>
+            <Route path='/system-environment/update/:id'>
+               <EditSystem history={history} />
             </Route>
          </Switch>
       </section>

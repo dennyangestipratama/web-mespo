@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useParams, Link } from 'react-router-dom'
 
 import ModalAction from '@Components/ModalAction'
 import ButtonAction from '@Components/ButtonAction'
@@ -19,10 +19,9 @@ export default function ListEnvironment({ history }) {
    const params = useParams()
 
    useEffect(() => {
-      environmentContext.fetchEnvironmentSystem(params.ID)
+      // environmentContext.fetchEnvironmentSystem(params.ID)
    }, [])
-   console.log(environmentContext.environmentSystem.items)
-   return environmentContext.environmentSystem.items.length === 0 ? (
+   return environmentContext.environmentSystem.items.length !== 0 ? (
       <EmptyEnvironment history={history} />
    ) : (
       <Fragment>
@@ -35,8 +34,8 @@ export default function ListEnvironment({ history }) {
             style={{ marginLeft: 16, paddingRight: 13 }}>
             All
          </NavLink>
-         {environmentContext.environmentSystem.items.map((item) => {
-            // {environmentContext.environment.items.map((item) => {
+         {/* {environmentContext.environmentSystem.items.map((item) => { */}
+         {environmentContext.environment.items.map((item) => {
             return (
                <NavLink
                   to={`/system-environment/system/${systemContext.selectedSystem}/env/${item.environmentId}`}
@@ -53,7 +52,9 @@ export default function ListEnvironment({ history }) {
                         button={
                            <Fragment>
                               <ButtonAction label='Clone' icon={<CloneSVG />} />
-                              <ButtonAction label='Edit' icon={<EditSVG />} />
+                              <Link to={`/system-environment/update/${params.id}/env/${params.envId}`}>
+                                 <ButtonAction label='Edit' icon={<EditSVG />} onClick={() => environmentContext.setShowAction(null)} />
+                              </Link>
                               <ButtonAction
                                  label='Delete'
                                  icon={<DeleteSVG />}

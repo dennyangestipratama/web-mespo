@@ -16,24 +16,35 @@ export default function TabEnvironment() {
    const environmentContext = useContext(EnvironmentContext)
 
    const createEnvironment = () => {
-      EnvironmentController.createEnvironment(environmentContext.create.parameters)
-         .then((response) => {
+      return new Promise((resolve, reject) => {
+         EnvironmentController.createEnvironment(environmentContext.create.parameters).then((response) => {
             environmentContext.setCreate((prevState) => ({
                ...prevState,
                isSubmit: false,
                data: response,
                parameters: { ...environmentContext.create.parameters, name: '', description: '', environmentId: '' },
             }))
-            environmentContext.setIsSuccessEnvironment(true)
-            environmentContext.fetchEnvironment()
+            resolve()
          })
-         .catch((err) => console.log(err))
+      })
+   }
+
+   const attachEnvironment = () => {
+      createEnvironment().then((response) => {
+         EnvironmentController.attachSystem({ systemId: systemContext.selectedSystem.systemId })
+            .then((response) => {
+               console.log('response attachment', response)
+            })
+            .catch((err) => console.log(err))
+         environmentContext.fetchEnvironment()
+         environmentContext.setIsSuccessEnvironment(true)
+      })
    }
 
    const submit = (event) => {
       event.preventDefault()
       environmentContext.setCreate((prevState) => ({ ...prevState, isSubmit: true }))
-      createEnvironment()
+      attachEnvironment()
    }
 
    return (
@@ -63,14 +74,7 @@ export default function TabEnvironment() {
                      label='URL'
                      placeholder='https://'
                   /> */}
-                  <Input
-                     label='Environment ID'
-                     placeholder='System ID'
-                     value={systemContext.selectedSystem?.systemId ?? ''}
-                     onChange={({ target: { value } }) =>
-                        environmentContext.setCreate((prevState) => ({ ...prevState, parameters: { ...environmentContext.create.parameters, environmentId: value } }))
-                     }
-                  />
+                  <Input label='Environment ID' placeholder='System ID' value={systemContext.selectedSystem?.systemId ?? ''} />
                </div>
             </form>
          </div>

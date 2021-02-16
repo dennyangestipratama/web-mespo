@@ -1,5 +1,4 @@
 import queryString from 'query-string'
-import API from './API'
 
 const UUID = () => {
    function _p8(s) {
@@ -35,7 +34,7 @@ export default class EnvironmentController {
       }).then((res) => res.json())
    }
 
-   static environmentSystem(ID) {
+   static detailEnvironmentSystem(ID) {
       return fetch(`${BASE_URL}/environments/systems/${ID}`, {
          headers: {
             'Content-Type': 'application/json',
@@ -55,7 +54,7 @@ export default class EnvironmentController {
 
    /**
     * POST controller
-    * for Systems
+    * for Environments
     */
 
    static createEnvironment(params) {
@@ -75,9 +74,51 @@ export default class EnvironmentController {
       }).then((res) => res.json())
    }
 
+   static attachSystem(params) {
+      const payload = {
+         systemId: params.systemId,
+      }
+
+      return fetch(`${BASE_URL}/environments/systems/attachments`, {
+         method: 'post',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
+   }
+
+   /**
+    * PUT controller
+    * for Systems
+    */
+
+   static updateEnvironment(ID, params, queryParams) {
+      const payload = {
+         name: params.name,
+         description: params.description,
+         ownerPartyId: params.ownerPartyId,
+         environmentId: params.environmentId,
+      }
+
+      const query = {
+         version: queryParams.version,
+      }
+
+      return fetch(`${BASE_URL}/environments/${ID}?${queryString.stringify(query)}`, {
+         method: 'put',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
+   }
+
    /**
     * DELETE controller
-    * for Systems
+    * for Environments
     */
 
    static deleteEnvironment(id, params) {

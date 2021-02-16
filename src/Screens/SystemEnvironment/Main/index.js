@@ -21,7 +21,6 @@ export default function Main() {
          systemContext.fetchSystemProperties(params.id)
       }
    }, [systemContext.selectedSystem])
-   console.log(systemContext.systemProperties.items)
    return (
       <section className='main'>
          {!system ? <EmptySystem /> : <DetailSystem />}

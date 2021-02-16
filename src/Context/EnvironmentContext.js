@@ -40,6 +40,17 @@ const EnvironmentContextProvider = ({ children }) => {
       data: null,
    })
 
+   const [update, setUpdate] = useState({
+      isSubmit: false,
+      data: null,
+      parameters: {
+         name: '',
+         description: '',
+         environmentId: '',
+         ownerPartyId: '',
+      },
+   })
+
    const deletingEnvironment = (id, params) => {
       EnvironmentController.deleteEnvironment(id, params).then((response) => {
          setShowDelete(null)
@@ -60,15 +71,26 @@ const EnvironmentContextProvider = ({ children }) => {
       setDetailEnvironment((prevState) => ({ ...prevState, isLoading: true, data: null }))
       EnvironmentController.detailEnvironment(ID).then((response) => {
          setDetailEnvironment((prevState) => ({ ...prevState, isLoading: false, data: response }))
+         setUpdate((prevState) => ({
+            ...prevState,
+            parameters: {
+               ...update.parameters,
+               name: response.name,
+               description: response.description,
+               version: response.version,
+               environmentId: response.environmentId,
+               ownerPartyId: response.ownerPartyId,
+            },
+         }))
       })
    }
 
-   const fetchEnvironmentSystem = (ID) => {
-      setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: true, items: [] }))
-      EnvironmentController.environmentSystem(ID).then((response) => {
-         setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: false, items: response }))
-      })
-   }
+   // const fetchEnvironmentSystem = (ID) => {
+   //    setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: true, items: [] }))
+   //    EnvironmentController.detailEnvironmentSystem(ID).then((response) => {
+   //       setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: false, items: response }))
+   //    })
+   // }
 
    useEffect(() => {
       fetchEnvironment()
@@ -86,6 +108,8 @@ const EnvironmentContextProvider = ({ children }) => {
             showDelete,
             isSuccessEnvironment,
             deleteEnvironment,
+            update,
+            setUpdate,
             setDeleteEnvironment,
             setShowAction,
             setShowDelete,
@@ -97,7 +121,6 @@ const EnvironmentContextProvider = ({ children }) => {
             setEnvironment,
             fetchEnvironment,
             fetchDetailEnvironment,
-            fetchEnvironmentSystem,
             deletingEnvironment,
          }}>
          {children}

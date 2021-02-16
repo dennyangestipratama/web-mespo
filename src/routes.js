@@ -11,19 +11,31 @@ const Routes = [
    {
       component: SystemEnvironment,
       route: '/system-environment/create',
-      name: 'System Environment',
+      name: 'Create System',
       exact: false,
    },
    {
       component: SystemEnvironment,
+      route: '/system-environment/update/:id',
+      name: 'Update System',
+      exact: true,
+   },
+   {
+      component: SystemEnvironment,
+      route: '/system-environment/update/:id/env/:envId',
+      name: 'Update Environment',
+      exact: true,
+   },
+   {
+      component: SystemEnvironment,
       route: '/system-environment/system/:id',
-      name: 'System Environment',
+      name: 'Detail System',
       exact: true,
    },
    {
       component: SystemEnvironment,
       route: '/system-environment/system/:id/env/:envId',
-      name: 'System Environment',
+      name: 'Detail System Environment',
       exact: true,
    },
    {

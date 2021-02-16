@@ -82,6 +82,33 @@ export default class SystemController {
    }
 
    /**
+    * PUT controller
+    * for Systems
+    */
+
+   static updateSystem(ID, params, queryParams) {
+      const payload = {
+         name: params.name,
+         description: params.description,
+         systemId: params.systemId,
+         ownerPartyId: params.ownerPartyId,
+      }
+
+      const query = {
+         version: queryParams.version,
+      }
+
+      return fetch(`${BASE_URL}/systems/${ID}?${queryString.stringify(query)}`, {
+         method: 'put',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
+   }
+
+   /**
     * DELETE controller
     * for Systems
     */

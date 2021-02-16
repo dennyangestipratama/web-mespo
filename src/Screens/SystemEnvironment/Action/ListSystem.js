@@ -1,5 +1,5 @@
 import { useContext, Fragment } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 
 import Search from '@Components/Search'
 import ModalAction from '@Components/ModalAction'
@@ -16,14 +16,14 @@ import { ReactComponent as CloneSVG } from '@Icon/clone.svg'
 import { ReactComponent as EditSVG } from '@Icon/edit.svg'
 import { ReactComponent as DeleteSVG } from '@Icon/delete.svg'
 
-export default function ListSystem() {
+export default function ListSystem({ history }) {
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
+   const params = useParams()
 
    const search = (event) => {
       event.preventDefault()
       SystemController.searchSystem(systemContext.search.parameters).then((response) => {
-         console.log(response)
          // systemContext.setSystem()
       })
    }
@@ -60,7 +60,9 @@ export default function ListSystem() {
                         button={
                            <Fragment>
                               <ButtonAction label='Clone' icon={<CloneSVG />} />
-                              <ButtonAction label='Edit' icon={<EditSVG />} />
+                              <Link to={`/system-environment/update/${params.id}`}>
+                                 <ButtonAction label='Edit' icon={<EditSVG />} />
+                              </Link>
                               <ButtonAction
                                  label='Delete'
                                  icon={<DeleteSVG />}
