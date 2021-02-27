@@ -55,6 +55,11 @@ const SystemContextProvider = ({ children }) => {
       name: '',
    })
 
+   const [attachedEnvironment, setAttachedEnvironment] = useState({
+      isLoading: false,
+      items: [],
+   })
+
    const [isSuccessSystem, setIsSuccessSystem] = useState(false)
    const [selectedSystem, setSelectedSystem] = useState(null)
    const [showAction, setShowAction] = useState(null)
@@ -92,6 +97,13 @@ const SystemContextProvider = ({ children }) => {
       })
    }
 
+   const fetchSystemEnvironmentAttach = (ID) => {
+      setAttachedEnvironment((prevState) => ({ ...prevState, isLoading: true }))
+      SystemController.systemEnvironmentAttach(ID).then((response) => {
+         setAttachedEnvironment((prevState) => ({ ...prevState, isLoading: false, items: response }))
+      })
+   }
+
    const deletingSystem = (id, params) => {
       SystemController.deleteSystem(id, params).then((response) => {
          setShowDelete(null)
@@ -119,6 +131,8 @@ const SystemContextProvider = ({ children }) => {
             search,
             detailSystem,
             systemProperties,
+            attachedEnvironment,
+            setAttachedEnvironment,
             setSystemProperties,
             setDetailSystem,
             setSearch,
@@ -134,6 +148,7 @@ const SystemContextProvider = ({ children }) => {
             fetchSystem,
             fetchDetailSystem,
             fetchSystemProperties,
+            fetchSystemEnvironmentAttach,
          }}>
          {children}
       </SystemContext.Provider>

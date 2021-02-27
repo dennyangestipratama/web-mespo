@@ -1,4 +1,4 @@
-import { useContext, Fragment } from 'react'
+import { useContext, useState, Fragment } from 'react'
 
 import Alert from '@Components/Alert'
 import Input from '@Components/Input'
@@ -16,18 +16,37 @@ export default function TabSystem({ history }) {
    const environmentContext = useContext(EnvironmentContext)
 
    const createSystem = () => {
-      SystemController.createSystem(systemContext.create.parameters)
-         .then((response) => {
+      if (environmentContext.selectingEnvironment.length === 0) {
+         SystemController.createSystem(systemContext.create.parameters)
+            .then((response) => {
+               systemContext.setCreate((prevState) => ({
+                  ...prevState,
+                  isSubmit: false,
+                  data: response,
+                  parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: null },
+               }))
+               systemContext.setIsSuccessSystem(true)
+               systemContext.fetchSystem()
+            })
+            .catch((err) => console.log(err))
+      } else {
+         SystemController.attachSystemEnvironment({
+            system: {
+               name: systemContext.create.parameters.name,
+               description: systemContext.create.parameters.description,
+            },
+            attachments: environmentContext.selectingEnvironment,
+         }).then(() => {
             systemContext.setCreate((prevState) => ({
                ...prevState,
                isSubmit: false,
-               data: response,
                parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: null },
             }))
+            environmentContext.setSelectingEnvironment([])
             systemContext.setIsSuccessSystem(true)
             systemContext.fetchSystem()
          })
-         .catch((err) => console.log(err))
+      }
    }
 
    const submit = (event) => {

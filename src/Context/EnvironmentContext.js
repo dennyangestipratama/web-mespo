@@ -16,6 +16,7 @@ const EnvironmentContextProvider = ({ children }) => {
    })
 
    const [selectedEnvironment, setSelectedEnvironment] = useState(null)
+   const [selectingEnvironment, setSelectingEnvironment] = useState([])
    const [isSuccessEnvironment, setIsSuccessEnvironment] = useState(false)
    const [showAction, setShowAction] = useState(null)
    const [showDelete, setShowDelete] = useState(null)
@@ -85,12 +86,12 @@ const EnvironmentContextProvider = ({ children }) => {
       })
    }
 
-   // const fetchEnvironmentSystem = (ID) => {
-   //    setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: true, items: [] }))
-   //    EnvironmentController.detailEnvironmentSystem(ID).then((response) => {
-   //       setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: false, items: response }))
-   //    })
-   // }
+   const fetchEnvironmentSystem = (ID) => {
+      setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: true, items: [] }))
+      EnvironmentController.detailEnvironmentSystem(ID).then((response) => {
+         setEnvironmentSystem((prevState) => ({ ...prevState, isLoading: false, items: response }))
+      })
+   }
 
    useEffect(() => {
       fetchEnvironment()
@@ -109,6 +110,8 @@ const EnvironmentContextProvider = ({ children }) => {
             isSuccessEnvironment,
             deleteEnvironment,
             update,
+            selectingEnvironment,
+            setSelectingEnvironment,
             setUpdate,
             setDeleteEnvironment,
             setShowAction,
@@ -121,6 +124,7 @@ const EnvironmentContextProvider = ({ children }) => {
             setEnvironment,
             fetchEnvironment,
             fetchDetailEnvironment,
+            fetchEnvironmentSystem,
             deletingEnvironment,
          }}>
          {children}

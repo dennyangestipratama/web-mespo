@@ -19,7 +19,6 @@ export default function SystemEnvironment() {
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
    const environmentContext = useContext(EnvironmentContext)
-
    return (
       <Fragment>
          {/* FOR PAGE */}
@@ -107,8 +106,8 @@ export default function SystemEnvironment() {
          {!environmentContext.showDelete ? null : (
             <ModalDelete
                title={environmentContext.showDelete?.name}
-               text='You are about to delete a system :'
-               desc='To continue, type the system name below.'
+               text='You are about to delete a environment :'
+               desc='To continue, type the environment name below.'
                placeholder={environmentContext.showDelete?.name}
                value={environmentContext.deleteEnvironment.name}
                onChange={({ target: { value } }) => environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, name: value }))}

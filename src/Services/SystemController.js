@@ -59,6 +59,15 @@ export default class SystemController {
       }).then((res) => res.json())
    }
 
+   static systemEnvironmentAttach(ID) {
+      return fetch(`${BASE_URL}/systems/${ID}/environments/attachments`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
+   }
+
    /**
     * POST controller
     * for Systems
@@ -72,6 +81,22 @@ export default class SystemController {
       }
 
       return fetch(`${BASE_URL}/systems`, {
+         method: 'post',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
+   }
+
+   static attachSystemEnvironment(params) {
+      const payload = {
+         system: params.system,
+         attachments: params.attachments,
+      }
+
+      return fetch(`${BASE_URL}/systems/environments/attachments`, {
          method: 'post',
          headers: {
             'Content-Type': 'application/json',
@@ -99,6 +124,22 @@ export default class SystemController {
       }
 
       return fetch(`${BASE_URL}/systems/${ID}?${queryString.stringify(query)}`, {
+         method: 'put',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
+   }
+
+   static updateAttachSystemEnvironment(params) {
+      const payload = {
+         system: params.system,
+         attachments: params.attachments,
+      }
+
+      return fetch(`${BASE_URL}/systems/environments/attachments`, {
          method: 'put',
          headers: {
             'Content-Type': 'application/json',

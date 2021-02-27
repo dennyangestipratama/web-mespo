@@ -42,8 +42,17 @@ export default function EditSystem({ history }) {
                data: response,
                parameters: { ...systemContext.update.parameters, name: '', description: '' },
             }))
-            systemContext.setIsSuccessSystem(true)
-            systemContext.fetchSystem()
+            SystemController.updateAttachSystemEnvironment({
+               system: {
+                  name: systemContext.update.parameters.name,
+                  description: systemContext.update.parameters.description,
+               },
+               attachments: environmentContext.selectingEnvironment,
+            }).then(() => {
+               environmentContext.setSelectingEnvironment([])
+               systemContext.setIsSuccessSystem(true)
+               systemContext.fetchSystem()
+            })
          })
          .catch((err) => console.log(err))
    }
