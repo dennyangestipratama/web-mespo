@@ -1,7 +1,6 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { EnvironmentContext } from '@Context/EnvironmentContext'
-import { SystemContext } from '@Context/SystemContext'
 import Search from '@Components/Search'
 
 import { ReactComponent as MoreSVG } from '@Icon/more-vertical.svg'
@@ -9,7 +8,6 @@ import { ReactComponent as CheckSVG } from '@Icon/check.svg'
 
 export default function AttachSystem() {
    const environmentContext = useContext(EnvironmentContext)
-   const systemContext = useContext(SystemContext)
 
    const selectingEnvironment = (item) => {
       if (environmentContext.selectingEnvironment.some((has) => has.aggregate.environment.environmentId === item.aggregate.environment.environmentId)) {
@@ -31,7 +29,6 @@ export default function AttachSystem() {
                   className='attach__items'
                   key={item.environmentId}
                   onClick={() => {
-                     systemContext.setCreate((prevState) => ({ ...prevState, parameters: { ...systemContext.create.parameters, systemId: item.environmentId } }))
                      selectingEnvironment({
                         aggregate: {
                            environment: {

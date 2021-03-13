@@ -9,13 +9,35 @@ import { ReactComponent as CheckSVG } from '@Icon/check.svg'
 export default function AttachEnvironment() {
    const systemContext = useContext(SystemContext)
 
+   const selectingSystem = (item) => {
+      if (systemContext.selectingSystem.some((has) => has.aggregate.system.systemId === item.aggregate.system.systemId)) {
+         systemContext.setSelectingSystem(
+            systemContext.selectingSystem.filter((filter) => filter.aggregate.system.systemId !== item.aggregate.system.systemId)
+         )
+      } else {
+         systemContext.setSelectingSystem((selected) => [...selected, item])
+      }
+   }
+
    return (
       <div className='attach'>
          <Search placeholder={'Search System'} />
          {systemContext.system.items.map((item) => {
-            const isActive = systemContext.selectedSystem?.systemId === item.systemId
+            const isActive = systemContext.selectingSystem.some((has) => has.aggregate.system.systemId === item.systemId)
             return (
-               <div className='attach__items' key={item.systemId} onClick={() => systemContext.setSelectedSystem(item)}>
+               <div
+                  className='attach__items'
+                  key={item.systemId}
+                  onClick={() => {
+                     selectingSystem({
+                        aggregate: {
+                           system: {
+                              systemId: item.systemId,
+                           },
+                        },
+                        status: 'ATTACHED',
+                     })
+                  }}>
                   <div className='attach__items-action'>{isActive ? <CheckSVG /> : null}</div>
                   <div className={`attach__capsules text__capsules ${isActive ? 'attach__capsules--active' : ''}`}>
                      <span>{item.name}</span>

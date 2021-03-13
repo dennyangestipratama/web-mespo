@@ -157,9 +157,10 @@ export default class SystemController {
    static deleteSystem(id, params) {
       const query = {
          version: params.version,
+         confirmed: true
       }
 
-      return fetch(`${BASE_URL}/systems/${id}?${queryString.stringify(query)}`, {
+      return fetch(`${BASE_URL}/systems/${id}/completely?${queryString.stringify(query)}`, {
          method: 'delete',
          headers: {
             'Content-Type': 'application/json',

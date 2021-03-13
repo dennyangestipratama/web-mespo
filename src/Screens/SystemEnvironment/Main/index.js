@@ -7,6 +7,7 @@ import ListEnvironment from './ListEnvironment'
 import DetailSystem from './DetailSystem'
 import EmptyEnvironment from './EmptyEnvironment'
 import EmptySystem from './EmptySystem'
+import Properties from './Properties'
 
 export default function Main() {
    const history = useHistory()
@@ -19,6 +20,8 @@ export default function Main() {
       if (systemContext.detailSystem.data?.systemId !== params.id || systemContext.selectedSystem) {
          systemContext.fetchDetailSystem(params.id)
          systemContext.fetchSystemProperties(params.id)
+
+         console.log(systemContext.systemProperties)
       }
    }, [systemContext.selectedSystem])
    return (
@@ -28,6 +31,7 @@ export default function Main() {
             <div className='main__sub-title text__sub-title'>Environment</div>
             {environmentContext.environment.items.length === 0 ? <EmptyEnvironment history={history} /> : <ListEnvironment history={history} />}
          </div>
+         <Properties />
       </section>
    )
 }

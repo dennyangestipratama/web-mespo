@@ -16,7 +16,7 @@ export default function TabEnvironment() {
    const environmentContext = useContext(EnvironmentContext)
 
    const createEnvironment = () => {
-      return new Promise((resolve, reject) => {
+      if (systemContext.selectingSystem.length === 0) {
          EnvironmentController.createEnvironment(environmentContext.create.parameters).then((response) => {
             environmentContext.setCreate((prevState) => ({
                ...prevState,
@@ -24,27 +24,35 @@ export default function TabEnvironment() {
                data: response,
                parameters: { ...environmentContext.create.parameters, name: '', description: '', environmentId: '' },
             }))
-            resolve()
+            environmentContext.fetchEnvironment()
+            environmentContext.setIsSuccessEnvironment(true)
+         }).catch((err) => console.log(err))
+      } else {
+         EnvironmentController.attachEnvironmentSystem({
+            environment: {
+               name: environmentContext.create.parameters.name,
+               description: environmentContext.create.parameters.description,
+            },
+            attachments: systemContext.selectingSystem,
+         }).then(() => {
+            environmentContext.setCreate((prevState) => ({
+               ...prevState,
+               isSubmit: false,
+               parameters: { ...systemContext.create.parameters, name: '', description: '', environmentId: '' },
+            }))
+            systemContext.setSelectingSystem([])
+            environmentContext.setIsSuccessEnvironment(true)
+            environmentContext.fetchEnvironment()
          })
-      })
+      }
    }
 
-   const attachEnvironment = () => {
-      createEnvironment().then((response) => {
-         EnvironmentController.attachSystem({ systemId: systemContext.selectedSystem.systemId })
-            .then((response) => {
-               console.log('response attachment', response)
-            })
-            .catch((err) => console.log(err))
-         environmentContext.fetchEnvironment()
-         environmentContext.setIsSuccessEnvironment(true)
-      })
-   }
+   console.log(systemContext.selectingSystem.length)
 
    const submit = (event) => {
       event.preventDefault()
       environmentContext.setCreate((prevState) => ({ ...prevState, isSubmit: true }))
-      attachEnvironment()
+      createEnvironment()
    }
 
    return (

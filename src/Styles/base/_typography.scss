@@ -218,3 +218,63 @@
    letter-spacing: 0.01em;
    color: #949393;
 }
+
+.text__properties-title {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   letter-spacing: 0.05em;
+   color: #50E4A7;
+   text-transform: uppercase;
+}
+
+.text__properties-menu {
+   text-transform: uppercase;
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   letter-spacing: 0.05em;
+   color: #A6C1FB;
+}
+
+.text__properties-number,
+.text__properties-info {
+   font-weight: bold;
+   font-size: 9px;
+   line-height: 9px;
+   text-align: right;
+   letter-spacing: 0.05em;
+   color: #FFFFFF;
+   text-transform: uppercase;
+}
+
+.text__properties-number {
+   color: #50E4A7;
+}
+
+.text__properties-item {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}
+
+.text__properties-empty {
+   font-weight: bold;
+   font-size: 13px;
+   line-height: 14px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: rgba($color: #FFFFFF, $alpha: .4);
+   margin-bottom: 11px;
+}
+
+.text__properties-empty--info {
+   font-weight: bold;
+   font-size: 10px;
+   line-height: 11px;
+   text-align: center;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+}

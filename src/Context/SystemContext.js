@@ -62,6 +62,7 @@ const SystemContextProvider = ({ children }) => {
 
    const [isSuccessSystem, setIsSuccessSystem] = useState(false)
    const [selectedSystem, setSelectedSystem] = useState(null)
+   const [selectingSystem, setSelectingSystem] = useState([])
    const [showAction, setShowAction] = useState(null)
    const [showDelete, setShowDelete] = useState(null)
 
@@ -132,6 +133,8 @@ const SystemContextProvider = ({ children }) => {
             detailSystem,
             systemProperties,
             attachedEnvironment,
+            selectingSystem,
+            setSelectingSystem,
             setAttachedEnvironment,
             setSystemProperties,
             setDetailSystem,

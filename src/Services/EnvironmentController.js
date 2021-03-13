@@ -89,6 +89,22 @@ export default class EnvironmentController {
       }).then((res) => res.json())
    }
 
+   static attachEnvironmentSystem(params) {
+      const payload = {
+         environment: params.environment,
+         attachments: params.attachments,
+      }
+
+      return fetch(`${BASE_URL}/environments/systems/attachments`, {
+         method: 'post',
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+         body: JSON.stringify(payload),
+      }).then((res) => res.json())
+   }
+
    /**
     * PUT controller
     * for Systems
@@ -124,9 +140,10 @@ export default class EnvironmentController {
    static deleteEnvironment(id, params) {
       const query = {
          version: params.version,
+         confirmed: true
       }
 
-      return fetch(`${BASE_URL}/environments/${id}?${queryString.stringify(query)}`, {
+      return fetch(`${BASE_URL}/environments/${id}/completely?${queryString.stringify(query)}`, {
          method: 'delete',
          headers: {
             'Content-Type': 'application/json',
