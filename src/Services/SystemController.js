@@ -1,5 +1,4 @@
 import queryString from 'query-string'
-import API from './API'
 
 const UUID = () => {
    function _p8(s) {
@@ -157,7 +156,7 @@ export default class SystemController {
    static deleteSystem(id, params) {
       const query = {
          version: params.version,
-         confirmed: true
+         confirmed: true,
       }
 
       return fetch(`${BASE_URL}/systems/${id}/completely?${queryString.stringify(query)}`, {

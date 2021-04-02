@@ -10,11 +10,6 @@ const SystemContextProvider = ({ children }) => {
       items: [],
    })
 
-   const [systemProperties, setSystemProperties] = useState({
-      isLoading: false,
-      items: [],
-   })
-
    const [detailSystem, setDetailSystem] = useState({
       isLoading: false,
       data: null,
@@ -91,13 +86,6 @@ const SystemContextProvider = ({ children }) => {
       })
    }
 
-   const fetchSystemProperties = (ID) => {
-      setSystemProperties((prevState) => ({ ...prevState, isLoading: true, items: [] }))
-      SystemController.systemProperties(ID).then((response) => {
-         setSystemProperties((prevState) => ({ ...prevState, isLoading: true, items: response }))
-      })
-   }
-
    const fetchSystemEnvironmentAttach = (ID) => {
       setAttachedEnvironment((prevState) => ({ ...prevState, isLoading: true }))
       SystemController.systemEnvironmentAttach(ID).then((response) => {
@@ -131,12 +119,10 @@ const SystemContextProvider = ({ children }) => {
             deleteSystem,
             search,
             detailSystem,
-            systemProperties,
             attachedEnvironment,
             selectingSystem,
             setSelectingSystem,
             setAttachedEnvironment,
-            setSystemProperties,
             setDetailSystem,
             setSearch,
             setDeleteSystem,
@@ -150,7 +136,6 @@ const SystemContextProvider = ({ children }) => {
             deletingSystem,
             fetchSystem,
             fetchDetailSystem,
-            fetchSystemProperties,
             fetchSystemEnvironmentAttach,
          }}>
          {children}

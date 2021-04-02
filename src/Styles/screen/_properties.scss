@@ -95,6 +95,10 @@
    padding: 6px 15px;
 }
 
+.properties__menu-save--active {
+   color: #FFFFFF;
+}
+
 .properties__body-empty {
    margin-top: 8px;
    background: rgba($color: #000000, $alpha: .1);

@@ -6,6 +6,7 @@ import AuthContext from '@Context/AuthContext'
 import UtilsContext from '@Context/UtilsContext'
 import SystemContext from '@Context/SystemContext'
 import EnvironmentContext from '@Context/EnvironmentContext'
+import PropertiesContext from '@Context/PropertiesContext'
 import '@Styles/main.scss'
 
 ReactDOM.render(
@@ -14,7 +15,9 @@ ReactDOM.render(
          <UtilsContext>
             <SystemContext>
                <EnvironmentContext>
-                  <App />
+                  <PropertiesContext>
+                     <App />
+                  </PropertiesContext>
                </EnvironmentContext>
             </SystemContext>
          </UtilsContext>

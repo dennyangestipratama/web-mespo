@@ -19,18 +19,16 @@ export default function Main() {
    useEffect(() => {
       if (systemContext.detailSystem.data?.systemId !== params.id || systemContext.selectedSystem) {
          systemContext.fetchDetailSystem(params.id)
-         systemContext.fetchSystemProperties(params.id)
-
-         console.log(systemContext.systemProperties)
       }
    }, [systemContext.selectedSystem])
+
    return (
       <section className='main'>
          {!system ? <EmptySystem /> : <DetailSystem />}
-         <div className='main__sub'>
+         {/* <div className='main__sub'>
             <div className='main__sub-title text__sub-title'>Environment</div>
             {environmentContext.environment.items.length === 0 ? <EmptyEnvironment history={history} /> : <ListEnvironment history={history} />}
-         </div>
+         </div> */}
          <Properties />
       </section>
    )

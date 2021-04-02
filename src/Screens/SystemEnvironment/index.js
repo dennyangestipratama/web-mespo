@@ -32,24 +32,25 @@ export default function SystemEnvironment() {
                title={systemContext.create.data?.event.system.name}
                text_title='System'
                text='is  successfully created !'
-               desc='But it seems it doesn’t attach to any environment. Do you want to create an environment now?'
+               desc='What do you want to do next?'
                button={
                   <Fragment>
-                     <Button
-                        onClick={() => {
-                           systemContext.setIsSuccessSystem(false)
-                           history.push('/system-environment')
-                        }}
-                        color='#000000'
-                        label='No'
-                     />
                      <Button
                         onClick={() => {
                            systemContext.setIsSuccessSystem(false)
                            history.push('/system-environment/create/environment')
                            systemContext.fetchSystem()
                         }}
-                        label='Yes'
+                        color='#000000'
+                        border='1px solid #3776FF'
+                        label='Add to Environment'
+                     />
+                     <Button
+                        onClick={() => {
+                           systemContext.setIsSuccessSystem(false)
+                           history.push('/system-environment')
+                        }}
+                        label='Add a Property'
                      />
                   </Fragment>
                }

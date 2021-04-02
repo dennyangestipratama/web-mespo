@@ -17,16 +17,18 @@ export default function TabEnvironment() {
 
    const createEnvironment = () => {
       if (systemContext.selectingSystem.length === 0) {
-         EnvironmentController.createEnvironment(environmentContext.create.parameters).then((response) => {
-            environmentContext.setCreate((prevState) => ({
-               ...prevState,
-               isSubmit: false,
-               data: response,
-               parameters: { ...environmentContext.create.parameters, name: '', description: '', environmentId: '' },
-            }))
-            environmentContext.fetchEnvironment()
-            environmentContext.setIsSuccessEnvironment(true)
-         }).catch((err) => console.log(err))
+         EnvironmentController.createEnvironment(environmentContext.create.parameters)
+            .then((response) => {
+               environmentContext.setCreate((prevState) => ({
+                  ...prevState,
+                  isSubmit: false,
+                  data: response,
+                  parameters: { ...environmentContext.create.parameters, name: '', description: '', environmentId: '' },
+               }))
+               environmentContext.fetchEnvironment()
+               environmentContext.setIsSuccessEnvironment(true)
+            })
+            .catch((err) => console.log(err))
       } else {
          EnvironmentController.attachEnvironmentSystem({
             environment: {

@@ -140,7 +140,7 @@ export default class EnvironmentController {
    static deleteEnvironment(id, params) {
       const query = {
          version: params.version,
-         confirmed: true
+         confirmed: true,
       }
 
       return fetch(`${BASE_URL}/environments/${id}/completely?${queryString.stringify(query)}`, {

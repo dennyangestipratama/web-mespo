@@ -6,6 +6,15 @@
    width: 125px;
    height: 135px;
    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
+
+   &.property {
+      width: 220px;
+
+      .modal-action__title {
+         text-align: center;
+      }
+
+   }
 }
 
 .modal-action__title {

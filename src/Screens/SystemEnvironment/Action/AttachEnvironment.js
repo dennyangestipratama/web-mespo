@@ -11,9 +11,7 @@ export default function AttachEnvironment() {
 
    const selectingSystem = (item) => {
       if (systemContext.selectingSystem.some((has) => has.aggregate.system.systemId === item.aggregate.system.systemId)) {
-         systemContext.setSelectingSystem(
-            systemContext.selectingSystem.filter((filter) => filter.aggregate.system.systemId !== item.aggregate.system.systemId)
-         )
+         systemContext.setSelectingSystem(systemContext.selectingSystem.filter((filter) => filter.aggregate.system.systemId !== item.aggregate.system.systemId))
       } else {
          systemContext.setSelectingSystem((selected) => [...selected, item])
       }
