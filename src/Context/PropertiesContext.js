@@ -7,6 +7,7 @@ export const PropertiesContextConsumer = PropertiesContext.Consumer
 const PropertiesContextProvider = ({ children }) => {
    const [systemProperties, setSystemProperties] = useState({
       isLoading: true,
+      isReset: false,
       items: [],
    })
 
@@ -20,11 +21,35 @@ const PropertiesContextProvider = ({ children }) => {
       },
    })
 
+   const [updateProperties, setUpdateProperties] = useState({
+      isSubmit: false,
+      data: null,
+      params: {
+         name: '',
+         systemId: '',
+         propertyId: '',
+         propertyTypeId: '',
+         value: '',
+         valueType: '',
+         version: '',
+         ownerPartyId: '',
+         valueVersion: '',
+      },
+   })
+
    const [selectedProperties, setSelectedProperties] = useState(null)
 
    const fetchSystemProperties = (ID) => {
       PropertiesController.detailSystemProperties(ID).then((response) => {
-         setSystemProperties((prevState) => ({ ...prevState, isLoading: false, items: response }))
+         setSystemProperties((prevState) => ({ ...prevState, isLoading: false, isReset: false, items: response }))
+      })
+   }
+
+   const resetList = () => {
+      setSystemProperties({
+         isLoading: true,
+         isReset: true,
+         items: [],
       })
    }
 
@@ -34,10 +59,13 @@ const PropertiesContextProvider = ({ children }) => {
             systemProperties,
             createProperties,
             selectedProperties,
+            updateProperties,
+            setUpdateProperties,
             setSelectedProperties,
             setCreateProperties,
             setSystemProperties,
             fetchSystemProperties,
+            resetList,
          }}>
          {children}
       </PropertiesContext.Provider>

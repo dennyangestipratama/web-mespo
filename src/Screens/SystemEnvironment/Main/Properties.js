@@ -34,10 +34,11 @@ export default function Properties() {
    const [showMenu, setShowMenu] = useState(true)
    const [showProperties, setShowProperties] = useState(true)
    const [showCreate, setShowCreate] = useState(false)
+   const [showUpdate, setShowUpdate] = useState(false)
 
    useEffect(() => {
-      propertiesContext.fetchSystemProperties(systemContext.selectedSystem ?? params.id)
-   }, [systemContext.selectedSystem])
+      propertiesContext.fetchSystemProperties(params.id ?? systemContext.selectedSystem)
+   }, [systemContext.selectedSystem, propertiesContext.systemProperties.isReset])
 
    const create = () => {
       PropertiesController.createProperties({ systemId: systemContext.selectedSystem, ...propertiesContext.createProperties.params })
@@ -54,17 +55,66 @@ export default function Properties() {
          })
    }
 
-   const submit = (event) => {
-      event.preventDefault()
-      propertiesContext.setCreateProperties((prevState) => ({ ...prevState, isSubmit: true }))
-      create()
+   const update = () => {
+      PropertiesController.updateSystemProperties(propertiesContext.selectedProperties.systemPropertyValueId, { ...propertiesContext.updateProperties.params })
+         .then((response) => {
+            propertiesContext.setUpdateProperties((prevState) => ({
+               ...prevState,
+               data: response,
+               isSubmit: false,
+            }))
+         })
+         .catch(() => {
+            propertiesContext.setUpdateProperties((prevState) => ({ ...prevState, isSubmit: false }))
+         })
+   }
+
+   const updatePropertiesValue = () => {
+      propertiesContext.setUpdateProperties((prevState) => ({
+         ...prevState,
+         params: {
+            name: propertiesContext.selectedProperties.name,
+            systemId: propertiesContext.selectedProperties.systemId,
+            propertyId: propertiesContext.selectedProperties.propertyId,
+            propertyTypeId: propertiesContext.selectedProperties.propertyTypeId,
+            value: propertiesContext.selectedProperties.value,
+            valueType: propertiesContext.selectedProperties.valueType,
+            version: propertiesContext.selectedProperties.version,
+            ownerPartyId: propertiesContext.selectedProperties.ownerPartyId,
+            valueVersion: propertiesContext.selectedProperties.valueVersion,
+         },
+      }))
+      setShowUpdate(!showUpdate)
    }
 
    const deleteProperties = () => {
-      PropertiesController.deleteProperties(propertiesContext.selectedProperties.systemPropertyValueId, { valueVersion: propertiesContext.selectedProperties.valueVersion, propertyId: propertiesContext.selectedProperties.propertyId, propertyVersion: propertiesContext.selectedProperties.version }).then(response => {
-         alert('success')
-         propertiesContext.setSelectedProperties(null)
-      }).catch(() => alert('failed'), propertiesContext.setSelectedProperties(null))
+      PropertiesController.deleteProperties(propertiesContext.selectedProperties.systemPropertyValueId, {
+         valueVersion: propertiesContext.selectedProperties.valueVersion,
+         propertyId: propertiesContext.selectedProperties.propertyId,
+         propertyVersion: propertiesContext.selectedProperties.version,
+      })
+         .then((response) => {
+            propertiesContext.resetList()
+            propertiesContext.setSelectedProperties(null)
+         })
+         .catch(() => alert('failed'), propertiesContext.setSelectedProperties(null))
+   }
+
+   const submit = (event) => {
+      event.preventDefault()
+      propertiesContext.setCreateProperties((prevState) => ({ ...prevState, isSubmit: true }))
+      propertiesContext.resetList()
+      create()
+      setShowCreate(false)
+   }
+
+   const submitUpdate = (event) => {
+      event.preventDefault()
+      propertiesContext.setUpdateProperties((prevState) => ({ ...prevState, isSubmit: true }))
+      propertiesContext.resetList()
+      update()
+      setShowUpdate(false)
+      propertiesContext.setSelectedProperties(null)
    }
 
    return (
@@ -107,64 +157,30 @@ export default function Properties() {
                            <span className='text__properties-item'>Clear all</span>
                         </button>
                      </div>
-                     <button
-                        type='submit'
-                        className={`properties__menu-save ${propertiesContext.createProperties.params.name !== '' &&
-                           propertiesContext.createProperties.params.value !== '' &&
-                           propertiesContext.createProperties.params.valueType !== ''
-                           ? 'properties__menu-save--active'
-                           : ''
+                     {!showCreate ? null : (
+                        <button
+                           type='submit'
+                           className={`properties__menu-save ${
+                              propertiesContext.createProperties.params.name !== '' &&
+                              propertiesContext.createProperties.params.value !== '' &&
+                              propertiesContext.createProperties.params.valueType !== ''
+                                 ? 'properties__menu-save--active'
+                                 : ''
                            }`}
-                        onClick={(event) => submit(event)}>
-                        {!propertiesContext.createProperties.isSubmit ? 'Save Changes' : 'Saving...'}
-                     </button>
+                           onClick={(event) => submit(event)}>
+                           {!propertiesContext.createProperties.isSubmit ? 'Save Changes' : 'Saving...'}
+                        </button>
+                     )}
+                     {!showUpdate ? null : (
+                        <button type='submit' className='properties__menu-save properties__menu-save--active' onClick={(event) => submitUpdate(event)}>
+                           {!propertiesContext.updateProperties.isSubmit ? 'Save Changes' : 'Saving...'}
+                        </button>
+                     )}
                   </div>
                )}
-               {!showCreate ? (
-                  properties.items.length > 0 ? (
-                     <Table
-                        items={properties.items.map((property) => {
-                           return (
-                              <Fragment key={property.propertyId}>
-                                 <div className='table__body --menu'>
-                                    <IconMenu />
-                                 </div>
-                                 <div className='table__body --title'>{property.name}</div>
-                                 <div className='table__body --title'>
-                                    {property.valueType}
-                                    <span>
-                                       <IconArrowDown />
-                                    </span>
-                                 </div>
-                                 <div className='table__body --title'>{property.value}</div>
-                                 <div className='table__body --action' style={{ position: 'relative' }}>
-                                    <IconMore style={{ height: '25px' }} onClick={() => propertiesContext.setSelectedProperties(property)} />
-                                    {propertiesContext.selectedProperties?.propertyId !== property.propertyId ? null :
-                                       <ModalPropertyAction
-                                          onClick={() => propertiesContext.setSelectedProperties(null)}
-                                          title='Property Action'
-                                          button={
-                                             <Fragment>
-                                                <ButtonAction label='Edit' icon={<EditSVG />} />
-                                                <ButtonAction
-                                                   label='Delete'
-                                                   icon={<DeleteSVG />}
-                                                   theme='delete'
-                                                   onClick={() => deleteProperties()}
-                                                />
-                                             </Fragment>
-                                          }
-                                       />
-                                    }
-                                 </div>
-                              </Fragment>
-                           )
-                        })}
-                     />
-                  ) : (
-                     <EmptyProperties />
-                  )
-               ) : (
+               {propertiesContext.systemProperties.isLoading ? null : properties.items.length === 0 && !showCreate ? (
+                  <EmptyProperties />
+               ) : showCreate ? (
                   <TableForm
                      submit={submit}
                      input={
@@ -213,9 +229,102 @@ export default function Properties() {
                         </Fragment>
                      }
                   />
+               ) : showUpdate ? (
+                  <TableForm
+                     submit={submitUpdate}
+                     input={
+                        <Fragment>
+                           <div className='table__body --menu'>
+                              <IconMenu />
+                           </div>
+                           <input
+                              className='table__body --title'
+                              type='text'
+                              placeholder='type property name'
+                              value={propertiesContext.updateProperties.params.name}
+                              onChange={({ target: { value } }) =>
+                                 propertiesContext.setUpdateProperties((prevState) => ({ ...prevState, params: { ...propertiesContext.updateProperties.params, name: value } }))
+                              }
+                           />
+                           <div className='table__body --title flexCenter'>
+                              <input
+                                 type='text'
+                                 placeholder='select'
+                                 style={{ color: '#fff' }}
+                                 value={propertiesContext.updateProperties.params.valueType}
+                                 onChange={({ target: { value } }) =>
+                                    propertiesContext.setUpdateProperties((prevState) => ({
+                                       ...prevState,
+                                       params: { ...propertiesContext.updateProperties.params, valueType: value },
+                                    }))
+                                 }
+                              />
+                              <span>
+                                 <IconArrowDown />
+                              </span>
+                           </div>
+                           <input
+                              className='table__body --title'
+                              type='text'
+                              placeholder='type property value'
+                              value={propertiesContext.updateProperties.params.value}
+                              onChange={({ target: { value } }) =>
+                                 propertiesContext.setUpdateProperties((prevState) => ({ ...prevState, params: { ...propertiesContext.updateProperties.params, value: value } }))
+                              }
+                           />
+                           <div className='table__body --action' style={{ position: 'relative' }}>
+                              <IconMore style={{ height: '25px' }} />
+                           </div>
+                        </Fragment>
+                     }
+                  />
+               ) : (
+                  <ListProperties updatePropertiesValue={updatePropertiesValue} deleteProperties={deleteProperties} />
                )}
             </Fragment>
          )}
       </section>
+   )
+}
+
+function ListProperties({ updatePropertiesValue, deleteProperties }) {
+   const propertiesContext = useContext(PropertiesContext)
+   const properties = propertiesContext.systemProperties
+
+   return (
+      <Table
+         items={properties.items.map((property) => {
+            return (
+               <Fragment key={property.propertyId}>
+                  <div className='table__body --menu'>
+                     <IconMenu />
+                  </div>
+                  <div className='table__body --title'>{property.name}</div>
+                  <div className='table__body --title'>
+                     {property.valueType}
+                     <span>
+                        <IconArrowDown />
+                     </span>
+                  </div>
+                  <div className='table__body --title'>{property.value}</div>
+                  <div className='table__body --action' style={{ position: 'relative' }}>
+                     <IconMore style={{ height: '25px' }} onClick={() => propertiesContext.setSelectedProperties(property)} />
+                     {propertiesContext.selectedProperties?.propertyId !== property.propertyId ? null : (
+                        <ModalPropertyAction
+                           onClick={() => propertiesContext.setSelectedProperties(null)}
+                           title='Property Action'
+                           button={
+                              <Fragment>
+                                 <ButtonAction label='Edit' icon={<EditSVG />} onClick={() => updatePropertiesValue()} />
+                                 <ButtonAction label='Delete' icon={<DeleteSVG />} theme='delete' onClick={() => deleteProperties()} />
+                              </Fragment>
+                           }
+                        />
+                     )}
+                  </div>
+               </Fragment>
+            )
+         })}
+      />
    )
 }

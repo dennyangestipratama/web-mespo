@@ -93,6 +93,7 @@ export default class PropertiesController {
          headers: {
             'Content-Type': 'application/json',
             'Correlation-ID': UUID(),
+            'Requester-Party-ID': UUID(),
          },
       }).then((res) => res.json())
    }

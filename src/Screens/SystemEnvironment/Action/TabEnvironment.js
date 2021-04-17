@@ -49,8 +49,6 @@ export default function TabEnvironment() {
       }
    }
 
-   console.log(systemContext.selectingSystem.length)
-
    const submit = (event) => {
       event.preventDefault()
       environmentContext.setCreate((prevState) => ({ ...prevState, isSubmit: true }))
