@@ -136,7 +136,11 @@ export default function Properties() {
             <div className='properties__header__info'>
                <span className='text__properties-number'>{properties.items.length ?? 0}</span>
                <span className='text__properties-info'>Properties</span>
-               {showProperties ? <IconArrowUp style={{ cursor: 'pointer' }} onClick={() => setShowProperties(!showProperties)} /> : <IconArrowDown style={{ cursor: 'pointer' }} onClick={() => setShowProperties(!showProperties)} />}
+               {showProperties ? (
+                  <IconArrowUp style={{ cursor: 'pointer' }} onClick={() => setShowProperties(!showProperties)} />
+               ) : (
+                  <IconArrowDown style={{ cursor: 'pointer' }} onClick={() => setShowProperties(!showProperties)} />
+               )}
             </div>
          </div>
          {!showProperties ? null : (
@@ -160,12 +164,13 @@ export default function Properties() {
                      {!showCreate ? null : (
                         <button
                            type='submit'
-                           className={`properties__menu-save ${propertiesContext.createProperties.params.name !== '' &&
+                           className={`properties__menu-save ${
+                              propertiesContext.createProperties.params.name !== '' &&
                               propertiesContext.createProperties.params.value !== '' &&
                               propertiesContext.createProperties.params.valueType !== ''
-                              ? 'properties__menu-save--active'
-                              : ''
-                              }`}
+                                 ? 'properties__menu-save--active'
+                                 : ''
+                           }`}
                            onClick={(event) => submit(event)}>
                            {!propertiesContext.createProperties.isSubmit ? 'Save Changes' : 'Saving...'}
                         </button>
