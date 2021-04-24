@@ -1,4 +1,4 @@
-import { useContext, useState, Fragment } from 'react'
+import { useContext, Fragment } from 'react'
 
 import Alert from '@Components/Alert'
 import Input from '@Components/Input'
@@ -6,53 +6,42 @@ import TextArea from '@Components/TextArea'
 import Button from '@Components/Button'
 import SystemController from '@Services/SystemController'
 import { SystemContext } from '@Context/SystemContext'
-import { EnvironmentContext } from '@Context/EnvironmentContext'
 import AttachSystem from './AttachSystem'
 
 import { ReactComponent as Attachment } from '@Icon/attachment.svg'
 
 export default function TabSystem({ history }) {
    const systemContext = useContext(SystemContext)
-   const environmentContext = useContext(EnvironmentContext)
 
    const createSystem = () => {
-      if (environmentContext.selectingEnvironment.length === 0) {
-         SystemController.createSystem(systemContext.create.parameters)
-            .then((response) => {
-               systemContext.setCreate((prevState) => ({
-                  ...prevState,
-                  isSubmit: false,
-                  data: response,
-                  parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: null },
-               }))
-               systemContext.setIsSuccessSystem(true)
-               systemContext.fetchSystem()
-            })
-            .catch((err) => console.log(err))
-      } else {
-         SystemController.attachSystemEnvironment({
-            system: {
-               name: systemContext.create.parameters.name,
-               description: systemContext.create.parameters.description,
-            },
-            attachments: environmentContext.selectingEnvironment,
-         }).then(() => {
+      SystemController.createSystem(systemContext.create.parameters)
+         .then((response) => {
             systemContext.setCreate((prevState) => ({
                ...prevState,
                isSubmit: false,
-               parameters: { ...systemContext.create.parameters, name: '', description: '', systemId: null },
+               data: response,
             }))
-            environmentContext.setSelectingEnvironment([])
             systemContext.setIsSuccessSystem(true)
             systemContext.fetchSystem()
          })
-      }
+         .catch((err) => console.log(err))
    }
 
    const submit = (event) => {
       event.preventDefault()
       systemContext.setCreate((prevState) => ({ ...prevState, isSubmit: true }))
       createSystem()
+   }
+
+   const createEnvironmentButton = () => {
+      systemContext.setIsSuccessSystem(false)
+      history.push('/system-environment/create/environment')
+      systemContext.fetchSystem()
+   }
+
+   const back = () => {
+      systemContext.setIsSuccessSystem(false)
+      history.push('/system-environment')
    }
 
    return (
@@ -78,26 +67,41 @@ export default function TabSystem({ history }) {
                      label='System Description'
                      placeholder='Optional'
                   />
-                  {/* <Input
+                  <Input
                      label='URL'
                      placeholder='https://'
-                  /> */}
-                  <Input label='System ID' placeholder='Environment ID' value={environmentContext.selectedEnvironment?.environmentId ?? ''} />
+                     value={systemContext.create.parameters.url}
+                     onChange={({ target: { value } }) =>
+                        systemContext.setCreate((prevState) => ({ ...prevState, parameters: { ...systemContext.create.parameters, url: value } }))
+                     }
+                  />
                </div>
             </form>
          </div>
-         <div className='action__tab-upload'>
-            <div className='action__attach-icon'>
-               <Attachment />
+         {systemContext.isSuccessSystem ? (
+            <div className='action__tab-upload'>
+               <div className='action__attach-icon'>
+                  <Attachment />
+               </div>
+               <div className='action__upload'>
+                  <div className='action__upload-title text__sub-title'>System Created!</div>
+                  <div className='action__upload-info text__sub-info'>Do you want to add it into an environment?</div>
+               </div>
+               {systemContext.system.items.length === 0 ? (
+                  <div className='action__upload-empty text__action'>
+                     <span style={{ marginBottom: 27, display: 'block' }}>No Environment available</span>
+                     <Button type='submit' full label='Create Environment' onClick={() => createEnvironmentButton()} />
+                     <Button type='submit' full color='transparent' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
+                  </div>
+               ) : (
+                  <AttachSystem history={history} />
+               )}
             </div>
-            <div className='action__upload'>
-               <div className='action__upload-title text__sub-title'>Attach to Environment</div>
-               {systemContext.system.items.length === 0 ? <div className='action__upload-empty text__action'>No Environment available</div> : <AttachSystem />}
+         ) : (
+            <div className='action__tab-btn'>
+               <Button type='submit' full label={systemContext.create.isSubmit ? 'Please wait...' : 'Create System'} onClick={(event) => submit(event)} />
             </div>
-         </div>
-         <div className='action__tab-btn'>
-            <Button type='submit' label={systemContext.create.isSubmit ? 'Please wait...' : 'Create'} onClick={(event) => submit(event)} />
-         </div>
+         )}
       </Fragment>
    )
 }

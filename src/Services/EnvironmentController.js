@@ -62,6 +62,7 @@ export default class EnvironmentController {
          name: params.name,
          description: params.description,
          environmentId: params.environmentId,
+         url: params.url,
       }
 
       return fetch(`${BASE_URL}/environments`, {

@@ -28,6 +28,7 @@ const EnvironmentContextProvider = ({ children }) => {
          name: '',
          description: '',
          environmentId: '',
+         url: '',
       },
    })
 

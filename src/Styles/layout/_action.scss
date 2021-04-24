@@ -69,14 +69,20 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   padding: 43px 0 40px;
+   padding: 43px 69px 22px;
 }
 
 .action__upload-empty {
-   padding: 74px 0 83px;
+   padding: 0 83px 27px;
+
+   button {
+      &:last-of-type {
+         margin-top: 16px;
+      }
+   }
 }
 
 .action__tab-btn {
-   padding-right: 31px;
+   padding: 0 25px;
    padding-bottom: 70px;
 }

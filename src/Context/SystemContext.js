@@ -22,6 +22,7 @@ const SystemContextProvider = ({ children }) => {
          name: '',
          description: '',
          systemId: null,
+         url: '',
       },
    })
 

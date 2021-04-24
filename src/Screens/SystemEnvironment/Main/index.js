@@ -25,10 +25,10 @@ export default function Main() {
    return (
       <section className='main'>
          {!system ? <EmptySystem /> : <DetailSystem />}
-         {/* <div className='main__sub'>
+         <div className='main__sub'>
             <div className='main__sub-title text__sub-title'>Environment</div>
             {environmentContext.environment.items.length === 0 ? <EmptyEnvironment history={history} /> : <ListEnvironment history={history} />}
-         </div> */}
+         </div>
          <Properties />
       </section>
    )

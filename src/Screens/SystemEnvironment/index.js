@@ -4,15 +4,10 @@ import { useHistory } from 'react-router-dom'
 import { UtilsContext } from '@Context/UtilsContext'
 import { SystemContext } from '@Context/SystemContext'
 import { EnvironmentContext } from '@Context/EnvironmentContext'
-import ModalSuccess from '@Components/ModalSuccess'
 import ModalDelete from '@Components/ModalDelete'
-import Button from '@Components/Button'
 
 import Action from './Action'
 import Main from './Main'
-
-import { ReactComponent as CreateSystemSVG } from '@Icon/create-system.svg'
-import { ReactComponent as CreateEnvironmentSVG } from '@Icon/create-environment.svg'
 
 export default function SystemEnvironment() {
    const history = useHistory()
@@ -25,66 +20,6 @@ export default function SystemEnvironment() {
          {!utilsContext.showAction ? null : <Action />}
          <Main />
 
-         {/* FOR MODAL */}
-         {!systemContext.isSuccessSystem ? null : (
-            <ModalSuccess
-               icon={<CreateSystemSVG />}
-               title={systemContext.create.data?.event.system.name}
-               text_title='System'
-               text='is  successfully created !'
-               desc='What do you want to do next?'
-               button={
-                  <Fragment>
-                     <Button
-                        onClick={() => {
-                           systemContext.setIsSuccessSystem(false)
-                           history.push('/system-environment/create/environment')
-                           systemContext.fetchSystem()
-                        }}
-                        color='#000000'
-                        border='1px solid #3776FF'
-                        label='Add to Environment'
-                     />
-                     <Button
-                        onClick={() => {
-                           systemContext.setIsSuccessSystem(false)
-                           history.push('/system-environment')
-                        }}
-                        label='Add a Property'
-                     />
-                  </Fragment>
-               }
-            />
-         )}
-         {!environmentContext.isSuccessEnvironment ? null : (
-            <ModalSuccess
-               icon={<CreateEnvironmentSVG />}
-               title={environmentContext.create.data?.event.environment.name}
-               text_title='Environment'
-               text='is  successfully created !'
-               desc='But it seems it doesn’t attach to any system. Do you want to create a system now?'
-               button={
-                  <Fragment>
-                     <Button
-                        onClick={() => {
-                           environmentContext.setIsSuccessEnvironment(false)
-                           history.push('/system-environment')
-                        }}
-                        color='#000000'
-                        label='No'
-                     />
-                     <Button
-                        onClick={() => {
-                           environmentContext.setIsSuccessEnvironment(false)
-                           history.push('/system-environment/create')
-                           environmentContext.fetchEnvironment()
-                        }}
-                        label='Yes'
-                     />
-                  </Fragment>
-               }
-            />
-         )}
          {!systemContext.showDelete ? null : (
             <ModalDelete
                title={systemContext.showDelete?.name}
@@ -104,6 +39,7 @@ export default function SystemEnvironment() {
                }}
             />
          )}
+
          {!environmentContext.showDelete ? null : (
             <ModalDelete
                title={environmentContext.showDelete?.name}
@@ -112,7 +48,7 @@ export default function SystemEnvironment() {
                placeholder={environmentContext.showDelete?.name}
                value={environmentContext.deleteEnvironment.name}
                onChange={({ target: { value } }) => environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, name: value }))}
-               label={environmentContext.deleteEnvironment.isSubmit ? 'Please wait...' : 'Delete System'}
+               label={environmentContext.deleteEnvironment.isSubmit ? 'Please wait...' : 'Delete Environment'}
                disabled={environmentContext.deleteEnvironment.name !== environmentContext.showDelete?.name}
                onClick={() => {
                   environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, isSubmit: true }))

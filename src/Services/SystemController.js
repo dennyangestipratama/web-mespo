@@ -77,6 +77,7 @@ export default class SystemController {
          name: params.name,
          description: params.description,
          systemId: params.systemId,
+         url: params.url,
       }
 
       return fetch(`${BASE_URL}/systems`, {
@@ -91,11 +92,11 @@ export default class SystemController {
 
    static attachSystemEnvironment(params) {
       const payload = {
-         system: params.system,
-         attachments: params.attachments,
+         environmentId: params.environmentId,
+         systemId: params.systemId,
       }
 
-      return fetch(`${BASE_URL}/systems/environments/attachments`, {
+      return fetch(`${BASE_URL}/environments/systems`, {
          method: 'post',
          headers: {
             'Content-Type': 'application/json',
