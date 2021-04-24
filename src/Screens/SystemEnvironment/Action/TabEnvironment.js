@@ -26,7 +26,7 @@ export default function TabEnvironment({ history }) {
             environmentContext.fetchEnvironment()
             environmentContext.setIsSuccessEnvironment(true)
          })
-         .catch((err) => console.log(err))
+         .catch((err) => console.error(err))
    }
 
    const submit = (event) => {
@@ -92,8 +92,8 @@ export default function TabEnvironment({ history }) {
                {environmentContext.environment.items.length === 0 ? (
                   <div className='action__upload-empty text__action'>
                      <span style={{ marginBottom: 27, display: 'block' }}>No System available</span>
-                     <Button type='submit' full label='Create System' onClick={() => createSystemButton()} />
-                     <Button type='submit' full color='transparent' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
+                     <Button type='submit' size='full' label='Create System' onClick={() => createSystemButton()} />
+                     <Button type='submit' size='full' variant='secondary' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
                   </div>
                ) : (
                   <AttachEnvironment history={history} />
@@ -101,7 +101,7 @@ export default function TabEnvironment({ history }) {
             </div>
          ) : (
             <div className='action__tab-btn'>
-               <Button type='submit' full label={environmentContext.create.isSubmit ? 'Please wait...' : 'Create Environment'} onClick={(event) => submit(event)} />
+               <Button type='submit' size='full' label={environmentContext.create.isSubmit ? 'Please wait...' : 'Create Environment'} onClick={(event) => submit(event)} />
             </div>
          )}
       </Fragment>

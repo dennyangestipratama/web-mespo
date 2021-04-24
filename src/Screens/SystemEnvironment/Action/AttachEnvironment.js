@@ -35,7 +35,7 @@ export default function AttachEnvironment({ history }) {
                   }))
                })
                .catch((error) => {
-                  console.log('error:', error)
+                  console.error('error:', error)
                })
          }
          resolve()
@@ -69,11 +69,11 @@ export default function AttachEnvironment({ history }) {
          </div>
          <div className='attach-skip'>
             {systemContext.selectingSystem.length === 0 ? (
-               <Button type='submit' full color='transparent' border='1px solid #3776FF' label='Skip for now' onClick={() => history.push('/system-environment')} />
+               <Button type='submit' size='full' variant='secondary' border='1px solid #3776FF' label='Skip for now' onClick={() => history.push('/system-environment')} />
             ) : (
                <Button
                   type='submit'
-                  full
+                  size='full'
                   label='Add to System'
                   onClick={() => {
                      submit()

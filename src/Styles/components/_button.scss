@@ -4,6 +4,7 @@
    margin-left: auto;
    padding: 10px 16px;
    border-radius: 8px;
+   transition: all 1s;
 }
 
 .button--full {
@@ -17,6 +18,7 @@
    align-items: center;
    width: 100%;
    padding: 4px;
+   transition: all 1s;
 
    span {
       margin-left: 4px;
@@ -50,5 +52,21 @@
       span {
          color: #FFFFFF;
       }
+   }
+}
+
+.button--primary {
+   background: hsl(221, 100%, 61%);
+
+   &:hover {
+      background: hsl(221, 100%, 56%);
+   }
+}
+
+.button--secondary {
+   background: #2B2F31;
+
+   &:hover {
+      background: hsl(221, 100%, 61%);
    }
 }

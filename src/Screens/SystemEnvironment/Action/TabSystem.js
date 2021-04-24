@@ -24,7 +24,7 @@ export default function TabSystem({ history }) {
             systemContext.setIsSuccessSystem(true)
             systemContext.fetchSystem()
          })
-         .catch((err) => console.log(err))
+         .catch((err) => console.error(err))
    }
 
    const submit = (event) => {
@@ -90,8 +90,8 @@ export default function TabSystem({ history }) {
                {systemContext.system.items.length === 0 ? (
                   <div className='action__upload-empty text__action'>
                      <span style={{ marginBottom: 27, display: 'block' }}>No Environment available</span>
-                     <Button type='submit' full label='Create Environment' onClick={() => createEnvironmentButton()} />
-                     <Button type='submit' full color='transparent' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
+                     <Button type='submit' size='full' label='Create Environment' onClick={() => createEnvironmentButton()} />
+                     <Button type='submit' size='full' variant='secondary' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
                   </div>
                ) : (
                   <AttachSystem history={history} />
@@ -99,7 +99,7 @@ export default function TabSystem({ history }) {
             </div>
          ) : (
             <div className='action__tab-btn'>
-               <Button type='submit' full label={systemContext.create.isSubmit ? 'Please wait...' : 'Create System'} onClick={(event) => submit(event)} />
+               <Button type='submit' size='full' label={systemContext.create.isSubmit ? 'Please wait...' : 'Create System'} onClick={(event) => submit(event)} />
             </div>
          )}
       </Fragment>

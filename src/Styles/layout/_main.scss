@@ -19,7 +19,8 @@
 .main__window {
    position: absolute;
    top: 39px;
-   right: 41px
+   right: 41px;
+   cursor: pointer;
 }
 
 .main__navigation {
@@ -31,6 +32,11 @@
    padding: 8px 12px;
    cursor: pointer;
    margin-top: 7px;
+   transition: all 1s;
+
+   &:hover {
+      background: hsl(0, 0%, 8%);
+   }
 
    svg {
       margin-right: 9px;
@@ -78,6 +84,7 @@
 
 .main__icon-add {
    margin: 0 13px;
+   cursor: pointer;
 }
 
 .main__icon-arrow {

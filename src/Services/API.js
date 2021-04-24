@@ -60,7 +60,7 @@ export default class API {
             return res.json()
          })
          .catch((err) => {
-            console.log('error', err)
+            console.error('error', err)
          })
    }
 

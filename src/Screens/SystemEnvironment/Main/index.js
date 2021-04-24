@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 
 import { SystemContext } from '@Context/SystemContext'
 import { EnvironmentContext } from '@Context/EnvironmentContext'
+
 import ListEnvironment from './ListEnvironment'
 import DetailSystem from './DetailSystem'
 import EmptyEnvironment from './EmptyEnvironment'
@@ -29,7 +30,7 @@ export default function Main() {
             <div className='main__sub-title text__sub-title'>Environment</div>
             {environmentContext.environment.items.length === 0 ? <EmptyEnvironment history={history} /> : <ListEnvironment history={history} />}
          </div>
-         <Properties />
+         {!systemContext.selectedSystem || !params.id ? null : <Properties />}
       </section>
    )
 }

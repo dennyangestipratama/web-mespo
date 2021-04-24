@@ -54,7 +54,7 @@ export default function EditSystem({ history }) {
                systemContext.fetchSystem()
             })
          })
-         .catch((err) => console.log(err))
+         .catch((err) => console.error(err))
    }
 
    const submit = (event) => {

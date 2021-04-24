@@ -45,7 +45,7 @@ export default function EditEnvironment({ history }) {
             environmentContext.setIsSuccessEnvironment(true)
             environmentContext.fetchEnvironment()
          })
-         .catch((err) => console.log(err))
+         .catch((err) => console.error(err))
    }
 
    const submit = (event) => {

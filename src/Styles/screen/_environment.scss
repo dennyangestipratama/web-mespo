@@ -8,6 +8,11 @@
    align-items: center;
    justify-content: space-between;
    position: relative;
+   transition: all 1s;
+
+   &:hover {
+      background: #3776FF;
+   }
 
    svg {
       width: 2rem;
