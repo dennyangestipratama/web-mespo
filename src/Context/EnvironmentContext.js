@@ -50,6 +50,7 @@ const EnvironmentContextProvider = ({ children }) => {
          description: '',
          environmentId: '',
          ownerPartyId: '',
+         url: '',
       },
    })
 
@@ -82,6 +83,7 @@ const EnvironmentContextProvider = ({ children }) => {
                version: response.version,
                environmentId: response.environmentId,
                ownerPartyId: response.ownerPartyId,
+               url: response.url,
             },
          }))
       })

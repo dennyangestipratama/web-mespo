@@ -30,6 +30,7 @@ export default function EditEnvironment({ history }) {
          {
             name: environmentContext.update.parameters.name,
             description: environmentContext.update.parameters.description,
+            url: environmentContext.update.parameters.url,
             environmentId: environmentContext.update.parameters.environmentId,
             ownerPartyId: environmentContext.update.parameters.ownerPartyId,
          },
@@ -40,7 +41,6 @@ export default function EditEnvironment({ history }) {
                ...prevState,
                isSubmit: false,
                data: response,
-               parameters: { ...environmentContext.update.parameters, name: '', description: '' },
             }))
             environmentContext.setIsSuccessEnvironment(true)
             environmentContext.fetchEnvironment()
@@ -52,6 +52,17 @@ export default function EditEnvironment({ history }) {
       event.preventDefault()
       environmentContext.setUpdate((prevState) => ({ ...prevState, isSubmit: true }))
       updateEnvironment()
+   }
+
+   const createSystemButton = () => {
+      systemContext.setIsSuccessSystem(false)
+      history.push('/system-environment/create')
+      systemContext.fetchSystem()
+   }
+
+   const back = () => {
+      systemContext.setIsSuccessSystem(false)
+      history.push('/system-environment')
    }
 
    return (
@@ -69,8 +80,8 @@ export default function EditEnvironment({ history }) {
             <form onSubmit={submit}>
                <div className='action__tab-form'>
                   <Input
-                     label='System Name'
-                     placeholder='System Name'
+                     label='Environment Name'
+                     placeholder='Environment Name'
                      value={environmentContext.update.parameters.name}
                      onChange={({ target: { value } }) =>
                         environmentContext.setUpdate((prevState) => ({ ...prevState, parameters: { ...environmentContext.update.parameters, name: value } }))
@@ -82,36 +93,44 @@ export default function EditEnvironment({ history }) {
                      onChange={({ target: { value } }) =>
                         environmentContext.setUpdate((prevState) => ({ ...prevState, parameters: { ...environmentContext.update.parameters, description: value } }))
                      }
-                     label='System Description'
+                     label='Environment Description'
                      placeholder='Optional'
                   />
-                  {/* <Input
+                  <Input
                      label='URL'
                      placeholder='https://'
-                  /> */}
-                  <Input
-                     label='Environment ID'
-                     placeholder='System ID'
-                     value={systemContext.selectedSystem?.systemId ?? ''}
+                     value={environmentContext.update.parameters.url}
                      onChange={({ target: { value } }) =>
-                        environmentContext.setUpdate((prevState) => ({ ...prevState, parameters: { ...environmentContext.update.parameters, environmentId: value } }))
+                        environmentContext.setUpdate((prevState) => ({ ...prevState, parameters: { ...environmentContext.update.parameters, url: value } }))
                      }
                   />
                </div>
             </form>
          </div>
-         <div className='action__tab-upload'>
-            <div className='action__attach-icon'>
-               <Attachment />
+         {environmentContext.isSuccessEnvironment ? (
+            <div className='action__tab-upload'>
+               <div className='action__attach-icon'>
+                  <Attachment />
+               </div>
+               <div className='action__upload'>
+                  <div className='action__upload-title text__sub-title'>Environment Updated!</div>
+                  <div className='action__upload-info text__sub-info'>Do you want to add it into a system?</div>
+               </div>
+               {environmentContext.environment.items.length === 0 ? (
+                  <div className='action__upload-empty text__action'>
+                     <span style={{ marginBottom: 27, display: 'block' }}>No System available</span>
+                     <Button type='submit' size='full' label='Create System' onClick={() => createSystemButton()} />
+                     <Button type='submit' size='full' variant='secondary' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
+                  </div>
+               ) : (
+                  <AttachEnvironment history={history} />
+               )}
             </div>
-            <div className='action__upload'>
-               <div className='action__upload-title text__sub-title'>Attach to Environment</div>
-               {systemContext.system.items.length === 0 ? <div className='action__upload-empty text__action'>No System available</div> : <AttachEnvironment />}
+         ) : (
+            <div className='action__tab-btn'>
+               <Button type='submit' size='full' label={environmentContext.update.isSubmit ? 'Please wait...' : 'Update Environment'} onClick={(event) => submit(event)} />
             </div>
-         </div>
-         <div className='action__tab-btn'>
-            <Button type='submit' label={environmentContext.update.isSubmit ? 'Please wait...' : 'Update'} onClick={(event) => submit(event)} />
-         </div>
+         )}
       </div>
    )
 }

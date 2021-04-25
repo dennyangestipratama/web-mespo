@@ -116,6 +116,7 @@ export default class SystemController {
          name: params.name,
          description: params.description,
          systemId: params.systemId,
+         url: params.url,
          ownerPartyId: params.ownerPartyId,
       }
 

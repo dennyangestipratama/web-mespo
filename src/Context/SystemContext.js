@@ -33,6 +33,7 @@ const SystemContextProvider = ({ children }) => {
          name: '',
          description: '',
          systemId: '',
+         url: '',
          ownerPartyId: '',
       },
    })
@@ -81,6 +82,7 @@ const SystemContextProvider = ({ children }) => {
                description: response.description,
                version: response.version,
                systemId: response.systemId,
+               url: response.url,
                ownerPartyId: response.ownerPartyId,
             },
          }))

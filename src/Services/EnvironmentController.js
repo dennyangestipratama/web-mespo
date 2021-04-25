@@ -116,6 +116,7 @@ export default class EnvironmentController {
          name: params.name,
          description: params.description,
          ownerPartyId: params.ownerPartyId,
+         url: params.url,
          environmentId: params.environmentId,
       }
 

@@ -31,28 +31,23 @@ export default function EditSystem({ history }) {
             name: systemContext.update.parameters.name,
             description: systemContext.update.parameters.description,
             systemId: systemContext.update.parameters.systemId,
+            url: systemContext.update.parameters.url,
             ownerPartyId: systemContext.update.parameters.ownerPartyId,
          },
          { version: systemContext.update.parameters.version }
       )
          .then((response) => {
-            systemContext.setUpdate((prevState) => ({
-               ...prevState,
-               isSubmit: false,
-               data: response,
-               parameters: { ...systemContext.update.parameters, name: '', description: '' },
-            }))
-            SystemController.updateAttachSystemEnvironment({
-               system: {
-                  name: systemContext.update.parameters.name,
-                  description: systemContext.update.parameters.description,
-               },
-               attachments: environmentContext.selectingEnvironment,
-            }).then(() => {
-               environmentContext.setSelectingEnvironment([])
-               systemContext.setIsSuccessSystem(true)
-               systemContext.fetchSystem()
-            })
+            systemContext
+               .setUpdate((prevState) => ({
+                  ...prevState,
+                  isSubmit: false,
+                  data: response,
+               }))
+               .then(() => {
+                  environmentContext.setSelectingEnvironment([])
+                  systemContext.setIsSuccessSystem(true)
+                  systemContext.fetchSystem()
+               })
          })
          .catch((err) => console.error(err))
    }
@@ -61,6 +56,17 @@ export default function EditSystem({ history }) {
       event.preventDefault()
       systemContext.setUpdate((prevState) => ({ ...prevState, isSubmit: true }))
       updateSystem()
+   }
+
+   const createEnvironmentButton = () => {
+      systemContext.setIsSuccessSystem(false)
+      history.push('/system-environment/create/environment')
+      systemContext.fetchSystem()
+   }
+
+   const back = () => {
+      systemContext.setIsSuccessSystem(false)
+      history.push('/system-environment')
    }
 
    return (
@@ -94,26 +100,41 @@ export default function EditSystem({ history }) {
                      label='System Description'
                      placeholder='Optional'
                   />
-                  {/* <Input
+                  <Input
                      label='URL'
                      placeholder='https://'
-                  /> */}
-                  <Input label='System ID' placeholder='Environment ID' value={environmentContext.selectedEnvironment?.environmentId ?? ''} />
+                     value={systemContext.update.parameters.url}
+                     onChange={({ target: { value } }) =>
+                        systemContext.setUpdate((prevState) => ({ ...prevState, parameters: { ...systemContext.update.parameters, url: value } }))
+                     }
+                  />
                </div>
             </form>
          </div>
-         <div className='action__tab-upload'>
-            <div className='action__attach-icon'>
-               <Attachment />
+         {systemContext.isSuccessSystem ? (
+            <div className='action__tab-upload'>
+               <div className='action__attach-icon'>
+                  <Attachment />
+               </div>
+               <div className='action__upload'>
+                  <div className='action__upload-title text__sub-title'>System Updated!</div>
+                  <div className='action__upload-info text__sub-info'>Do you want to add it into an environment?</div>
+               </div>
+               {systemContext.system.items.length === 0 ? (
+                  <div className='action__upload-empty text__action'>
+                     <span style={{ marginBottom: 27, display: 'block' }}>No Environment available</span>
+                     <Button type='submit' size='full' label='Create Environment' onClick={() => createEnvironmentButton()} />
+                     <Button type='submit' size='full' variant='secondary' border='1px solid #3776FF' label='Not now' onClick={() => back()} />
+                  </div>
+               ) : (
+                  <AttachSystem history={history} />
+               )}
             </div>
-            <div className='action__upload'>
-               <div className='action__upload-title text__sub-title'>Attach to Environment</div>
-               {systemContext.system.items.length === 0 ? <div className='action__upload-empty text__action'>No Environment available</div> : <AttachSystem />}
+         ) : (
+            <div className='action__tab-btn'>
+               <Button type='submit' size='full' label={systemContext.update.isSubmit ? 'Please wait...' : 'Update System'} onClick={(event) => submit(event)} />
             </div>
-         </div>
-         <div className='action__tab-btn'>
-            <Button type='submit' label={systemContext.update.isSubmit ? 'Please wait...' : 'Update'} onClick={(event) => submit(event)} />
-         </div>
+         )}
       </div>
    )
 }
