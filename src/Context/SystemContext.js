@@ -42,8 +42,6 @@ const SystemContextProvider = ({ children }) => {
       isSubmit: false,
       parameters: {
          q: '',
-         pageNumber: 1,
-         pageSize: 10,
       },
    })
 

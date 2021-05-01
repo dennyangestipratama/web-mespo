@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 
-import Search from '@Components/Search'
 import Table from '@Components/Table'
 import TableForm from '@Components/TableForm'
 import EmptyProperties from './EmptyProperties'
@@ -19,13 +18,12 @@ import { ReactComponent as IconMore } from '@Icon/more.svg'
 import { ReactComponent as IconArrowUp } from '@Icon/arrow-up.svg'
 import { ReactComponent as IconArrowDown } from '@Icon/arrow-down.svg'
 import { ReactComponent as IconAdd } from '@Icon/add-white.svg'
-import { ReactComponent as IconUpload } from '@Icon/upload.svg'
 import { ReactComponent as IconClose } from '@Icon/close-red.svg'
 import { ReactComponent as EditSVG } from '@Icon/edit.svg'
 import { ReactComponent as DeleteSVG } from '@Icon/delete.svg'
-import EnvironmentProperties from './EnvironmentProperties'
+import { ReactComponent as OverridesSVG } from '@Icon/overrides.svg'
 
-export default function Properties() {
+export default function EnvironmentProperties() {
    const params = useParams()
    const environmentContext = useContext(EnvironmentContext)
    const systemContext = useContext(SystemContext)
@@ -122,12 +120,11 @@ export default function Properties() {
 
    return (
       <section className='properties'>
-         <div className='properties__search'>
-            <Search placeholder={'Search Properties'} />
-         </div>
          <div className='properties__header'>
             <div className='properties__header__title'>
-               <h2 className='text__properties-title'>{`${system?.name ?? ''} Properties`}</h2>
+               <h2 className='text__properties-title' style={{ color: '#4E85FF' }}>{`${
+                  environmentContext.selectedEnvironment?.aggregate.environment?.name ?? ''
+               } Environment Properties`}</h2>
                <IconInfo />
             </div>
             <div className='properties__header__menu'>
@@ -137,7 +134,9 @@ export default function Properties() {
                </button>
             </div>
             <div className='properties__header__info'>
-               <span className='text__properties-number'>{properties.items.length ?? 0}</span>
+               <span className='text__properties-number' style={{ color: '#4E85FF' }}>
+                  {properties.items.length ?? 0}
+               </span>
                <span className='text__properties-info'>Properties</span>
                {showProperties ? (
                   <IconArrowUp style={{ cursor: 'pointer' }} onClick={() => setShowProperties(!showProperties)} />
@@ -284,7 +283,6 @@ export default function Properties() {
                ) : (
                   <ListProperties updatePropertiesValue={updatePropertiesValue} deleteProperties={deleteProperties} />
                )}
-               {!environmentContext.selectedEnvironment ? null : <EnvironmentProperties />}
             </Fragment>
          )}
       </section>
@@ -300,6 +298,8 @@ function ListProperties({ updatePropertiesValue, deleteProperties }) {
          items={properties.items.map((property) => {
             return (
                <Fragment key={property.propertyId}>
+                  <div className='override'></div>
+                  <OverridesSVG className='override-icon' />
                   <div className='table__body --menu'>
                      <IconMenu />
                   </div>

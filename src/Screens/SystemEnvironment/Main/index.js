@@ -27,7 +27,9 @@ export default function Main() {
       <section className='main'>
          {!system ? <EmptySystem /> : <DetailSystem />}
          <div className='main__sub'>
-            <div className='main__sub-title text__sub-title'>Environment</div>
+            <div className='main__sub-title text__sub-title' style={{ marginLeft: 16, paddingRight: 13 }}>
+               Environment
+            </div>
             {environmentContext.environment.items.length === 0 ? <EmptyEnvironment history={history} /> : <ListEnvironment history={history} />}
          </div>
          {!systemContext.selectedSystem || !params.id ? null : <Properties />}

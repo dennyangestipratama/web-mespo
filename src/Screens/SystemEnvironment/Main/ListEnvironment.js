@@ -27,16 +27,7 @@ export default function ListEnvironment({ history }) {
    return systemContext.attachedEnvironment.isLoading ? null : systemContext.attachedEnvironment.items.attachments?.length <= 3 ? (
       <EmptyEnvironment history={history} />
    ) : (
-      <Fragment>
-         <NavLink
-            exact
-            to={`/system-environment/system/${systemContext.selectedSystem}`}
-            className='main__environment-capsules text__capsules'
-            activeClassName='main__environment-capsules--active'
-            onClick={() => environmentContext.setSelectedEnvironment(null)}
-            style={{ marginLeft: 16, paddingRight: 13 }}>
-            All
-         </NavLink>
+      <Fragment style={{ marginLeft: 16, paddingRight: 13 }}>
          {systemContext.attachedEnvironment.items.attachments
             ?.filter((filter) => filter.status === 'ATTACHED')
             .map((item) => {
@@ -44,7 +35,7 @@ export default function ListEnvironment({ history }) {
                   <NavLink
                      to={`/system-environment/system/${systemContext.selectedSystem}/env/${item.aggregate.environment.environmentId}`}
                      key={item.aggregate.environment.environmentId}
-                     onClick={() => environmentContext.setSelectedEnvironment(item.aggregate.environment.environmentId)}
+                     onClick={() => environmentContext.setSelectedEnvironment(item)}
                      className='main__environment-capsules text__capsules'
                      activeClassName='main__environment-capsules--active'>
                      {item.aggregate.environment.name}

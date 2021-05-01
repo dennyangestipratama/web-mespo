@@ -1,11 +1,10 @@
-.properties {}
-
 .properties__header {
    background: #151719;
    display: flex;
    align-items: center;
    justify-content: space-between;
    padding: 5px 15px 5px 30px;
+   position: relative;
 }
 
 .properties__search {
@@ -27,6 +26,9 @@
 .properties__header__menu {
    background: #000000;
    border-radius: 31px;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
 
    button {
       display: flex;
@@ -58,7 +60,7 @@
 .properties__menu__action {
    display: flex;
    align-items: center;
-   justify-content: space-between;
+   justify-content: center;
    background: rgba($color: #000000, $alpha: 0.4);
    padding: 7px 22px 7px 32px;
 }
@@ -69,7 +71,7 @@
    justify-content: center;
 
    button:not(:last-of-type) {
-      margin-right: 20px;
+      margin-right: 10px;
    }
 }
 

@@ -9,8 +9,8 @@ export default function Table({ items }) {
             <div className='table__header'>Value Type</div>
             <div className='table__header'>Value</div>
             <div className='table__header'></div>
-            {items}
          </div>
+         <div className='table-body'>{items}</div>
       </div>
    )
 }

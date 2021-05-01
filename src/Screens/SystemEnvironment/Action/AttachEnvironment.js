@@ -42,10 +42,22 @@ export default function AttachEnvironment({ history }) {
       })
    }
 
+   const search = (event) => {
+      event.preventDefault()
+      SystemController.searchSystem(systemContext.search.parameters).then((response) => {
+         systemContext.setSystem((prevState) => ({ ...prevState, items: response }))
+      })
+   }
+
    return (
       <React.Fragment>
          <div className='attach'>
-            <Search placeholder={'Search System'} />
+            <Search
+               placeholder={'Search System'}
+               value={systemContext.search.parameters.q}
+               onChange={({ target: { value } }) => systemContext.setSearch((prevState) => ({ ...prevState, parameters: { ...systemContext.search.parameters, q: value } }))}
+               onSubmit={search}
+            />
             {systemContext.system.items.map((item) => {
                const isActive = systemContext.selectingSystem.some((has) => has === item.systemId)
                const toggle = (isActive) => {

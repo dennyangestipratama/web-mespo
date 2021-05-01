@@ -54,6 +54,13 @@ const EnvironmentContextProvider = ({ children }) => {
       },
    })
 
+   const [search, setSearch] = useState({
+      isSubmit: false,
+      parameters: {
+         q: '',
+      },
+   })
+
    const deletingEnvironment = (id, params) => {
       EnvironmentController.deleteEnvironment(id, params).then((response) => {
          setShowDelete(null)
@@ -114,6 +121,8 @@ const EnvironmentContextProvider = ({ children }) => {
             deleteEnvironment,
             update,
             selectingEnvironment,
+            search,
+            setSearch,
             setSelectingEnvironment,
             setUpdate,
             setDeleteEnvironment,

@@ -1,4 +1,5 @@
-.table {
+.table,
+.table-body {
    display: grid;
    grid-template-columns: 0.5fr 5fr 2fr 5fr 0.5fr;
    column-gap: 10px;
@@ -6,7 +7,7 @@
    padding-top: 19px;
    padding-left: 36px;
    padding-right: 46px;
-   padding-bottom: 34px;
+   padding-bottom: 15px;
    background: rgba($color: #000000, $alpha: 0.1);
 
    .flexCenter {
@@ -72,5 +73,31 @@
          margin: auto;
          cursor: pointer;
       }
+   }
+}
+
+.table-body {
+   padding: 0;
+   padding-left: 36px;
+   padding-right: 46px;
+   padding-bottom: 34px;
+   position: relative;
+
+   .override {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 38px;
+      transform: translateY(-4px);
+      background-color: rgba($color: #FF3737, $alpha: 0.2);
+      z-index: -1;
+   }
+
+   .override-icon {
+      position: absolute;
+      right: 1rem;
+      top: 0.5rem;
+      cursor: pointer;
    }
 }

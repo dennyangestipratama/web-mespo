@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { EnvironmentContext } from '@Context/EnvironmentContext'
 import { SystemContext } from '@Context/SystemContext'
 import SystemController from '@Services/SystemController'
+import EnvironmentController from '@Services/EnvironmentController'
 import Search from '@Components/Search'
 import Button from '@Components/Button'
 
@@ -42,10 +43,25 @@ export default function AttachSystem({ history }) {
       })
    }
 
+   const search = (event) => {
+      event.preventDefault()
+      EnvironmentController.searchEnvironment(environmentContext.search.parameters).then((response) => {
+         environmentContext.setEnvironment((prevState) => ({ ...prevState, items: response }))
+      })
+   }
+
    return (
       <React.Fragment>
          <div className='attach'>
-            <Search placeholder='Search Environment' />
+            <Search
+               placeholder='Search Environment'
+               value={environmentContext.search.parameters.q}
+               onChange={({ target: { value } }) =>
+                  environmentContext.setSearch((prevState) => ({ ...prevState, parameters: { ...environmentContext.search.parameters, q: value } }))
+               }
+               onSubmit={search}
+            />
+
             {environmentContext.environment.items.map((item) => {
                const isActive = environmentContext.selectingEnvironment.some((has) => has === item.environmentId)
                const toggle = (isActive) => {

@@ -46,8 +46,6 @@ export default class SystemController {
    static searchSystem(params) {
       const query = {
          q: params.q,
-         pageNumber: params.pageNumber,
-         pageSize: params.pageSize,
       }
 
       return fetch(`${BASE_URL}/systems/search?${queryString.stringify(query)}`, {

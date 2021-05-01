@@ -52,6 +52,19 @@ export default class EnvironmentController {
       }).then((res) => res.json())
    }
 
+   static searchEnvironment(params) {
+      const query = {
+         q: params.q,
+      }
+
+      return fetch(`${BASE_URL}/environments/search?${queryString.stringify(query)}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            'Correlation-ID': UUID(),
+         },
+      }).then((res) => res.json())
+   }
+
    /**
     * POST controller
     * for Environments

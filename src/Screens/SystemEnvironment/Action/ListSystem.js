@@ -8,6 +8,7 @@ import ButtonAction from '@Components/ButtonAction'
 import SystemController from '@Services/SystemController'
 import { UtilsContext } from '@Context/UtilsContext'
 import { SystemContext } from '@Context/SystemContext'
+import { EnvironmentContext } from '@Context/EnvironmentContext'
 
 import { ReactComponent as Close } from '@Icon/close.svg'
 import { ReactComponent as Add } from '@Icon/add.svg'
@@ -19,12 +20,13 @@ import { ReactComponent as DeleteSVG } from '@Icon/delete.svg'
 export default function ListSystem({ history }) {
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
+   const environmentContext = useContext(EnvironmentContext)
    const params = useParams()
 
    const search = (event) => {
       event.preventDefault()
       SystemController.searchSystem(systemContext.search.parameters).then((response) => {
-         // systemContext.setSystem()
+         systemContext.setSystem((prevState) => ({ ...prevState, items: response }))
       })
    }
 
@@ -48,7 +50,10 @@ export default function ListSystem({ history }) {
                <NavLink
                   key={item.systemId}
                   to={`/system-environment/system/${item.systemId}`}
-                  onClick={() => systemContext.setSelectedSystem(item.systemId)}
+                  onClick={() => {
+                     systemContext.setSelectedSystem(item.systemId)
+                     environmentContext.setSelectedEnvironment(null)
+                  }}
                   activeClassName='system-list__capsules--active'
                   className='system-list__capsules text__capsules'>
                   <span>{item.name}</span>
