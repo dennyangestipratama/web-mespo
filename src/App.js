@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import Login from '@Screens/Login'
+import Login from '@Screens/Authentication/Login'
+import SignUp from '@Screens/Authentication/SignUp'
 import Navigation from '@Layouts/Navigation'
 import { UtilsContext } from '@Context/UtilsContext'
 
@@ -13,6 +14,7 @@ export default function App() {
       <Router>
          <Switch>
             <Route exact path='/' component={Login} />
+            <Route exact path='/signup' component={SignUp} />
             <section
                className={`home ${!utilsContext.showAction && utilsContext.isMini ? 'home--fullsize' : ''} ${utilsContext.showAction ? '' : 'home--full'} ${
                   !utilsContext.isMini ? '' : 'home--mini'

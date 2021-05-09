@@ -1,4 +1,4 @@
-.login {
+.auth {
    width: 100vw;
    height: 100vh;
    display: flex;
@@ -10,7 +10,7 @@
    }
 }
 
-.login__card {
+.auth__card {
    margin: auto;
    width: 425px;
    height: 397px;
@@ -25,15 +25,27 @@
    }
 }
 
-.login__logo {
+.auth__card--register {
+   height: auto;
+   padding: 72px 60px 0;
+}
+
+.auth__logo {
    margin: 0 auto 43px;
 }
 
-.login__forget {
+.auth__forget {
    display: block;
    margin-bottom: 12px;
 }
 
-.login__button-icon {
+.auth__button-icon {
    margin-right: 18px;
+}
+
+.auth__footer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 30px 0;
 }

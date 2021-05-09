@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import InputLogin from '@Components/InputLogin'
 import Button from '@Components/Button'
+import AuthFooter from '@Components/AuthFooter'
 
 import Mespo from '@Image/logo.png'
 import { ReactComponent as EyeOpen } from '@Icon/eye-open.svg'
@@ -23,21 +24,22 @@ export default function Login() {
 
    const submit = (event) => {
       event.preventDefault()
-      if (username.value === '' && password.value === '') {
-         alert('cannot be blank')
-      } else {
-         alert(`
-         Welcome ${username.value},
-         your password is ${password.value}
-         `)
-         history.push('/system-environment')
-      }
+      if (username.value === '') return alert('username cannot be blank')
+      if (password.value === '') return alert('password cannot be blank')
+      if (username.value !== localStorage.getItem('username')) return alert('cannot find any username/password')
+      if (password.value !== localStorage.getItem('password')) return alert('cannot find any username/password')
+
+      alert(`
+      Welcome ${username.value},
+      your password is ${password.value}
+      `)
+      history.push('/system-environment')
    }
 
    return (
-      <section className='login'>
-         <form onSubmit={submit} className='login__card'>
-            <img src={Mespo} alt='mespo' className='login__logo' />
+      <section className='auth'>
+         <form onSubmit={submit} className='auth__card'>
+            <img src={Mespo} alt='mespo' className='auth__logo' />
             <InputLogin
                label='Username'
                placeholder='Type your username'
@@ -68,10 +70,11 @@ export default function Login() {
                   setPassword((prevState) => ({ ...prevState, value: event.target.value }))
                }}
             />
-            <a href='/' className='login__forget text__link'>
+            <a href='/' className='auth__forget text__link'>
                Forgot Password
             </a>
-            <Button type='submit' label='Login' showImage={true} icon={<IconLogin className='login__button-icon' />} />
+            <Button type='submit' label='Login' showImage={true} icon={<IconLogin className='auth__button-icon' />} />
+            <AuthFooter text='Dont have an account?' link='Sign up' href='/signup' />
          </form>
       </section>
    )
