@@ -1,5 +1,6 @@
 import SystemEnvironment from '@Screens/SystemEnvironment'
 import Features from '@Screens/Features'
+import Users from '@Screens/Users'
 
 const Routes = [
    {
@@ -42,6 +43,12 @@ const Routes = [
       component: Features,
       route: '/features',
       name: 'Features',
+      exact: true,
+   },
+   {
+      component: Users,
+      route: '/users',
+      name: 'Users',
       exact: true,
    },
 ]

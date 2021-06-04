@@ -18,46 +18,46 @@ export const NAVIGATION_TAB = [
          },
       ],
    },
-   {
-      ID: 2,
-      title: 'Features & Toggles',
-      tab: [
-         {
-            ID: 1,
-            title: 'Features',
-            icon: <Features />,
-            href: '/features',
-         },
-         {
-            ID: 2,
-            title: 'Toggles',
-            icon: <Toggles />,
-            href: '/toggles',
-         },
-      ],
-   },
+   // {
+   //    ID: 2,
+   //    title: 'Features & Toggles',
+   //    tab: [
+   //       {
+   //          ID: 1,
+   //          title: 'Features',
+   //          icon: <Features />,
+   //          href: '/features',
+   //       },
+   //       {
+   //          ID: 2,
+   //          title: 'Toggles',
+   //          icon: <Toggles />,
+   //          href: '/toggles',
+   //       },
+   //    ],
+   // },
    {
       ID: 3,
       title: 'Accounts',
       tab: [
-         {
-            ID: 1,
-            title: 'Me',
-            icon: <Account />,
-            href: '/account',
-         },
+         // {
+         //    ID: 1,
+         //    title: 'Me',
+         //    icon: <Account />,
+         //    href: '/account',
+         // },
          {
             ID: 2,
-            title: 'People',
+            title: 'Users',
             icon: <People />,
-            href: '/people',
+            href: '/users',
          },
-         {
-            ID: 3,
-            title: 'Roles',
-            icon: <Roles />,
-            href: '/roles',
-         },
+         // {
+         //    ID: 3,
+         //    title: 'Roles',
+         //    icon: <Roles />,
+         //    href: '/roles',
+         // },
       ],
    },
 ]

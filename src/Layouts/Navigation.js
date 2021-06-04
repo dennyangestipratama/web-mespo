@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { UtilsContext } from '@Context/UtilsContext'
 import { NAVIGATION_TAB } from '@Utilities/Navigation'
@@ -12,19 +12,12 @@ import { ReactComponent as ArrowUp } from '@Icon/arrow-up.svg'
 import { ReactComponent as Logout } from '@Icon/logout.svg'
 
 export default function Navigation() {
-   const history = useHistory()
    const utilsContext = useContext(UtilsContext)
    const [minimize, setMinimize] = useState({
       tabProperties: false,
       tabFeatures: false,
       tabAccounts: true,
    })
-
-   const handleLogout = () => {
-      // localStorage.removeItem('username')
-      // localStorage.removeItem('password')
-      history.push('/')
-   }
 
    const whichNav = (ID) => {
       switch (ID) {
@@ -51,6 +44,8 @@ export default function Navigation() {
             break
       }
    }
+
+   console.log(utilsContext.showLogout)
 
    return (
       <section className='navigation'>
@@ -81,11 +76,13 @@ export default function Navigation() {
             })}
          </div>
          <div
-            style={{ marginTop: 'auto', alignItems: 'center', cursor: 'pointer', marginBottom: '1rem' }}
-            onClick={handleLogout}
-            className='navigation__link-title text__nav-title'>
+            style={{ marginTop: 'auto', alignItems: 'center', cursor: 'pointer' }}
+            onClick={() => {
+               utilsContext.setShowLogout(true)
+            }}
+            className='logout text__nav-title'>
+            <Logout />
             <span>Logout</span>
-            <Logout className='navigation__icon' />
          </div>
       </section>
    )

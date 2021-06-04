@@ -1,0 +1,23 @@
+.main-user {
+   h3 {
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 33px;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+      background: #2F2F30;
+      border-bottom: 1px solid #464343;
+      padding: 59px 28px 21px;
+   }
+}
+
+.empty-users {
+   display: grid;
+   place-items: center;
+   margin-top: 10rem;
+}
+
+.empty-users__text {
+   width: 8rem;
+   margin-bottom: 26px;
+}

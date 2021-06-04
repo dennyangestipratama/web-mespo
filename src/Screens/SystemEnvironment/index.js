@@ -1,10 +1,11 @@
-import { Fragment, useContext } from 'react'
+import { Fragment, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { UtilsContext } from '@Context/UtilsContext'
 import { SystemContext } from '@Context/SystemContext'
 import { EnvironmentContext } from '@Context/EnvironmentContext'
 import ModalDelete from '@Components/ModalDelete'
+import ModalLogout from '@Components/ModalLogout'
 
 import Action from './Action'
 import Main from './Main'
@@ -14,6 +15,11 @@ export default function SystemEnvironment() {
    const utilsContext = useContext(UtilsContext)
    const systemContext = useContext(SystemContext)
    const environmentContext = useContext(EnvironmentContext)
+
+   useEffect(() => {
+      utilsContext.setShowAction(true)
+   }, [])
+
    return (
       <Fragment>
          {/* FOR PAGE */}
@@ -56,6 +62,18 @@ export default function SystemEnvironment() {
                      environmentContext.deletingEnvironment(environmentContext.showDelete?.environmentId, { version: environmentContext.showDelete?.version })
                      history.push('/system-environment')
                   }, 500)
+               }}
+            />
+         )}
+
+         {!utilsContext.showLogout ? null : (
+            <ModalLogout
+               onClickYes={() => {
+                  utilsContext.setShowLogout(false)
+                  history.push('/')
+               }}
+               onClickNo={() => {
+                  utilsContext.setShowLogout(false)
                }}
             />
          )}
