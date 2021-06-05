@@ -15,10 +15,17 @@
    padding: 17px 40px 45px;
    z-index: 5;
 
-   >svg {
+   .modal-delete__icon {
       width: 100px;
       height: 100px;
       margin-bottom: 3px;
+   }
+
+   .modal-delete__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
    }
 
    input {

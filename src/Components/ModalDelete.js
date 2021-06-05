@@ -1,9 +1,11 @@
 import { ReactComponent as DeleteSVG } from '@Icon/delete.svg'
+import { ReactComponent as CloseSVG } from '@Icon/close.svg'
 
-export default function ModalDelete({ desc, title, text, value, onChange, onClick, placeholder, label, disabled }) {
+export default function ModalDelete({ desc, title, text, value, onChange, onClick, placeholder, label, disabled, onClose }) {
    return (
       <div className='modal-delete'>
-         <DeleteSVG />
+         <DeleteSVG className='modal-delete__icon' />
+         <CloseSVG className='modal-delete__close' onClick={onClose} />
          <div className='modal-delete__title text__delete-title'>
             <span>{text}</span>
             <br />

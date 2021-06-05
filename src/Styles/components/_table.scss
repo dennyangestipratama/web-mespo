@@ -2,6 +2,7 @@
 .table-body {
    display: grid;
    grid-template-columns: 0.5fr 5fr 2fr 5fr 0.5fr;
+   align-items: center;
    column-gap: 10px;
    row-gap: 6px;
    padding-top: 19px;
@@ -100,4 +101,35 @@
       top: 0.5rem;
       cursor: pointer;
    }
+}
+
+.table-users {
+   display: grid;
+   grid-template-columns: 0.5fr 3fr 3fr 3fr 3fr 5fr 0.5fr;
+   align-items: center;
+   column-gap: 10px;
+   row-gap: 6px;
+   padding: 22px 30px 12px;
+   background: #151719;
+}
+
+.table-users__body {
+   >div {
+      display: grid;
+      grid-template-columns: 0.5fr 3fr 3fr 3fr 3fr 4.5fr 0.5fr;
+      align-items: center;
+      column-gap: 10px;
+      row-gap: 6px;
+      padding: 5px 30px 12px;
+      background: rgba($color: #000000, $alpha: 0.1);
+
+      &:hover {
+         background: rgba($color: #3776FF, $alpha: 0.2);
+      }
+   }
+}
+
+.flex {
+   display: flex;
+   align-items: center;
 }

@@ -36,6 +36,7 @@ export default function SystemEnvironment() {
                onChange={({ target: { value } }) => systemContext.setDeleteSystem((prevState) => ({ ...prevState, name: value }))}
                label={systemContext.deleteSystem.isSubmit ? 'Please wait...' : 'Delete System'}
                disabled={systemContext.deleteSystem.name !== systemContext.showDelete?.name}
+               onClose={() => systemContext.setShowDelete(false)}
                onClick={() => {
                   systemContext.setDeleteSystem((prevState) => ({ ...prevState, isSubmit: true }))
                   setTimeout(() => {
@@ -56,6 +57,7 @@ export default function SystemEnvironment() {
                onChange={({ target: { value } }) => environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, name: value }))}
                label={environmentContext.deleteEnvironment.isSubmit ? 'Please wait...' : 'Delete Environment'}
                disabled={environmentContext.deleteEnvironment.name !== environmentContext.showDelete?.name}
+               onClose={() => environmentContext.setShowDelete(false)}
                onClick={() => {
                   environmentContext.setDeleteEnvironment((prevState) => ({ ...prevState, isSubmit: true }))
                   setTimeout(() => {

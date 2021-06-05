@@ -4,7 +4,7 @@ import { UtilsContext } from '@Context/UtilsContext'
 import Action from './Action'
 import Main from './Main'
 
-export default function Users() {
+export default function People() {
    const utilsContext = useContext(UtilsContext)
 
    useEffect(() => {

@@ -21,3 +21,12 @@
    width: 8rem;
    margin-bottom: 26px;
 }
+
+.users__content {
+   padding: 25px 19px;
+
+   .table__body {
+      background-color: transparent;
+      padding-left: 0;
+   }
+}

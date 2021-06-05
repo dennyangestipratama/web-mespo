@@ -48,9 +48,9 @@ export const NAVIGATION_TAB = [
          // },
          {
             ID: 2,
-            title: 'Users',
+            title: 'People',
             icon: <People />,
-            href: '/users',
+            href: '/people',
          },
          // {
          //    ID: 3,
