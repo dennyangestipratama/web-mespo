@@ -48,3 +48,23 @@
    letter-spacing: 0.02em;
    color: #FFFFFF;
 }
+
+.modal-user__success {
+   position: fixed;
+   display: flex;
+   align-items: center;
+   top: 1rem;
+   left: 50%;
+   transform: translateX(-50%);
+   padding: 15px 22px;
+   background: rgba(80, 228, 167, 0.8);
+   border-radius: 10px;
+}
+
+.modal-user__success-text {
+   font-size: 15px;
+   line-height: 17px;
+   letter-spacing: 0.02em;
+   color: #FFFFFF;
+   margin-left: 17px;
+}

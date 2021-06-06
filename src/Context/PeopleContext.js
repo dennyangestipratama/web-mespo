@@ -33,7 +33,20 @@ const PeopleContextProvider = ({ children }) => {
       ],
    })
 
+   const [createUser, setCreateUser] = useState({
+      isSubmit: false,
+      data: null,
+      parameters: {
+         username: '',
+         first_name: '',
+         last_name: '',
+         email: '',
+         created: '6 June 2021',
+      },
+   })
+
    const [showDelete, setShowDelete] = useState(false)
+   const [showSuccess, setShowSuccess] = useState(false)
    const [showModalUser, setShowModalUser] = useState(false)
    const [selectedUser, setSelectedUser] = useState(null)
    const [deleteUser, setDeleteUser] = useState({
@@ -47,13 +60,17 @@ const PeopleContextProvider = ({ children }) => {
             people,
             showDelete,
             showModalUser,
+            showSuccess,
             selectedUser,
             deleteUser,
+            createUser,
             setShowDelete,
             setShowModalUser,
             setSelectedUser,
             setDeleteUser,
             setPeople,
+            setShowSuccess,
+            setCreateUser,
          }}>
          {children}
       </PeopleContext.Provider>

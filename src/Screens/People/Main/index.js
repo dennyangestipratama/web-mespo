@@ -1,21 +1,36 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { PeopleContext } from '@Context/PeopleContext'
 import TableUsers from '@Components/TableUsers'
 import ModalDelete from '@Components/ModalDelete'
+import ModalUser from '@Components/ModalUser'
 
 import EmptyPeopleTab from './EmptyPeopleTab'
 import EmptyPeople from './EmptyPeople'
 
 import { ReactComponent as EditSVG } from '@Icon/edit.svg'
 import { ReactComponent as DeleteSVG } from '@Icon/delete.svg'
-import ModalUser from '../../../Components/ModalUser'
+import { ReactComponent as SuccessSVG } from '@Icon/success.svg'
 
 export default function Main() {
    const history = useHistory()
    const peopleContext = useContext(PeopleContext)
    const people = peopleContext.people
+
+   const handleSubmit = (event) => {
+      event.preventDefault()
+      peopleContext.setPeople((prevState) => ({ ...prevState, items: [...prevState.items, peopleContext.createUser.parameters] }))
+      peopleContext.setShowSuccess(true)
+   }
+
+   useEffect(() => {
+      if (peopleContext.showSuccess) {
+         setTimeout(() => {
+            peopleContext.setShowSuccess(false)
+         }, 3000)
+      }
+   }, [peopleContext.showSuccess])
 
    return (
       <section className='main main-user'>
@@ -54,11 +69,25 @@ export default function Main() {
             </div>
          )}
 
+         {!peopleContext.showSuccess ? null : (
+            <div className='modal-user__success'>
+               <SuccessSVG />
+               <div className='modal-user__success-text'>
+                  <span style={{ fontWeight: 'bold' }}>{peopleContext.createUser.parameters.username} </span>
+                  <span>is successfully added to Users !</span>
+               </div>
+            </div>
+         )}
+
          {!peopleContext.showModalUser ? null : (
             <ModalUser
                onClose={() => peopleContext.setShowModalUser(false)}
                onClickNo={() => peopleContext.setShowModalUser(false)}
-               onClickYes={() => peopleContext.setShowModalUser(false)}
+               onClickYes={(event) => {
+                  peopleContext.setShowModalUser(false)
+                  handleSubmit(event)
+               }}
+               onSubmit={handleSubmit}
             />
          )}
 
@@ -71,7 +100,10 @@ export default function Main() {
                value={peopleContext.deleteUser.keyword}
                onChange={({ target: { value } }) => peopleContext.setDeleteUser((prevState) => ({ ...prevState, keyword: value }))}
                label={peopleContext.deleteUser.isSubmit ? 'Please wait...' : 'Delete User'}
-               onClose={() => peopleContext.setShowDelete(false)}
+               onClose={() => {
+                  peopleContext.setShowDelete(false)
+                  peopleContext.setDeleteUser((prevState) => ({ ...prevState, keyword: '' }))
+               }}
                disabled={peopleContext.selectedUser.username !== peopleContext.deleteUser.keyword}
                // onClick={() => {
                //    systemContext.setDeleteSystem((prevState) => ({ ...prevState, isSubmit: true }))
