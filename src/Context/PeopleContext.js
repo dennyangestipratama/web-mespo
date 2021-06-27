@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
+import moment from 'moment'
 
 export const PeopleContext = createContext()
 
@@ -45,9 +46,22 @@ const PeopleContextProvider = ({ children }) => {
       },
    })
 
+   const [updateUser, setUpdateUser] = useState({
+      isSubmit: false,
+      data: null,
+      parameters: {
+         username: '',
+         first_name: '',
+         last_name: '',
+         email: '',
+         created: moment().format('DD MMM YYYY'),
+      },
+   })
+
    const [showDelete, setShowDelete] = useState(false)
    const [showSuccess, setShowSuccess] = useState(false)
    const [showModalUser, setShowModalUser] = useState(false)
+   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false)
    const [selectedUser, setSelectedUser] = useState(null)
    const [deleteUser, setDeleteUser] = useState({
       isSubmit: false,
@@ -60,14 +74,18 @@ const PeopleContextProvider = ({ children }) => {
             people,
             showDelete,
             showModalUser,
+            showModalUpdateUser,
             showSuccess,
             selectedUser,
             deleteUser,
             createUser,
+            updateUser,
             setShowDelete,
             setShowModalUser,
+            setShowModalUpdateUser,
             setSelectedUser,
             setDeleteUser,
+            setUpdateUser,
             setPeople,
             setShowSuccess,
             setCreateUser,

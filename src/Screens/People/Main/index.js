@@ -5,6 +5,7 @@ import { PeopleContext } from '@Context/PeopleContext'
 import TableUsers from '@Components/TableUsers'
 import ModalDelete from '@Components/ModalDelete'
 import ModalUser from '@Components/ModalUser'
+import ModalUpdateUser from '@Components/ModalUpdateUser'
 
 import EmptyPeopleTab from './EmptyPeopleTab'
 import EmptyPeople from './EmptyPeople'
@@ -21,6 +22,19 @@ export default function Main() {
    const handleSubmit = (event) => {
       event.preventDefault()
       peopleContext.setPeople((prevState) => ({ ...prevState, items: [...prevState.items, peopleContext.createUser.parameters] }))
+      peopleContext.setShowSuccess(true)
+   }
+
+   const handleUpdate = (event, key, ID) => {
+      event.preventDefault()
+      let newArr = people.items.map((item) => {
+         if (ID == item.ID) {
+            return { ...item, [key]: event.target.value }
+         } else {
+            return item
+         }
+      })
+      peopleContext.setPeople(newArr)
       peopleContext.setShowSuccess(true)
    }
 
@@ -54,7 +68,21 @@ export default function Main() {
                            <div className='table__body --title'>{item.created}</div>
                            <div className='table__body --title'>{item.email}</div>
                            <div className='table__body --action flex' style={{ position: 'relative' }}>
-                              <EditSVG style={{ marginRight: 8 }} onClick={() => peopleContext.setSelectedUser(item)} />
+                              <EditSVG
+                                 style={{ marginRight: 8 }}
+                                 onClick={() => {
+                                    peopleContext.setUpdateUser((prev) => ({
+                                       ...prev,
+                                       parameters: {
+                                          username: item.username,
+                                          first_name: item.first_name,
+                                          last_name: item.last_name,
+                                          email: item.email,
+                                       },
+                                    }))
+                                    peopleContext.setShowModalUpdateUser(true)
+                                 }}
+                              />
                               <DeleteSVG
                                  onClick={() => {
                                     peopleContext.setSelectedUser(item)
@@ -88,6 +116,18 @@ export default function Main() {
                   handleSubmit(event)
                }}
                onSubmit={handleSubmit}
+            />
+         )}
+
+         {!peopleContext.showModalUpdateUser ? null : (
+            <ModalUpdateUser
+               onClose={() => peopleContext.setShowModalUpdateUser(false)}
+               onClickNo={() => peopleContext.setShowModalUpdateUser(false)}
+               onClickYes={(event) => {
+                  peopleContext.setShowModalUpdateUser(false)
+                  handleUpdate(event)
+               }}
+               onSubmit={handleUpdate}
             />
          )}
 
