@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import InputLogin from '@Components/InputLogin'
 import Button from '@Components/Button'
@@ -11,8 +11,8 @@ import { ReactComponent as EyeClose } from '@Icon/eye-close.svg'
 import { ReactComponent as IconLogin } from '@Icon/login.svg'
 
 export default function SignUp() {
-   const history = useHistory()
-   const [username, setUsername] = useState({
+   const [redirect, setRedirect] = useState(false)
+   const [email, setEmail] = useState({
       isFocus: false,
       value: '',
    })
@@ -29,37 +29,35 @@ export default function SignUp() {
 
    const submit = (event) => {
       event.preventDefault()
-      if (username.value === '') return alert('username cannot be blank')
+      if (email.value === '') return alert('email cannot be blank')
       if (password.value === '') return alert('password cannot be blank')
       if (password.value !== confirmPassword.value) return alert('password must be the same')
 
-      localStorage.setItem('username', username.value)
+      localStorage.setItem('email', email.value)
       localStorage.setItem('password', password.value)
 
-      alert(`
-      Account ${localStorage.getItem('username')} created,
-      your password is ${localStorage.getItem('password')}
-      `)
-      history.push('/')
+      setRedirect(true)
    }
+
+   if (redirect) return <Redirect to='/signup/verification' />
 
    return (
       <section className='auth'>
          <form onSubmit={submit} className='auth__card auth__card--register'>
             <img src={Mespo} alt='mespo' className='auth__logo' />
             <InputLogin
-               label='Username'
-               placeholder='Type your username'
-               type='text'
-               value={username.value}
-               isFocus={username.isFocus}
+               label='Email'
+               placeholder='Type your email'
+               type='email'
+               value={email.value}
+               isFocus={email.isFocus}
                onClick={() => {
-                  setUsername((prevState) => ({ ...prevState, isFocus: true }))
+                  setEmail((prevState) => ({ ...prevState, isFocus: true }))
                   setPassword((prevState) => ({ ...prevState, isFocus: false }))
                   setConfirmPassword((prevState) => ({ ...prevState, isFocus: false }))
                }}
                onChange={(event) => {
-                  setUsername((prevState) => ({ ...prevState, value: event.target.value }))
+                  setEmail((prevState) => ({ ...prevState, value: event.target.value }))
                }}
             />
             <InputLogin
@@ -79,7 +77,7 @@ export default function SignUp() {
                onClick={() => {
                   setPassword((prevState) => ({ ...prevState, isFocus: true }))
                   setConfirmPassword((prevState) => ({ ...prevState, isFocus: false }))
-                  setUsername((prevState) => ({ ...prevState, isFocus: false }))
+                  setEmail((prevState) => ({ ...prevState, isFocus: false }))
                }}
                onChange={(event) => {
                   setPassword((prevState) => ({ ...prevState, value: event.target.value }))
@@ -102,7 +100,7 @@ export default function SignUp() {
                onClick={() => {
                   setConfirmPassword((prevState) => ({ ...prevState, isFocus: true }))
                   setPassword((prevState) => ({ ...prevState, isFocus: false }))
-                  setUsername((prevState) => ({ ...prevState, isFocus: false }))
+                  setEmail((prevState) => ({ ...prevState, isFocus: false }))
                }}
                onChange={(event) => {
                   setConfirmPassword((prevState) => ({ ...prevState, value: event.target.value }))

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Login from '@Screens/Authentication/Login'
 import SignUp from '@Screens/Authentication/SignUp'
+import Verification from '@Screens/Authentication/Verification'
+import Complete from '@Screens/Authentication/Complete'
 import Navigation from '@Layouts/Navigation'
 import { UtilsContext } from '@Context/UtilsContext'
 
@@ -15,6 +17,8 @@ export default function App() {
          <Switch>
             <Route exact path='/' component={Login} />
             <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/signup/verification' component={Verification} />
+            <Route exact path='/signup/complete' component={Complete} />
             <section
                className={`home ${!utilsContext.showAction && utilsContext.isMini ? 'home--fullsize' : ''} ${utilsContext.showAction ? '' : 'home--full'} ${
                   !utilsContext.isMini ? '' : 'home--mini'

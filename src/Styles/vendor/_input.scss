@@ -1,0 +1,22 @@
+.react-code-input {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 12px;
+  margin-bottom: 33px !important;
+
+  input {
+    width: 100% !important;
+    height: 32px !important;
+    background: #000000 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    color: #fff !important;
+
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 11px !important;
+    line-height: 15px !important;
+    letter-spacing: 0.01em !important;
+    margin: 0 !important;
+  }
+}
