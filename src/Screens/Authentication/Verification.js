@@ -28,7 +28,9 @@ export default function Verification() {
             <h3 className='auth__title'>Verification</h3>
             <Mail className='auth__icon' />
             <p className='auth__text'>Input the code we have sent you via email.</p>
-            <label className='input__label text__label'>Code</label>
+            <label className='input__label text__label' style={{ marginBottom: 9 }}>
+               Code
+            </label>
             <ReactCodeInput
                fields={4}
                label='Code'

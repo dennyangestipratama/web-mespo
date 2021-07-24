@@ -2,7 +2,7 @@
   display: grid !important;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 12px;
-  margin-bottom: 33px !important;
+  margin-bottom: 15px !important;
 
   input {
     width: 100% !important;
@@ -14,9 +14,10 @@
 
     font-style: normal !important;
     font-weight: normal !important;
-    font-size: 11px !important;
-    line-height: 15px !important;
-    letter-spacing: 0.01em !important;
+    font-size: 12px !important;
+    line-height: 13px !important;
+    letter-spacing: 0.02em !important;
+    text-align: center !important;
     margin: 0 !important;
   }
 }
