@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import InputLogin from '@Components/InputLogin'
 import Button from '@Components/Button'
+import TextError from '@Components/TextError'
 import AuthFooter from '@Components/AuthFooter'
 
 import Mespo from '@Image/logo.png'
@@ -12,12 +13,15 @@ import { ReactComponent as IconLogin } from '@Icon/login.svg'
 
 export default function SignUp() {
    const [redirect, setRedirect] = useState(false)
+   const [errorMessage, setErrorMessage] = useState('')
    const [email, setEmail] = useState({
       isFocus: false,
+      isError: false,
       value: '',
    })
    const [password, setPassword] = useState({
       isFocus: false,
+      isError: false,
       isVisible: false,
       value: '',
    })
@@ -29,14 +33,25 @@ export default function SignUp() {
 
    const submit = (event) => {
       event.preventDefault()
-      if (email.value === '') return alert('email cannot be blank')
-      if (password.value === '') return alert('password cannot be blank')
-      if (password.value !== confirmPassword.value) return alert('password must be the same')
 
-      localStorage.setItem('email', email.value)
-      localStorage.setItem('password', password.value)
+      if (email.value === '') {
+         setEmail((prev) => ({ ...prev, isError: true, isFocus: false }))
+         setTimeout(() => {
+            setEmail((prev) => ({ ...prev, isError: false }))
+         }, 3000)
+         setErrorMessage('Email cannot be blank')
+      } else if (password.value === '' || password.value !== confirmPassword.value) {
+         setPassword((prev) => ({ ...prev, isError: true, isFocus: false }))
+         setTimeout(() => {
+            setPassword((prev) => ({ ...prev, isError: false }))
+         }, 3000)
+         setErrorMessage('Password must be the same')
+      } else {
+         localStorage.setItem('email', email.value)
+         localStorage.setItem('password', password.value)
 
-      setRedirect(true)
+         setRedirect(true)
+      }
    }
 
    if (redirect) return <Redirect to='/signup/verification' />
@@ -51,6 +66,7 @@ export default function SignUp() {
                type='email'
                value={email.value}
                isFocus={email.isFocus}
+               isError={email.isError}
                onClick={() => {
                   setEmail((prevState) => ({ ...prevState, isFocus: true }))
                   setPassword((prevState) => ({ ...prevState, isFocus: false }))
@@ -63,6 +79,7 @@ export default function SignUp() {
             <InputLogin
                label='Password'
                placeholder='Type your password...'
+               isError={password.isError}
                type={password.isVisible ? 'text' : 'password'}
                showImage={true}
                icon={
@@ -87,6 +104,7 @@ export default function SignUp() {
                label='Retype Password'
                placeholder='Type your password again'
                type={confirmPassword.isVisible ? 'text' : 'password'}
+               isError={password.isError}
                showImage={true}
                icon={
                   confirmPassword.isVisible ? (
@@ -106,6 +124,7 @@ export default function SignUp() {
                   setConfirmPassword((prevState) => ({ ...prevState, value: event.target.value }))
                }}
             />
+            <TextError label={errorMessage} />
             <Button type='submit' label='Sign up' showImage={true} icon={<IconLogin className='auth__button-icon' />} />
             <AuthFooter text='Already have an account?' link='Login' href='/' />
          </form>

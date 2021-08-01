@@ -21,3 +21,9 @@
     margin: 0 !important;
   }
 }
+
+.input__code--error {
+  input {
+    border: 1px solid #FF5E5B !important;
+  }
+}

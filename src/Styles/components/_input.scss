@@ -25,6 +25,10 @@
    border: 1px solid #3776FF;
 }
 
+.input--error {
+   border: 1px solid #FF5E5B;
+}
+
 .input__default,
 .textarea__default {
    background: rgba($color: #000000, $alpha: 0.45);
